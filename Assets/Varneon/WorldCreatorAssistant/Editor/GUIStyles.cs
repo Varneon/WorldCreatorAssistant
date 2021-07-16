@@ -80,13 +80,11 @@ namespace Varneon.WorldCreatorAssistant
                 onNormal = { background = (EditorGUIUtility.isProSkin ? ColorTexture(new Color(0.2f, 0.2f, 0.2f)) : ColorTexture(new Color(0.76f, 0.76f, 0.76f))) }
             };
 
-            HeaderPageSelection = new GUIStyle(GUI.skin.GetStyle("toolbarButton"))
+            HeaderPageSelection = new GUIStyle(GUI.skin.box)
             {
-#if UNITY_2019
-                //Fixed height breaks toolbar buttons in 2019, might just leave them at standard height
-#else
                 fixedHeight = 32,
-#endif
+                margin = new RectOffset(0, 0, 0, 0),
+                alignment = TextAnchor.MiddleCenter,
                 fontSize = 12,
                 active = { textColor = Color.white, background = Texture2D.blackTexture },
                 onNormal = { textColor = new Color(0.2f, 0.65f, 1f), background = Texture2D.blackTexture },

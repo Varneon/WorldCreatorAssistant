@@ -61,7 +61,7 @@ namespace Varneon.WorldCreatorAssistant
         private void OnGUI()
         {
             GUI.color = new Color(0.65f, 0.65f, 0.65f);
-            pageNum = GUILayout.Toolbar(pageNum, pages, GUIStyles.HeaderPageSelection);
+            pageNum = GUILayout.Toolbar(pageNum, pages, GUIStyles.HeaderPageSelection, GUILayout.Width(Screen.width));
             GUI.color = Color.white;
 
             EditorGUILayout.BeginHorizontal();
