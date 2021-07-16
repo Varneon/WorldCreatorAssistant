@@ -1,8 +1,21 @@
 # WorldCreatorAssistant
-Unity Editor extension that automates majority of the steps related to VRChat world creation.
+Unity Editor extension that automates majority of the steps related to managing Unity projects for VRChat world creation.
 ---
 Are you tired of manually importing VRCSDK, CyanEmu, VRWorldToolkit, UdonSharp, UdonToolkit or any other package into your new project or updating them over time?
 
-WorldCreatorAssistant is made to be the first package to be imported in your Unity projects and it takes care of the most common steps with the help of Project Setup Wizard that allows you to choose your preferred options for initializing the project.
+Would you like to have direct access to an extensive list of verified sources of information related to VRChat world creation right within your editor?
 
-WCA also has built-in tutorials and resources that are there for you when you need them the most.
+WorldCreatorAssistant is made to be the first package to be imported into your Unity projects and it takes care of the most common steps with the help of Project Setup Wizard that allows you to choose your preferred options for initializing the project.
+
+WCA also has built-in resources and FAQ that are there for you when you need them the most.
+
+How to start new project using WCA Project Setup Wizard:
+---
+
+1. Download latest WCA from [here](https://github.com/Varneon/WorldCreatorAssistant/releases/latest)
+2. Start new Unity project
+3. Import WCA unitypackage to the project
+4. Open WCA Project Setup Wizard by navigating to ***Varneon > World Creator Assistant*** on your Unity editor's toolbar
+5. Proceed to configure your project as you wish and let WCA Project Setup Wizard take care of the initialization of the project
+
+**Note:** *If you want to start using WCA in an existing Unity project, just import the unitypackage into that project and the main window of WCA will be available automatically if VRCSDK can be found in the project*
