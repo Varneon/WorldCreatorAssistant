@@ -5,4 +5,4 @@ Are you tired of manually importing VRCSDK, CyanEmu, VRWorldToolkit, UdonSharp, 
 
 WorldCreatorAssistant is made to be the first package to be imported in your Unity projects and it takes care of the most common steps with the help of Project Setup Wizard that allows you to choose your preferred options for initializing the project.
 
-WCA also has built-in tutorials, resources and utilities that are there for you when you need them the most.
+WCA also has built-in tutorials and resources that are there for you when you need them the most.

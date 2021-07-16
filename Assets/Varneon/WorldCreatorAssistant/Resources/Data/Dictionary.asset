@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215a6ed57c7bac7408e8bf6757420e36, type: 3}
+  m_Name: Dictionary
+  m_EditorClassIdentifier: 
+  Languages:
+  - Language: English
+    Translations:
+      ARE_YOU_SURE_CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS: Are you sure you want to clear
+        VRC script define keywords?\n\nOnly do this if you have deleted all VRCSDK
+        files and are planning to do a clean install
+      ARE_YOU_SURE_CLEAR_WCA_REGISTRY_KEYS: Are you sure you want to clear WCA registry
+        keys?
+      ASSET_IMPORTER: Asset Importer
+      BROWSE: Browse
+      CANCEL: Cancel
+      CHECK_FOR_UPDATES_GET_LATEST_VERSION: Check for updates to get the latest version
+      CHECK_FOR_UPDATES: Check for updates
+      CHOOSE_VRCSDK: Choose VRCSDK
+      CLEAN_INSTALL_INFO: Delete all of the existing related files before importing
+        the package again
+      CLEAN_INSTALL_WARNING: Clean install will remove all assets located in the folders
+        associated with the packages. Please avoid saving your personal assets in
+        the folders that are automatically managed by WCA
+      CLEAN_INSTALL: Clean install
+      CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS: Clear VRC script define keywords
+      CLEAR_WCA_REGISTRY_KEYS: Clear WCA registry keys
+      COMING_SOON: Coming Soon
+      CONTINUE: Continue
+      COPY_LINK: Copy Link
+      COULD_NOT_FETCH_PACKAGE_LIST: Could not fetch UPM package list
+      CURRENT_FEATURES: Current features
+      DANGER_ZONE: Danger Zone
+      DEFINE_VALID_CACHE_DIRECTORY: Please define valid directory before adding repositories
+      DEPRECATED: Deprecated
+      DO_YOU_WANT_CHECK_UPDATES_GITHUB: Do you want to check for updates for the GitHub
+        repositories?
+      DO_YOU_WANT_CHECK_UPDATES_VRCSDK: Do you want to check for updates for VRCSDK?
+      DO_YOU_WANT_TO_UPDATE_VRCSDK: Do you want to update VRCSDK?
+      DOWNLOAD: Download
+      DOWNLOADED: Downloaded
+      FEATURES_IN_DEVELOPMENT: Features in development
+      FREQUENTLY_ASKED_QUESTIONS: Frequently Asked Questions
+      GITHUB_API_RATE_WARNING: GitHub API rate limit warning!
+      GITHUB_IMPORTER: GitHub Importer
+      GITHUB_NOT_ENOUGH_REQUESTS: You don't have enough GitHub API requests left\n\nRestrictions
+        will be reset
+      IMPORT_ASSET_STORE_PACKAGES: Import downloaded Unity Asset Store packages
+      IMPORT_COMMUNITY_TOOLS: Import recommended community tools
+      IMPORT_UPM_PACKAGES: Import Unity Package Manager packages
+      IMPORT: Import
+      IMPORTED: Imported
+      IMPORTER: Importer
+      INSTALLED_VERSION: Installed version
+      LAST_CHECK: Last check
+      LAST_VRCAPI_REQUEST: Last VRCSDK API request
+      LATEST_VERSION: Latest version
+      MAIN: Main
+      NEXT: Next
+      NO: No
+      NO_ASSET_STORE_PACKAGES_AVAILABLE: No Asset Store packages available
+      NOTE_VRC_LAYERS_AND_LIGHTMAP_GENERATION: 'NOTE: VRC layers will be set up and
+        automatic lightmap generation will be disabled automatically'
+      OK: OK
+      PACKAGE_CACHE_DIRECTORY: Package cache directory
+      PACKAGE_IMPORTER: Package Importer
+      PLEASE_CHOOSE_VRCSDK: Please choose the VRCSDK you want to use
+      PLEASE_DEFINE_VALID_CACHE_DIRECTORY: Please define valid package cache directory
+        in the settings to access importer
+      PLEASE_WAIT_VRCAPI: You have already checked the latest version of VRCSDK within
+        the last 60 seconds, please wait until making another API request
+      PREFAB_REPOSITORIES: Community Prefabs
+      PREVIOUS: Previous
+      PROJECT_SETUP_OPTIONS: Project Setup Options
+      PSW_PAGE_HINT_1: VRChat SDK provides all the essential components and tools
+        for creating a VRChat world and uploading it.
+      PSW_PAGE_HINT_2: Utilizing these setup options saves you valuable time during
+        the project setup as you only have to tick one box instead of setting up everything
+        manually and they will be ready after the setup is done.
+      PSW_PAGE_HINT_3: Here you can import packages from the PackageManager
+      PSW_PAGE_HINT_4: Community has created numerous useful tools to help with VRChat
+        world creation. Downloading and importing them during the setup can save a
+        lot of time and doesn't require any knowledge about GitHub or downloading
+        repositories.
+      PSW_PAGE_HINT_5: In this page you can import any downloaded packages from Unity
+        Asset Store.
+      RECOMMENDED_COMMUNITY_TOOLS: Recommended Community Tools
+      RESET_UNUSED_LIGHTING_SETTINGS_DESC: Reset the lighting setting parameters that
+        are unused by default\n\nOptional
+      RESET_UNUSED_LIGHTING_SETTINGS: Reset unused lighting settings
+      RESETS: Resets
+      RESOURCES: Resources
+      SDK2_DEPRECATION_TEXT: VRCSDK2 is considered deprecated for creation. It will
+        not receive most/any of the new features available in VRCSDK3-Worlds or VRCSDK3-Avatars.
+        It will still receive important security and maintenance patches.\n\nIf you
+        are creating new content, we strongly recommend using VRCSDK3 instead.
+      SDK2_DESCRIPTION: Older SDK based on Triggers and Actions.
+      SDK3_DESCRIPTION: Brand new SDK with VRChat's own visual programming language,
+        Udon.
+      SECONDS_AGO: seconds ago
+      SELECT_PACKAGE_CACHE_DIRECTORY: Select Package Cache Directory
+      SELECT: Select
+      SELECTED: Selected
+      SETTINGS: Settings
+      SETUP_OPTIONS: Setup Options
+      SOME_COMMUNITY_TOOLS_UNAVAILABLE_SDK: Some community tools are disabled because
+        they are only available when using VRCSDK3
+      SPECIFY_PACKAGE_CACHE_DIRECTORY_DESC: Specify Package Cache directory for storing
+        downloaded GitHub repositories. (Recommended to have at the root of your projects
+        folder, the cache will be shared by all projects)
+      TUTORIALS: Tutorials
+      UNAVAILABLE: Unavailable
+      UNITY_ASSET_STORE: Unity Asset Store
+      UP_TO_DATE: Up to date
+      UPDATE_AVAILABLE: Update Available
+      UPDATE: Update
+      UPM_IMPORTER_DISABLED_TEMPORARILY: Unity Package Manager importer is disabled
+        temporarily due to issues during the project setup process
+      USEFUL_LINKS: Useful Links
+      USES_LEFT: Uses left
+      VERSION_UNAVAILABLE: Version unavailable
+      VRC_DOCUMENTATION: VRChat Documentation
+      VRC_DOWNLOAD_PAGE: VRChat Download Page
+      VRC_YOU_HAVE_ALREADY_CHECKED: You have already checked the latest version of
+        VRCSDK within the last 60 seconds, please wait until making another API request
+      WARNING: Warning!
+      WCA_FEATURES_WIP: -Built-in tutorials\n-Custom GitHub repository importer
+      WCA_FEATURES: -Project Setup Wizard\n-VRCSDK and GitHub importer\n-Resources
+        and FAQ
+      WCA_FOLDER_CLEANUP: WCA Folder Cleanup
+      WCA_THANK_YOU_FOR_USING: Thank you for using World Creator Assistant!
+      WCA_THIS_EDITOR: This editor extension is still heavily work in progress and
+        should only be used for testing purposes.
+      WCA_WILL_TRY_TO_CLEAR_DIRECTORIES: WCA will try to clear the following directories
+      YES: Yes
+      YOU_ARE_ABOUT_TO_DOWNLOAD: You are about to download following packages and
+        import them into the project
