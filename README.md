@@ -1,6 +1,16 @@
 # WorldCreatorAssistant
 Unity Editor extension that automates majority of the steps related to managing Unity projects for VRChat world creation.
 ---
+<div align="center">
+
+![GitHub repo size](https://img.shields.io/github/repo-size/Varneon/WorldCreatorAssistant?label=Repository%20Size&style=for-the-badge)
+[![GitHub](https://img.shields.io/github/license/Varneon/WorldCreatorAssistant?color=blue&label=License&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/blob/master/LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/WorldCreatorAssistant?style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/stargazers)
+[![GitHub all releases](https://img.shields.io/github/downloads/Varneon/WorldCreatorAssistant/total?color=blue&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/releases)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Varneon/WorldCreatorAssistant?color=blue&sort=semver&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/releases/latest)
+
+</div>
+
 ![Header1](https://i.imgur.com/rIdvYx2.png)
 ![Header2](https://i.imgur.com/H2lu2k0.png)
 
