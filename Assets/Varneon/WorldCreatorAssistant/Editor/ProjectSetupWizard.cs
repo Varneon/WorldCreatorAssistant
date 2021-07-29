@@ -602,7 +602,7 @@ namespace Varneon.WorldCreatorAssistant
         private void OpenWorldCreatorAssistant()
         {
             EditorWindow window = CreateInstance<WorldCreatorAssistant>();
-            window.titleContent.image = UnityEngine.Resources.Load<SpriteAtlas>("Icons/Icons").GetSprite($"World_{(EditorGUIUtility.isProSkin ? "W" : "B")}").texture;
+            window.titleContent.image = UnityEngine.Resources.Load<Texture>($"Icons/World_{(EditorGUIUtility.isProSkin ? "W" : "B")}");
             window.titleContent.text = "World Creator Assistant";
             window.minSize = new Vector2(512f, 512f);
             window.Show();
