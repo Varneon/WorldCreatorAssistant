@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddbdbe91c50970f4e88a472a0de4ce42, type: 3}
+  m_Name: ResourceData
+  m_EditorClassIdentifier: 
+  Resources:
+  - Name: VRChat Documentation
+    URL: https://docs.vrchat.com/
+    Description: Official documentation for VRChat
+    Type: 6
+  - Name: VRChat Canny
+    URL: https://vrchat.canny.io/
+    Description: Official way to give feedback and report bugs regarding VRChat
+    Type: 1
+  - Name: VRChat Discord Server
+    URL: https://discord.gg/vrchat
+    Description: Official VRChat Discord
+    Type: 4
+  - Name: VRChat Forum
+    URL: https://ask.vrchat.com/
+    Description: Official VRChat Forum
+    Type: 4
+  - Name: Unity Documentation
+    URL: https://docs.unity3d.com/2018.4/Documentation/Manual/index.html
+    Description: Official Unity documentation
+    Type: 6
+  - Name: VRCPrefabs Database
+    URL: https://vrcprefabs.com/browse
+    Description: Spreadsheet of prefabs created by the members of VRCPrefabs
+    Type: 3
+  - Name: VRC Prefabs TLX
+    URL: https://tlx.dev/talks
+    Description: Developer conference related to VRChat world creation where you can
+      find many talks with a lot of useful information to help you with your own world
+      creation
+    Type: 6
+  - Name: Blender
+    URL: https://www.blender.org/
+    Description: Free and open source 3D creation suite
+    Type: 0
+  - Name: Substance
+    URL: https://www.substance3d.com/substance/
+    Description: Inspiring content and intelligent tools to create and apply materials
+      for 3D
+    Type: 0
+  - Name: PureRef
+    URL: https://www.pureref.com/
+    Description: Free program for collecting images on canvases
+    Type: 0
+  - Name: ArtStation
+    URL: https://www.artstation.com/
+    Description: ArtStation provides you with a simple, yet powerful way to show your
+      portfolio and be seen by the right people in the industry.
+    Type: 5
+  - Name: Trello
+    URL: https://trello.com/
+    Description: Trello helps teams work more collaboratively and get more done
+    Type: 1
+  - Name: Miro
+    URL: https://miro.com/
+    Description: Embed digital whiteboards into products to extend workflows
+    Type: 1
+  - Name: Desmos
+    URL: https://www.desmos.com/
+    Description: Advanced graphing calculator implemented as a web application
+    Type: 1
+  - Name: PlasticSCM
+    URL: https://www.plasticscm.com/
+    Description: Plastic SCM is a version control to help teams focus on delivering
+      work, one task at a time
+    Type: 0
+  Questions:
+  - Question: Why is my world lagging?
+    Answers:
+    - Description: Most of the issues related to general performance can be solved
+        by using VRWorldToolkit. You can download VRWorldToolkit from 'Importer' page
+      URL: https://github.com/oneVR/VRWorldToolkit
+    - Description: 'The official VRChat Discord server has a #world-optimization channel
+        where you can ask questions related to world optimization'
+      URL: https://discord.gg/vrchat
+  - Question: Where can I learn Udon?
+    Answers:
+    - Description: The official VRChat documentation explains everything you need
+        to know about Udon before getting started
+      URL: https://docs.vrchat.com/docs/what-is-udon
+    - Description: Vowgan has created some beginner level Udon Graph and UdonSharp
+        tutorials that can help you to get started
+      URL: https://www.youtube.com/VowganVR
+  - Question: Is there a way to test worlds faster within Unity Editor?
+    Answers:
+    - Description: CyanEmu allows you to basic testing of your world inside Unity
+        editor. You can download CyanEmu from 'Importer' page
+      URL: https://github.com/CyanLaser/CyanEmu
+  - Question: Why am I constantly getting errors?
+    Answers:
+    - Description: 1 gave a talk at VRCPrefabs TLX about fixing Unity projects, you
+        can find a lot of answers from their talk
+      URL: https://tlx.dev/talks/TLX2020-12/Fixing%20Broken%20Unity%20Projects
+  - Question: How do I properly sync UdonBehaviours?
+    Answers:
+    - Description: FairlySadPanda gave an amazing talk about Udon networking during
+        TLX Spring 2021 explaining how to properly utilize all of the different syncing
+        methods provided to us
+      URL: https://www.youtube.com/watch?v=mNYt11OPXhI
