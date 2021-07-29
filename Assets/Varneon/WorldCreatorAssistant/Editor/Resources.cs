@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    public class Resources
+    internal class Resources
     {
         bool expandResources, expandQuestions;
         Dictionary.Translations dictionary;
         int selectedQuestion = -1, selectedResource = -1;
-        public Texture iconWeb, iconCopy;
+        internal Texture iconWeb, iconCopy;
         readonly ResourceData resourceData;
 
-        public void Draw()
+        internal void Draw()
         {
             GUILayout.BeginVertical(EditorStyles.helpBox);
             if (GUILayout.Button(dictionary.USEFUL_LINKS, GUIStyles.BlockHeaderButton))
@@ -43,31 +43,39 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.EndVertical();
         }
 
-        public Resources()
+        internal Resources()
         {
             LoadActiveDictionary();
 
             resourceData = UnityEngine.Resources.Load<ResourceData>("Data/ResourceData");
         }
 
-        public void LoadActiveDictionary()
+        internal void LoadActiveDictionary()
         {
             dictionary = DictionaryLoader.ActiveDictionary;
         }
 
         private void DrawResourceBlock(DataStructs.Resource resource, int index)
         {
+            bool isThisResourceSelected = index == selectedResource;
+
+            GUI.color = isThisResourceSelected ? Color.grey : Color.white;
             Rect rect = EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            GUI.color = Color.white;
+
             GUILayout.BeginHorizontal();
 
+            GUI.color = isThisResourceSelected ? new Color(0.2f, 0.65f, 1f) : Color.white;
             if (GUILayout.Button(resource.Name, GUIStyles.BlockHeaderButton))
             {
                 selectedResource = (selectedResource == index) ? -1 : index;
             }
+            GUI.color = Color.white;
 
             GUILayout.Label(resource.Type.ToString(), GUIStyles.ResourceTypeText, GUILayout.MaxWidth(100));
             GUILayout.EndHorizontal();
-            if (index == selectedResource)
+
+            if (isThisResourceSelected)
             {
                 EditorGUI.DrawRect(new Rect(rect.x, rect.y + 30, rect.width, 1), (EditorGUIUtility.isProSkin ? new Color(0.15f, 0.15f, 0.15f) : Color.grey));
                 GUILayout.Label(resource.Description, GUIStyles.WrappedText);
@@ -81,22 +89,35 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DrawQuestionBlock(DataStructs.FAQTopic question, int index)
         {
-            Rect rect = EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            bool isThisQuestionSelected = index == selectedQuestion;
 
+            GUI.color = isThisQuestionSelected ? Color.grey : Color.white;
+            Rect rect = EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            GUI.color = Color.white;
+
+            GUI.color = isThisQuestionSelected ? new Color(0.2f, 0.65f, 1f) : Color.white;
             if (GUILayout.Button(question.Question, GUIStyles.BlockHeaderButton))
             {
                 selectedQuestion = (selectedQuestion == index) ? -1 : index;
             }
+            GUI.color = Color.white;
 
-            if(index == selectedQuestion)
+            if (isThisQuestionSelected)
             {
                 EditorGUI.DrawRect(new Rect(rect.x, rect.y + 30, rect.width, 1), (EditorGUIUtility.isProSkin ? new Color(0.15f, 0.15f, 0.15f) : Color.grey));
-                
-                GUILayout.Label(question.Answer, GUIStyles.WrappedText);
 
-                if (question.URL.Length > 0)
+                for (int i = 0; i < question.Answers.Count; i++)
                 {
-                    DrawBlockURL(question.URL);
+                    if (i > 0) { GUILayout.Space(20); }
+
+                    DataStructs.FAQAnswer answer = question.Answers[i];
+
+                    GUILayout.Label(answer.Description, GUIStyles.WrappedText);
+
+                    if (!string.IsNullOrEmpty(answer.URL))
+                    {
+                        DrawBlockURL(answer.URL);
+                    }
                 }
             }
 

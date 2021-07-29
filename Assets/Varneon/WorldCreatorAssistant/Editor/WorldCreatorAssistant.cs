@@ -7,24 +7,24 @@ using UnityEngine.U2D;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    public class WorldCreatorAssistant : EditorWindow
+    internal class WorldCreatorAssistant : EditorWindow
     {
-        const string LogPrefix = "[<color=#009999>WorldCreatorAssistant</color>]:";
+        private const string LogPrefix = "[<color=#009999>WorldCreatorAssistant</color>]:";
 
-        bool showPackageCacheDirectory, showDangerZoneSettings;
-        Dictionary.Translations dictionary;
-        Importer importer;
-        Resources resources;
-        string packageCacheDirectory;
+        private bool showPackageCacheDirectory, showDangerZoneSettings;
+        private Dictionary.Translations dictionary;
+        private Importer importer;
+        private Resources resources;
+        private string packageCacheDirectory;
 
         #region Page Variables
-        int pageNum = 0;
-        Page page = Page.Main;
-        Vector2 scrollPos;
-        static string[] pages;
+        private int pageNum = 0;
+        private Page page = Page.Main;
+        private Vector2 scrollPos;
+        private string[] pages = System.Enum.GetNames(typeof(Page));
         #endregion
 
-        public enum Page
+        internal enum Page
         {
             Main,
             Tutorials,
@@ -48,14 +48,12 @@ namespace Varneon.WorldCreatorAssistant
 
             string iconVariant = EditorGUIUtility.isProSkin ? "W" : "B";
 
-            SpriteAtlas iconAtlas = UnityEngine.Resources.Load<SpriteAtlas>("Icons/Icons");
-            importer.iconCheckmark = iconAtlas.GetSprite("Checkmark").texture;
-            importer.iconDownload = iconAtlas.GetSprite($"Download_{iconVariant}").texture;
-            importer.iconNotification = iconAtlas.GetSprite("Notification").texture;
-            importer.iconGitHub = iconAtlas.GetSprite($"GitHub_{iconVariant}").texture;
-            importer.iconImport = iconAtlas.GetSprite($"Import_{iconVariant}").texture;
-            resources.iconWeb = iconAtlas.GetSprite($"Web_{iconVariant}").texture;
-            resources.iconCopy = iconAtlas.GetSprite($"Copy_{iconVariant}").texture;
+            importer.iconCheckmark = UnityEngine.Resources.Load<Texture>("Icons/Checkmark");
+            importer.iconDownload = UnityEngine.Resources.Load<Texture>($"Icons/Download_{iconVariant}");
+            importer.iconGitHub = UnityEngine.Resources.Load<Texture>($"Icons/GitHub_{iconVariant}");
+            importer.iconImport = UnityEngine.Resources.Load<Texture>($"Icons/Import_{iconVariant}");
+            resources.iconWeb = UnityEngine.Resources.Load<Texture>($"Icons/Web_{iconVariant}");
+            resources.iconCopy = UnityEngine.Resources.Load<Texture>($"Icons/Copy_{iconVariant}");
         }
 
         private void OnGUI()
@@ -107,11 +105,7 @@ namespace Varneon.WorldCreatorAssistant
 
             resources.LoadActiveDictionary();
 
-            if (DictionaryLoader.ActiveLanguageIndex == 0)
-            {
-                pages = System.Enum.GetNames(typeof(Page));
-            }
-            else
+            if (DictionaryLoader.ActiveLanguageIndex > 0)
             {
                 pages = new string[]
                 {

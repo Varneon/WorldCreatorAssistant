@@ -28,6 +28,9 @@ MonoBehaviour:
       CHOOSE_VRCSDK: Choose VRCSDK
       CLEAN_INSTALL_INFO: Delete all of the existing related files before importing
         the package again
+      CLEAN_INSTALL_VRCSDK_NOTICE: 'NOTE: When updating VRCSDK after major updates,
+        it''s best to use clean install to make sure that all of the old files are
+        deleted before importing'
       CLEAN_INSTALL_WARNING: Clean install will remove all assets located in the folders
         associated with the packages. Please avoid saving your personal assets in
         the folders that are automatically managed by WCA

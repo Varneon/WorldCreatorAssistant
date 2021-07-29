@@ -80,23 +80,34 @@ MonoBehaviour:
     Type: 0
   Questions:
   - Question: Why is my world lagging?
-    Answer: Most of the issues regarding general performance can be solved by using
-      VRWorldToolkit. You can download VRWorldToolkit from 'Importer' page
-    URL: https://github.com/oneVR/VRWorldToolkit
+    Answers:
+    - Description: Most of the issues related to general performance can be solved
+        by using VRWorldToolkit. You can download VRWorldToolkit from 'Importer' page
+      URL: https://github.com/oneVR/VRWorldToolkit
+    - Description: 'The official VRChat Discord server has a #world-optimization channel
+        where you can ask questions related to world optimization'
+      URL: https://discord.gg/vrchat
   - Question: Where can I learn Udon?
-    Answer: Vowgan has created some beginner level Udon Graph and UdonSharp tutorials
-      that can help you to get started
-    URL: https://www.youtube.com/VowganVR
-  - Question: Can I test worlds locally faster?
-    Answer: CyanEmu allows you to basic testing of your world inside Unity editor.
-      You can download CyanEmu from 'Importer' page
-    URL: https://github.com/CyanLaser/CyanEmu
+    Answers:
+    - Description: The official VRChat documentation explains everything you need
+        to know about Udon before getting started
+      URL: https://docs.vrchat.com/docs/what-is-udon
+    - Description: Vowgan has created some beginner level Udon Graph and UdonSharp
+        tutorials that can help you to get started
+      URL: https://www.youtube.com/VowganVR
+  - Question: Is there a way to test worlds faster within Unity Editor?
+    Answers:
+    - Description: CyanEmu allows you to basic testing of your world inside Unity
+        editor. You can download CyanEmu from 'Importer' page
+      URL: https://github.com/CyanLaser/CyanEmu
   - Question: Why am I constantly getting errors?
-    Answer: 1 gave a talk at VRCPrefabs TLX about fixing Unity projects, you can find
-      a lot of answers from their talk
-    URL: https://tlx.dev/talks/TLX2020-12/Fixing%20Broken%20Unity%20Projects
+    Answers:
+    - Description: 1 gave a talk at VRCPrefabs TLX about fixing Unity projects, you
+        can find a lot of answers from their talk
+      URL: https://tlx.dev/talks/TLX2020-12/Fixing%20Broken%20Unity%20Projects
   - Question: How do I properly sync UdonBehaviours?
-    Answer: FairlySadPanda gave an amazing talk about Udon networking during TLX Spring
-      2021 explaining how to properly utilize all of the different syncing methods
-      provided to us
-    URL: https://www.youtube.com/watch?v=mNYt11OPXhI
+    Answers:
+    - Description: FairlySadPanda gave an amazing talk about Udon networking during
+        TLX Spring 2021 explaining how to properly utilize all of the different syncing
+        methods provided to us
+      URL: https://www.youtube.com/watch?v=mNYt11OPXhI

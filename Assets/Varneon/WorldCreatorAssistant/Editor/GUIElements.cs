@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    public static class GUIElements
+    internal static class GUIElements
     {
-        public static bool Foldout(bool open, string foldoutText, Action drawContent, string contextButtonText = null, Action contextButtonAction = null)
+        internal static bool Foldout(bool open, string foldoutText, Action drawContent, string contextButtonText = null, Action contextButtonAction = null)
         {
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
             GUILayout.BeginVertical();
@@ -36,7 +36,7 @@ namespace Varneon.WorldCreatorAssistant
 
             return open;
         }
-        public static void DrawWarningBox(string text)
+        internal static void DrawWarningBox(string text)
         {
             GUI.color = Color.yellow;
             EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
@@ -45,7 +45,7 @@ namespace Varneon.WorldCreatorAssistant
             GUI.color = Color.white;
         }
 
-        public static void DrawHintPanel(string text)
+        internal static void DrawHintPanel(string text)
         {
             GUI.color = new Color(0.5f, 0.75f, 1f);
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
@@ -54,7 +54,7 @@ namespace Varneon.WorldCreatorAssistant
             GUI.color = Color.white;
         }
 
-        public static void LanguageSelection(Action loadActiveLanguage)
+        internal static void LanguageSelection(Action loadActiveLanguage)
         {
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
             GUILayout.Label("Language");

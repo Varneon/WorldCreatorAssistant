@@ -91,7 +91,7 @@ namespace Varneon.WorldCreatorAssistant
         }
 
         [Serializable]
-        public struct RepositoryImportResponse
+        public struct ImportResponse
         {
             public string Version;
             public bool Succeeded;
@@ -165,44 +165,26 @@ namespace Varneon.WorldCreatorAssistant
         public struct FAQTopic
         {
             public string Question;
-            public string Answer;
-            public string URL;
+            public List<FAQAnswer> Answers;
 
-            public FAQTopic(string question, string answer, string url = "")
+            public FAQTopic(string question, List<FAQAnswer> answers)
             {
                 Question = question;
-                Answer = answer;
-                URL = url;
+                Answers = answers;
             }
         }
 
         [Serializable]
-        public enum Skill
+        public struct FAQAnswer
         {
-            Beginner,
-            Intermediate,
-            Expert
-        }
+            public string Description;
+            public string URL;
 
-        [Serializable]
-        public struct Skills
-        {
-            public Skill Unity;
-            public Skill Blender;
-            public Skill CSharp;
-            public Skill SubstancePainter;
-        }
-
-        [Serializable]
-        public struct Lesson
-        {
-
-        }
-
-        [Serializable]
-        public struct Task
-        {
-            bool Skippable;
+            public FAQAnswer(string description, string url = "")
+            {
+                Description = description;
+                URL = url;
+            }
         }
 
         #region VRCSDK

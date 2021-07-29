@@ -8,7 +8,7 @@ using UnityEngine.U2D;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    public class ProjectSetupWizard : EditorWindow
+    internal class ProjectSetupWizard : EditorWindow
     {
         const string LogPrefix = "[<color=#33AA77>WCA Project Setup Wizard</color>]:";
 
@@ -530,7 +530,7 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DownloadAndImportRepository(string author, string name)
         {
-            DataStructs.RepositoryImportResponse response = packageManager.DownloadRepositoryLatest(packageCacheDirectory, author, name);
+            DataStructs.ImportResponse response = packageManager.DownloadRepositoryLatest(packageCacheDirectory, author, name);
 
             if (!response.Succeeded) { Debug.LogError($"{LogPrefix} GitHub repository import failed! ({author}/{name})"); }
 

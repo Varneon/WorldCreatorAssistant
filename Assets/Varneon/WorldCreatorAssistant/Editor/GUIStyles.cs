@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    public static class GUIStyles
+    internal static class GUIStyles
     {
-        public static GUIStyle BlockHeaderButton { get; }
-        public static GUIStyle ButtonHyperlink { get; }
-        public static GUIStyle CenteredBoldLabel { get; }
-        public static GUIStyle CenteredHeaderLabel { get; }
-        public static GUIStyle CenteredLabel { get; }
-        public static GUIStyle FlatStandardButton { get; }
-        public static GUIStyle HeaderPageSelection { get; }
-        public static GUIStyle LeftGreyLabel { get; }
-        public static GUIStyle NonPaddedButton { get; }
-        public static GUIStyle ResourceTypeText { get; }
-        public static GUIStyle UpdateLabel { get; }
-        public static GUIStyle VersionLabel { get; }
-        public static GUIStyle WrappedText { get; }
+        internal static GUIStyle BlockHeaderButton { get; }
+        internal static GUIStyle ButtonHyperlink { get; }
+        internal static GUIStyle CenteredBoldLabel { get; }
+        internal static GUIStyle CenteredHeaderLabel { get; }
+        internal static GUIStyle CenteredLabel { get; }
+        internal static GUIStyle FlatStandardButton { get; }
+        internal static GUIStyle HeaderPageSelection { get; }
+        internal static GUIStyle LeftGreyLabel { get; }
+        internal static GUIStyle NonPaddedButton { get; }
+        internal static GUIStyle ResourceTypeText { get; }
+        internal static GUIStyle UpdateLabel { get; }
+        internal static GUIStyle VersionLabel { get; }
+        internal static GUIStyle WrappedText { get; }
 
         private static Texture2D ColorTexture(Color color)
         {

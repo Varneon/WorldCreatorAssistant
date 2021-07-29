@@ -11,7 +11,7 @@ using UnityEngine.Networking;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    public class PackageManager
+    internal class PackageManager
     {
         private const string LogPrefix = "[<color=#009999>WCA Package Manager</color>]:";
 
@@ -24,13 +24,13 @@ namespace Varneon.WorldCreatorAssistant
 
         DataStructs.GitHubApiRateLimit rateLimit;
         DataStructs.GitHubApiRelease latestRelease;
-        public float Progress = 0f;
-        readonly string tempPath = Path.GetTempPath();
-        string vrcApiResponse;
+        internal float Progress = 0f;
+        private readonly string tempPath = Path.GetTempPath();
+        private string vrcApiResponse;
 
         #region GitHub
 
-        public DataStructs.GitHubApiRateLimit GetGitHubApiRateLimit()
+        internal DataStructs.GitHubApiRateLimit GetGitHubApiRateLimit()
         {
             var reader = GitHubAPIRateLimit("https://api.github.com/rate_limit");
             while (reader.MoveNext()) { }
@@ -59,7 +59,7 @@ namespace Varneon.WorldCreatorAssistant
             }
         }
 
-        public DataStructs.RepositoryImportResponse DownloadRepositoryLatest(string cacheDir, string author, string name)
+        internal DataStructs.ImportResponse DownloadRepositoryLatest(string cacheDir, string author, string name)
         {
             string apiUrl = UtilityMethods.GetGitHubApiLatestReleaseURL(author, name);
 
@@ -78,7 +78,7 @@ namespace Varneon.WorldCreatorAssistant
             return ImportPackage(path, returnVersion: true);
         }
 
-        public System.Version GetLatestReleaseVersion(string author, string name)
+        internal System.Version GetLatestReleaseVersion(string author, string name)
         {
             Debug.Log($"{LogPrefix} Checking the latest version of {name}...");
 
@@ -155,7 +155,7 @@ namespace Varneon.WorldCreatorAssistant
         #endregion
 
         #region VRCSDK
-        public void DownloadSDK(DataStructs.SDKVariant variant, bool cleanInstall = false)
+        internal void DownloadSDK(DataStructs.SDKVariant variant, bool cleanInstall = false)
         {
             if (cleanInstall)
             {
@@ -215,7 +215,7 @@ namespace Varneon.WorldCreatorAssistant
             }
         }
 
-        public string GetVRCSDKConfig()
+        internal string GetVRCSDKConfig()
         {
             vrcApiResponse = null;
 
@@ -240,7 +240,7 @@ namespace Varneon.WorldCreatorAssistant
 
             if (request.isHttpError || request.isNetworkError)
             {
-                Debug.Log(request.error);
+                Debug.LogError(request.error);
             }
             else
             {
@@ -250,7 +250,7 @@ namespace Varneon.WorldCreatorAssistant
         #endregion
 
         #region Asset Store
-        public DataStructs.AssetStorePackage[] GetDownloadedUASPackages()
+        internal DataStructs.AssetStorePackage[] GetDownloadedUASPackages()
         {
             List<DataStructs.AssetStorePackage> downloadedPackages = new List<DataStructs.AssetStorePackage>();
             string path = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Unity\Asset Store-5.x";
@@ -270,7 +270,7 @@ namespace Varneon.WorldCreatorAssistant
         #endregion
 
         #region Unity Package Manager
-        public void AddUPMPackage(string package)
+        internal void AddUPMPackage(string package)
         {
             Debug.Log($"{LogPrefix} Importing UPM Package: {package}");
 
@@ -282,9 +282,9 @@ namespace Varneon.WorldCreatorAssistant
         }
         #endregion
 
-        public DataStructs.RepositoryImportResponse ImportPackage(string path, bool returnVersion = false)
+        internal DataStructs.ImportResponse ImportPackage(string path, bool returnVersion = false)
         {
-            DataStructs.RepositoryImportResponse response = new DataStructs.RepositoryImportResponse();
+            DataStructs.ImportResponse response = new DataStructs.ImportResponse();
 
             if (File.Exists(path))
             {
@@ -302,7 +302,7 @@ namespace Varneon.WorldCreatorAssistant
             }
             else
             {
-                Debug.Log($"{LogPrefix} Could not find Unitypackage to import at {path}");
+                Debug.LogError($"{LogPrefix} Could not find Unitypackage to import at {path}");
 
                 return response;
             }

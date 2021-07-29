@@ -27,6 +27,7 @@ namespace Varneon.WorldCreatorAssistant
             public string CHECK_FOR_UPDATES;
             public string CHOOSE_VRCSDK;
             public string CLEAN_INSTALL_INFO;
+            public string CLEAN_INSTALL_VRCSDK_NOTICE;
             public string CLEAN_INSTALL_WARNING;
             public string CLEAN_INSTALL;
             public string CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS;

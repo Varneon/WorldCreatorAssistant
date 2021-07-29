@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    public class Importer
+    internal class Importer
     {
         const string LogPrefix = "[<color=#990099>WorldCreatorAssistant</color>]:";
 
@@ -16,7 +16,7 @@ namespace Varneon.WorldCreatorAssistant
         DataStructs.GitHubApiRateLimit gitHubApiRateLimit;
         DataStructs.SDKVariant installedSDKVariant = DataStructs.SDKVariant.None;
         DateTime gitHubApiRateLimitReset;
-        public Texture iconCheckmark, iconNotification, iconDownload, iconGitHub, iconImport;
+        internal Texture iconCheckmark, iconDownload, iconGitHub, iconImport;
         readonly bool udonSharpImported;
         readonly List<bool> communityToolsExpanded, prefabRepositoriesExpanded;
         readonly PackageManager packageManager = new PackageManager();
@@ -25,7 +25,7 @@ namespace Varneon.WorldCreatorAssistant
         readonly WCAData wcaData;
         Dictionary.Translations dictionary;
 
-        public void Draw()
+        internal void Draw()
         {
             if (!isPackageCacheValid) 
             {
@@ -100,6 +100,8 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.Label($"{dictionary.INSTALLED_VERSION}: {wcaData.InstalledVRCSDKVersion}");
 
             GUILayout.Label($"{dictionary.LATEST_VERSION}: {(string.IsNullOrEmpty(wcaData.LatestVRCSDKVersion) ? dictionary.CHECK_FOR_UPDATES_GET_LATEST_VERSION : wcaData.LatestVRCSDKVersion)}");
+
+            GUIElements.DrawWarningBox(dictionary.CLEAN_INSTALL_VRCSDK_NOTICE);
 
             GUILayout.EndVertical();
         }
@@ -282,12 +284,12 @@ namespace Varneon.WorldCreatorAssistant
                         }
                         else if (repository.LatestCached && GUILayout.Button(new GUIContent(iconImport, dictionary.IMPORT), GUIStyle.none, GUILayout.MaxWidth(40)))
                         {
-                            DataStructs.RepositoryImportResponse response = ImportRepository(repository, true);
+                            DataStructs.ImportResponse response = ImportRepository(repository, true);
                             if (response.Succeeded) { repository.ImportedVersion = response.Version; }
                         }
                         else if (!repository.LatestCached && GUILayout.Button(new GUIContent(iconDownload, dictionary.DOWNLOAD), GUIStyle.none, GUILayout.MaxWidth(40)))
                         {
-                            DataStructs.RepositoryImportResponse response = ImportRepository(repository, false);
+                            DataStructs.ImportResponse response = ImportRepository(repository, false);
                             if (response.Succeeded)
                             {
                                 repository.ImportedVersion = response.Version;
@@ -310,7 +312,7 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.EndVertical();
         }
 
-        private DataStructs.RepositoryImportResponse ImportRepository(DataStructs.Repository repository, bool fromCache)
+        private DataStructs.ImportResponse ImportRepository(DataStructs.Repository repository, bool fromCache)
         {
             if (!cleanInstall || (cleanInstall && ClearFolders(repository.Directories.ToArray())))
             {
@@ -322,7 +324,7 @@ namespace Varneon.WorldCreatorAssistant
                 return packageManager.DownloadRepositoryLatest(packageCacheDirectory, repository.Author, repository.Name);
             }
 
-            return new DataStructs.RepositoryImportResponse();
+            return new DataStructs.ImportResponse();
         }
 
         private bool ClearFolders(string[] directories)
@@ -341,7 +343,7 @@ namespace Varneon.WorldCreatorAssistant
             return true;
         }
 
-        public Importer(string packageCacheDir)
+        internal Importer(string packageCacheDir)
         {
             UpdatePackageCacheDirectory(packageCacheDir);
 
@@ -374,14 +376,14 @@ namespace Varneon.WorldCreatorAssistant
             GetInstalledSDKVariant();
         }
 
-        public void UpdatePackageCacheDirectory(string path)
+        internal void UpdatePackageCacheDirectory(string path)
         {
             packageCacheDirectory = path;
 
             isPackageCacheValid = Directory.Exists(packageCacheDirectory);
         }
 
-        public void LoadActiveDictionary()
+        internal void LoadActiveDictionary()
         {
             dictionary = DictionaryLoader.ActiveDictionary;
         }

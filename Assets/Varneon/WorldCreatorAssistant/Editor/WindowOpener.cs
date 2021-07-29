@@ -9,11 +9,9 @@ namespace Varneon.WorldCreatorAssistant
         [MenuItem("Varneon/World Creator Assistant")]
         public static void OpenWindow()
         {
-            EditorSettings.spritePackerMode = SpritePackerMode.AlwaysOnAtlas;
-
 #if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3
             WorldCreatorAssistant window = EditorWindow.GetWindow<WorldCreatorAssistant>();
-            window.titleContent.image = UnityEngine.Resources.Load<SpriteAtlas>("Icons/Icons").GetSprite($"World_{(EditorGUIUtility.isProSkin ? "W" : "B")}").texture;
+            window.titleContent.image = UnityEngine.Resources.Load<Texture>($"Icons/World_{(EditorGUIUtility.isProSkin ? "W" : "B")}");
             window.titleContent.text = "WCA";
 #else
             ProjectSetupWizard window = EditorWindow.GetWindow<ProjectSetupWizard>();

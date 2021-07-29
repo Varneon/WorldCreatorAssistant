@@ -7,26 +7,26 @@ using Version = System.Version;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    public static class UtilityMethods
+    internal static class UtilityMethods
     {
-        public static string GetGitHubApiLatestReleaseURL(string author, string name)
+        internal static string GetGitHubApiLatestReleaseURL(string author, string name)
         {
             return $"https://api.github.com/repos/{author}/{name}/releases/latest";
         }
 
-        public static string GitHubPageURL(string owner, string repo)
+        internal static string GitHubPageURL(string owner, string repo)
         {
             return $"https://github.com/{owner}/{repo}";
         }
 
-        public static Version ParseVersionText(string version)
+        internal static Version ParseVersionText(string version)
         {
             string v = Regex.Match(Regex.Match(version, "[0-9.][0-9.][0-9.]*").Value, @"^([^.]*)\.([^.]*)\.([^.]*)").Value.TrimStart('.').TrimEnd('.');
 
             return new Version(v);
         }
 
-        public static Version GetVersionFile(string path)
+        internal static Version GetVersionFile(string path)
         {
             string fullPath = Path.GetFullPath($"Assets/{path}/version.txt");
 
@@ -44,17 +44,17 @@ namespace Varneon.WorldCreatorAssistant
             return new Version();
         }
 
-        public static int GetElapsedTimeFromUnix(int time)
+        internal static int GetElapsedTimeFromUnix(int time)
         {
             return (int)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(time)).TotalSeconds;
         }
 
-        public static int GetUnixTime()
+        internal static int GetUnixTime()
         {
             return (int)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
         }
 
-        public static void DeleteRegistryKey(string key)
+        internal static void DeleteRegistryKey(string key)
         {
             if (EditorPrefs.HasKey(key))
             {
@@ -62,7 +62,7 @@ namespace Varneon.WorldCreatorAssistant
             }
         }
 
-        public static void SaveAsset(UnityEngine.Object asset)
+        internal static void SaveAsset(UnityEngine.Object asset)
         {
             if(asset == null) { return; }
 
@@ -73,7 +73,7 @@ namespace Varneon.WorldCreatorAssistant
             AssetDatabase.Refresh();
         }
 
-        public static DataStructs.RepositoryStatus GetRepositoryStatus(this DataStructs.Repository repository, string packageCacheDirectory)
+        internal static DataStructs.RepositoryStatus GetRepositoryStatus(this DataStructs.Repository repository, string packageCacheDirectory)
         {
             DataStructs.RepositoryStatus status = new DataStructs.RepositoryStatus();
 
@@ -151,7 +151,7 @@ namespace Varneon.WorldCreatorAssistant
             }
         }
 
-        public static void ClearDirectories(string[] directories)
+        internal static void ClearDirectories(string[] directories)
         {
             string logPrefix = "[<color=#ABCDEF>WCA Package Manager</color>]:";
 
@@ -186,7 +186,7 @@ namespace Varneon.WorldCreatorAssistant
             AssetDatabase.Refresh();
         }
 
-        public static WCAData LoadWCAData()
+        internal static WCAData LoadWCAData()
         {
             WCAData wcaData = UnityEngine.Resources.Load<WCAData>("Data/WCAData");
 
@@ -262,7 +262,7 @@ namespace Varneon.WorldCreatorAssistant
             return wcaData;
         }
 
-        public static string GetVRCSDKDownloadLink(DataStructs.SDKVariant variant)
+        internal static string GetVRCSDKDownloadLink(DataStructs.SDKVariant variant)
         {
             switch (variant)
             {
@@ -272,14 +272,12 @@ namespace Varneon.WorldCreatorAssistant
                     return "https://vrchat.com/download/sdk3-avatars";
                 case DataStructs.SDKVariant.SDK2:
                     return "https://vrchat.com/download/sdk2";
-                case DataStructs.SDKVariant.None:
-                    break;
+                default:
+                    return string.Empty;
             }
-
-            return string.Empty;
         }
 
-        public static string ParseFileSize(long fileLength)
+        internal static string ParseFileSize(long fileLength)
         {
             string[] sizes = { "bytes", "KB", "MB", "GB" };
             int i = 0;

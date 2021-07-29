@@ -80,3 +80,10 @@ MonoBehaviour:
     RequiresUdonSharp: 1
     Directories:
     - VRCBilliardsCE
+  - Author: llealloo
+    Name: vrc-udon-audio-link
+    Description: Audio reactive prefabs for VRChat
+    SDK3Only: 1
+    RequiresUdonSharp: 1
+    Directories:
+    - AudioLink
