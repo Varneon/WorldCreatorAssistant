@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.U2D;
 
 namespace Varneon.WorldCreatorAssistant
 {
