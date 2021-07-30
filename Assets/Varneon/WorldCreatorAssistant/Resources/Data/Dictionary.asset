@@ -96,6 +96,8 @@ MonoBehaviour:
         repositories.
       PSW_PAGE_HINT_5: In this page you can import any downloaded packages from Unity
         Asset Store.
+      PSW_REDUCE_REPOSITORIES_OR_WAIT: Reduce the number of repositories to import
+        or wait for request limit to reset
       RECOMMENDED_COMMUNITY_TOOLS: Recommended Community Tools
       RESET_UNUSED_LIGHTING_SETTINGS_DESC: Reset the lighting setting parameters that
         are unused by default\n\nOptional

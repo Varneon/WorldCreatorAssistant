@@ -237,6 +237,14 @@ namespace Varneon.WorldCreatorAssistant
         }
 
         [Serializable]
+        public struct GitHubApiStatus
+        {
+            public int RequestsRemaining;
+            public int RequestLimit;
+            public DateTime ResetDateTime;
+        }
+
+        [Serializable]
         public struct GitHubApiRateLimit
         {
             public RateLimitResources resources;

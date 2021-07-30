@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
@@ -352,7 +353,21 @@ namespace Varneon.WorldCreatorAssistant
 
             GUIElements.DrawHintPanel(pageHints[page]);
 
-            DrawNavigationFooter(NextPage, PreviousPage);
+            DrawNavigationFooter(CheckForGitHubApiRequestLimitAndNextPage, PreviousPage);
+        }
+
+        private void CheckForGitHubApiRequestLimitAndNextPage()
+        {
+            DataStructs.GitHubApiStatus gitHubApiStatus = packageManager.GetGitHubApiRateLimit();
+            Debug.Log($"{LogPrefix}[<color=#999999>GitHub API</color>]:{gitHubApiStatus.RequestsRemaining}/{gitHubApiStatus.RequestLimit} {dictionary.USES_LEFT} | {dictionary.RESETS}: {gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm:ss tt}");
+            if (gitHubApiStatus.RequestsRemaining < communityToolsToImport.Count(c => c))
+            {
+                EditorUtility.DisplayDialog(dictionary.GITHUB_API_RATE_WARNING, $"{Regex.Unescape(dictionary.GITHUB_NOT_ENOUGH_REQUESTS)}:\n{gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm: ss tt}\n\n{dictionary.PSW_REDUCE_REPOSITORIES_OR_WAIT}", "OK");
+            }
+            else
+            {
+                NextPage();
+            }
         }
 
         private void DrawAssetStoreImporterPage()

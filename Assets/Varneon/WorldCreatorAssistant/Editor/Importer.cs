@@ -13,9 +13,7 @@ namespace Varneon.WorldCreatorAssistant
 
         bool cleanInstall;
         bool sdkExpanded, prefabsExpanded, toolsExpanded;
-        DataStructs.GitHubApiRateLimit gitHubApiRateLimit;
         DataStructs.SDKVariant installedSDKVariant = DataStructs.SDKVariant.None;
-        DateTime gitHubApiRateLimitReset;
         internal Texture iconCheckmark, iconDownload, iconGitHub, iconImport;
         readonly bool udonSharpImported;
         readonly List<bool> communityToolsExpanded, prefabRepositoriesExpanded;
@@ -138,12 +136,11 @@ namespace Varneon.WorldCreatorAssistant
         {
             if (EditorUtility.DisplayDialog(dictionary.CHECK_FOR_UPDATES, dictionary.DO_YOU_WANT_CHECK_UPDATES_GITHUB, dictionary.YES, dictionary.CANCEL))
             {
-                gitHubApiRateLimit = packageManager.GetGitHubApiRateLimit();
-                gitHubApiRateLimitReset = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(gitHubApiRateLimit.resources.core.reset);
-                Debug.Log($"{LogPrefix}[<color=#999999>GitHub API</color>]:{gitHubApiRateLimit.resources.core.remaining}/{gitHubApiRateLimit.resources.core.limit} {dictionary.USES_LEFT} | {dictionary.RESETS}: {gitHubApiRateLimitReset.ToLocalTime():MMMM dd, yyyy | h:mm:ss tt}");
-                if (gitHubApiRateLimit.resources.core.remaining < repositories.Count)
+                DataStructs.GitHubApiStatus gitHubApiStatus = packageManager.GetGitHubApiRateLimit();
+                Debug.Log($"{LogPrefix}[<color=#999999>GitHub API</color>]:{gitHubApiStatus.RequestsRemaining}/{gitHubApiStatus.RequestLimit} {dictionary.USES_LEFT} | {dictionary.RESETS}: {gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm:ss tt}");
+                if (gitHubApiStatus.RequestsRemaining < repositories.Count)
                 {
-                    EditorUtility.DisplayDialog(dictionary.GITHUB_API_RATE_WARNING, $"{Regex.Unescape(dictionary.GITHUB_NOT_ENOUGH_REQUESTS)}:\n{gitHubApiRateLimitReset.ToLocalTime():MMMM dd, yyyy | h:mm: ss tt}", "OK");
+                    EditorUtility.DisplayDialog(dictionary.GITHUB_API_RATE_WARNING, $"{Regex.Unescape(dictionary.GITHUB_NOT_ENOUGH_REQUESTS)}:\n{gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm: ss tt}", "OK");
                 }
                 else
                 {
@@ -289,14 +286,23 @@ namespace Varneon.WorldCreatorAssistant
                         }
                         else if (!repository.LatestCached && GUILayout.Button(new GUIContent(iconDownload, dictionary.DOWNLOAD), GUIStyle.none, GUILayout.MaxWidth(40)))
                         {
-                            DataStructs.ImportResponse response = ImportRepository(repository, false);
-                            if (response.Succeeded)
+                            DataStructs.GitHubApiStatus gitHubApiStatus = packageManager.GetGitHubApiRateLimit();
+                            Debug.Log($"{LogPrefix}[<color=#999999>GitHub API</color>]:{gitHubApiStatus.RequestsRemaining}/{gitHubApiStatus.RequestLimit} {dictionary.USES_LEFT} | {dictionary.RESETS}: {gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm:ss tt}");
+                            if (gitHubApiStatus.RequestsRemaining < 1)
                             {
-                                repository.ImportedVersion = response.Version;
-                                repository.DownloadedVersion = repository.ImportedVersion;
-                                repository.Downloaded = true;
-                                repository.Imported = true;
-                                repository.LastRefreshed = DateTime.UtcNow.ToFileTime();
+                                EditorUtility.DisplayDialog(dictionary.GITHUB_API_RATE_WARNING, $"{Regex.Unescape(dictionary.GITHUB_NOT_ENOUGH_REQUESTS)}:\n{gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm: ss tt}", "OK");
+                            }
+                            else
+                            {
+                                DataStructs.ImportResponse response = ImportRepository(repository, false);
+                                if (response.Succeeded)
+                                {
+                                    repository.ImportedVersion = response.Version;
+                                    repository.DownloadedVersion = repository.ImportedVersion;
+                                    repository.Downloaded = true;
+                                    repository.Imported = true;
+                                    repository.LastRefreshed = DateTime.UtcNow.ToFileTime();
+                                }
                             }
                         }
                     }

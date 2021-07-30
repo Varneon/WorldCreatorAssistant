@@ -79,6 +79,7 @@ namespace Varneon.WorldCreatorAssistant
             public string PSW_PAGE_HINT_3;
             public string PSW_PAGE_HINT_4;
             public string PSW_PAGE_HINT_5;
+            public string PSW_REDUCE_REPOSITORIES_OR_WAIT;
             public string RECOMMENDED_COMMUNITY_TOOLS;
             public string RESET_UNUSED_LIGHTING_SETTINGS_DESC;
             public string RESET_UNUSED_LIGHTING_SETTINGS;
