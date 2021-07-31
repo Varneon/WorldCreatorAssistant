@@ -3,7 +3,7 @@ Unity Editor extension that automates majority of the steps related to managing 
 ---
 <div align="center">
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Varneon/WorldCreatorAssistant?label=Repository%20Size&style=for-the-badge)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Varneon/WorldCreatorAssistant?style=for-the-badge)
 [![GitHub](https://img.shields.io/github/license/Varneon/WorldCreatorAssistant?color=blue&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/blob/main/LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/WorldCreatorAssistant?style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/stargazers)
 [![GitHub all releases](https://img.shields.io/github/downloads/Varneon/WorldCreatorAssistant/total?color=blue&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/releases)
