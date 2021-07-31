@@ -15,7 +15,8 @@ namespace Varneon.WorldCreatorAssistant
         bool resetLightSettings;
         bool validCacheDirectory;
         bool[] uasPackagesToImport, upmPackagesToImport, communityToolsToImport;
-        DataStructs.SDKVariant selectedSDK;
+        DataStructs.SDKVariant selectedSDK, customSDKVariant;
+        string customSDKPath;
         Dictionary.Translations dictionary;
         int page = 0;
         int udonSharpIndex;
@@ -24,6 +25,13 @@ namespace Varneon.WorldCreatorAssistant
         string[] pageHints;
         Vector2 scrollPos;
         WCAData wcaData;
+        SetupMode setupMode;
+
+        private enum SetupMode
+        {
+            Basic,
+            Advanced
+        }
 
         private void OnEnable()
         {
@@ -148,9 +156,10 @@ namespace Varneon.WorldCreatorAssistant
             }
             else if (GUILayout.Button(dictionary.SELECT, GUIStyles.FlatStandardButton, GUILayout.MinHeight(30)))
             {
+                ResetSDKInfo();
                 selectedSDK = DataStructs.SDKVariant.SDK2;
 
-                for(int i = 0; i < communityToolsToImport.Length; i++)
+                for (int i = 0; i < communityToolsToImport.Length; i++)
                 {
                     if (!wcaData.CommunityTools[i].SDK3Only) { continue; }
                     
@@ -196,6 +205,7 @@ namespace Varneon.WorldCreatorAssistant
             }
             else if (GUILayout.Button(dictionary.SELECT, GUIStyles.FlatStandardButton, GUILayout.MinHeight(30)))
             {
+                ResetSDKInfo();
                 selectedSDK = DataStructs.SDKVariant.SDK3Worlds;
             }
 
@@ -234,17 +244,79 @@ namespace Varneon.WorldCreatorAssistant
 
             GUILayout.EndVertical();
 
+            if(setupMode == SetupMode.Advanced)
+            {
+                GUILayout.Label("- OR -", GUIStyles.CenteredHeaderLabel);
+
+                DrawCustomSDKField();
+            }
+
             GUIElements.DrawHintPanel(pageHints[page]);
 
             GUILayout.FlexibleSpace();
 
             GUILayout.BeginHorizontal();
 
-            GUIElements.LanguageSelection(LoadActiveLanguage);
+            GUIElements.LanguageSelection(LoadActiveLanguage, false);
 
-            DrawNavigationFooter(NextPage, nextDisabled: selectedSDK == DataStructs.SDKVariant.None);
+            DrawSetupModeSelection();
+
+            DrawNavigationFooter(NextPage, nextDisabled: selectedSDK == DataStructs.SDKVariant.None && customSDKVariant == DataStructs.SDKVariant.None);
 
             GUILayout.EndHorizontal();
+        }
+
+        private void DrawSetupModeSelection()
+        {
+            using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
+            {
+                GUILayout.Label(dictionary.SETUP_MODE);
+
+                EditorGUI.BeginChangeCheck();
+
+                setupMode = (SetupMode)EditorGUILayout.EnumPopup(setupMode, GUILayout.Width(100));
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    if(setupMode == SetupMode.Basic) { ResetSDKInfo(); }
+                }
+            }
+        }
+
+        private void DrawCustomSDKField()
+        {
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                GUILayout.Label(dictionary.IMPORT_OPEN_BETA_SDK_MANUALLY, EditorStyles.boldLabel);
+
+                using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
+                {
+                    GUILayout.Label(customSDKPath, EditorStyles.wordWrappedLabel);
+                    if (GUILayout.Button(dictionary.BROWSE, GUIStyles.NonPaddedButton, new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(16) }))
+                    {
+                        string newPath = EditorUtility.OpenFilePanelWithFilters(dictionary.SELECT_OPEN_BETA_SDK, "", new string[] { "Unitypackage", "unitypackage" });
+                        if (!string.IsNullOrEmpty(newPath) && customSDKPath != newPath)
+                        {
+                            ResetSDKInfo();
+                            customSDKPath = newPath;
+                            customSDKVariant = UtilityMethods.GetVRCSDKVariantFromFileName(newPath);
+                        }
+                    }
+                }
+
+                switch (customSDKVariant)
+                {
+                    case DataStructs.SDKVariant.SDK3Worlds:
+                        GUIElements.DrawSuccessPanel($"{dictionary.DETECTED_SDK_VARIANT}: {customSDKVariant}");
+                        break;
+                    case DataStructs.SDKVariant.SDK2:
+                        GUIElements.DrawSuccessPanel($"{dictionary.DETECTED_SDK_VARIANT}: {customSDKVariant}");
+                        break;
+                    default:
+                        GUIElements.DrawWarningBox(dictionary.SDK_VARIANT_NOT_DETECTED);
+                        break;
+                }
+            }
         }
 
         private void DrawSetupOptionsPage()
@@ -316,7 +388,7 @@ namespace Varneon.WorldCreatorAssistant
                 {
                     DataStructs.Repository repo = wcaData.CommunityTools[i];
 
-                    EditorGUI.BeginDisabledGroup((repo.SDK3Only && selectedSDK != DataStructs.SDKVariant.SDK3Worlds) || (repo.RequiresUdonSharp && !communityToolsToImport[udonSharpIndex]));
+                    EditorGUI.BeginDisabledGroup((repo.SDK3Only && selectedSDK != DataStructs.SDKVariant.SDK3Worlds && customSDKVariant != DataStructs.SDKVariant.SDK3Worlds) || (repo.RequiresUdonSharp && !communityToolsToImport[udonSharpIndex]));
                     GUILayout.BeginVertical(EditorStyles.helpBox);
                     GUILayout.BeginHorizontal();
                     communityToolsToImport[i] = GUILayout.Toggle(communityToolsToImport[i] && (repo.RequiresUdonSharp ? communityToolsToImport[udonSharpIndex] : true), $"{repo.Name} {(repo.RequiresUdonSharp ? "[Prerequisites: UdonSharp]" : string.Empty)}");
@@ -330,7 +402,7 @@ namespace Varneon.WorldCreatorAssistant
 
                 EditorGUILayout.EndScrollView();
                 
-                if(selectedSDK != DataStructs.SDKVariant.SDK3Worlds)
+                if(selectedSDK != DataStructs.SDKVariant.SDK3Worlds && customSDKVariant != DataStructs.SDKVariant.SDK3Worlds)
                 {
                     GUI.color = Color.yellow;
                     GUILayout.BeginHorizontal(EditorStyles.helpBox);
@@ -479,7 +551,7 @@ namespace Varneon.WorldCreatorAssistant
 
             string summary = String.Format(dictionary.YOU_ARE_ABOUT_TO_DOWNLOAD + ":\n\n{0}\n\t{1}\n\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n\t{9}\n\n{10}",
                     "VRCSDK:",
-                    selectedSDK,
+                    selectedSDK == DataStructs.SDKVariant.None ? customSDKPath : selectedSDK.ToString(),
                     "Unity Package Manager:",
                     upmPackageList,
                     "GitHub:",
@@ -519,7 +591,8 @@ namespace Varneon.WorldCreatorAssistant
                 }
             }
 
-            packageManager.DownloadSDK(selectedSDK);
+            if (selectedSDK != DataStructs.SDKVariant.None) { packageManager.DownloadSDK(selectedSDK); }
+            else { packageManager.ImportPackage(customSDKPath); }
 
             for (int i = 0; i < communityToolsToImport.Length; i++)
             {
@@ -611,6 +684,13 @@ namespace Varneon.WorldCreatorAssistant
             RenderSettings.flareStrength = 0f;
 
             Debug.Log($"{LogPrefix} Lighting settings have been reset!");
+        }
+
+        private void ResetSDKInfo()
+        {
+            customSDKPath = string.Empty;
+            customSDKVariant = DataStructs.SDKVariant.None;
+            selectedSDK = DataStructs.SDKVariant.None;
         }
 
         private void OpenWorldCreatorAssistant()

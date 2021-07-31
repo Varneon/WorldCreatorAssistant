@@ -40,6 +40,7 @@ namespace Varneon.WorldCreatorAssistant
             public string DANGER_ZONE;
             public string DEFINE_VALID_CACHE_DIRECTORY;
             public string DEPRECATED;
+            public string DETECTED_SDK_VARIANT;
             public string DO_YOU_WANT_CHECK_UPDATES_GITHUB;
             public string DO_YOU_WANT_CHECK_UPDATES_VRCSDK;
             public string DO_YOU_WANT_TO_UPDATE_VRCSDK;
@@ -52,6 +53,7 @@ namespace Varneon.WorldCreatorAssistant
             public string GITHUB_NOT_ENOUGH_REQUESTS;
             public string IMPORT_ASSET_STORE_PACKAGES;
             public string IMPORT_COMMUNITY_TOOLS;
+            public string IMPORT_OPEN_BETA_SDK_MANUALLY;
             public string IMPORT_UPM_PACKAGES;
             public string IMPORT;
             public string IMPORTED;
@@ -85,14 +87,17 @@ namespace Varneon.WorldCreatorAssistant
             public string RESET_UNUSED_LIGHTING_SETTINGS;
             public string RESETS;
             public string RESOURCES;
+            public string SDK_VARIANT_NOT_DETECTED;
             public string SDK2_DEPRECATION_TEXT;
             public string SDK2_DESCRIPTION;
             public string SDK3_DESCRIPTION;
             public string SECONDS_AGO;
+            public string SELECT_OPEN_BETA_SDK;
             public string SELECT_PACKAGE_CACHE_DIRECTORY;
             public string SELECT;
             public string SELECTED;
             public string SETTINGS;
+            public string SETUP_MODE;
             public string SETUP_OPTIONS;
             public string SOME_COMMUNITY_TOOLS_UNAVAILABLE_SDK;
             public string SPECIFY_PACKAGE_CACHE_DIRECTORY_DESC;
