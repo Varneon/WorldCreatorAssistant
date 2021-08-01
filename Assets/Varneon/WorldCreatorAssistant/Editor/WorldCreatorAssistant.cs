@@ -144,7 +144,7 @@ namespace Varneon.WorldCreatorAssistant
 
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
                 GUILayout.Label(packageCacheDirectory);
-                if (GUILayout.Button(dictionary.BROWSE, GUIStyles.NonPaddedButton, new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(16) }))
+                if (GUIElements.BrowseButton(dictionary.BROWSE))
                 {
                     string newPath = EditorUtility.OpenFolderPanel(dictionary.SELECT_PACKAGE_CACHE_DIRECTORY, "", "");
                     if (!string.IsNullOrEmpty(newPath) && packageCacheDirectory != newPath)

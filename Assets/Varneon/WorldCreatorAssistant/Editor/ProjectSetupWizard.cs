@@ -292,7 +292,7 @@ namespace Varneon.WorldCreatorAssistant
                 using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
                 {
                     GUILayout.Label(customSDKPath, EditorStyles.wordWrappedLabel);
-                    if (GUILayout.Button(dictionary.BROWSE, GUIStyles.NonPaddedButton, new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(16) }))
+                    if (GUIElements.BrowseButton(dictionary.BROWSE))
                     {
                         string newPath = EditorUtility.OpenFilePanelWithFilters(dictionary.SELECT_OPEN_BETA_SDK, "", new string[] { "Unitypackage", "unitypackage" });
                         if (!string.IsNullOrEmpty(newPath) && customSDKPath != newPath)
