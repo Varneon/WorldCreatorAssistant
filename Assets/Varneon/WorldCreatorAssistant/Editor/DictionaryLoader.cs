@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
 namespace Varneon.WorldCreatorAssistant
 {
@@ -20,9 +19,9 @@ namespace Varneon.WorldCreatorAssistant
 
             LanguageNames = GetAvailableLanguages();
 
-            if (EditorPrefs.HasKey("Varneon/WCA/Language"))
+            if (EditorPrefs.HasKey(EditorPreferenceKeys.Language))
             {
-                ActiveLanguageIndex = EditorPrefs.GetInt("Varneon/WCA/Language");
+                ActiveLanguageIndex = EditorPrefs.GetInt(EditorPreferenceKeys.Language);
             }
 
             LoadActiveDictionary();
@@ -44,9 +43,9 @@ namespace Varneon.WorldCreatorAssistant
         {
             int languageIndex = 0;
 
-            if (EditorPrefs.HasKey("Varneon/WCA/Language"))
+            if (EditorPrefs.HasKey(EditorPreferenceKeys.Language))
             {
-                languageIndex = EditorPrefs.GetInt("Varneon/WCA/Language");
+                languageIndex = EditorPrefs.GetInt(EditorPreferenceKeys.Language);
             }
 
             int languageCount = dictionary.Languages.Count;
@@ -58,7 +57,7 @@ namespace Varneon.WorldCreatorAssistant
 
         public static void ChangeLanguage(int index)
         {
-            EditorPrefs.SetInt("Varneon/WCA/Language", index);
+            EditorPrefs.SetInt(EditorPreferenceKeys.Language, index);
 
             ActiveLanguageIndex = index;
 

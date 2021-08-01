@@ -44,9 +44,22 @@ namespace Varneon.WorldCreatorAssistant
             return new Version();
         }
 
+        internal static DataStructs.SDKVariant GetVRCSDKVariantFromFileName(string name)
+        {
+            if(Regex.IsMatch(name, "VRCSDK3-WORLD")) { return DataStructs.SDKVariant.SDK3Worlds; }
+            else if(Regex.IsMatch(name, "VRCSDK2")) { return DataStructs.SDKVariant.SDK2; }
+
+            return DataStructs.SDKVariant.None;
+        }
+
+        internal static DateTime GetDateTimeFromUnix(int time)
+        {
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(time);
+        }
+
         internal static int GetElapsedTimeFromUnix(int time)
         {
-            return (int)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(time)).TotalSeconds;
+            return (int)(DateTime.Now - GetDateTimeFromUnix(time)).TotalSeconds;
         }
 
         internal static int GetUnixTime()

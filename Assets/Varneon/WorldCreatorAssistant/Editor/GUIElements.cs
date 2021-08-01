@@ -1,5 +1,4 @@
-﻿#if UNITY_EDITOR
-using System;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,6 +6,8 @@ namespace Varneon.WorldCreatorAssistant
 {
     internal static class GUIElements
     {
+        private static readonly GUILayoutOption[] BrowseButtonGUILayoutOptions = new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(15) };
+
         internal static bool Foldout(bool open, string foldoutText, Action drawContent, string contextButtonText = null, Action contextButtonAction = null)
         {
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
@@ -36,6 +37,12 @@ namespace Varneon.WorldCreatorAssistant
 
             return open;
         }
+
+        internal static bool BrowseButton(string text)
+        {
+            return GUILayout.Button(text, GUIStyles.FlatStandardButton, BrowseButtonGUILayoutOptions);
+        }
+
         internal static void DrawWarningBox(string text)
         {
             GUI.color = Color.yellow;
@@ -54,11 +61,20 @@ namespace Varneon.WorldCreatorAssistant
             GUI.color = Color.white;
         }
 
-        internal static void LanguageSelection(Action loadActiveLanguage)
+        internal static void DrawSuccessPanel(string text)
+        {
+            GUI.color = Color.green;
+            GUILayout.BeginHorizontal(EditorStyles.helpBox);
+            GUILayout.Label(text, GUIStyles.WrappedText);
+            GUILayout.EndHorizontal();
+            GUI.color = Color.white;
+        }
+
+        internal static void LanguageSelection(Action loadActiveLanguage, bool allowExpand = true)
         {
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
             GUILayout.Label("Language");
-            GUILayout.FlexibleSpace();
+            if (allowExpand) { GUILayout.FlexibleSpace(); }
             EditorGUI.BeginChangeCheck();
             int selectedLanguage = EditorGUILayout.Popup(DictionaryLoader.ActiveLanguageIndex, DictionaryLoader.LanguageNames, GUILayout.Width(100));
             if (EditorGUI.EndChangeCheck())
@@ -71,4 +87,3 @@ namespace Varneon.WorldCreatorAssistant
         }
     }
 }
-#endif

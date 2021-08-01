@@ -45,6 +45,7 @@ MonoBehaviour:
       DANGER_ZONE: Danger Zone
       DEFINE_VALID_CACHE_DIRECTORY: Please define valid directory before adding repositories
       DEPRECATED: Deprecated
+      DETECTED_SDK_VARIANT: Detected SDK variant
       DO_YOU_WANT_CHECK_UPDATES_GITHUB: Do you want to check for updates for the GitHub
         repositories?
       DO_YOU_WANT_CHECK_UPDATES_VRCSDK: Do you want to check for updates for VRCSDK?
@@ -59,6 +60,7 @@ MonoBehaviour:
         will be reset
       IMPORT_ASSET_STORE_PACKAGES: Import downloaded Unity Asset Store packages
       IMPORT_COMMUNITY_TOOLS: Import recommended community tools
+      IMPORT_OPEN_BETA_SDK_MANUALLY: Import Open Beta VRCSDK manually
       IMPORT_UPM_PACKAGES: Import Unity Package Manager packages
       IMPORT: Import
       IMPORTED: Imported
@@ -96,12 +98,15 @@ MonoBehaviour:
         repositories.
       PSW_PAGE_HINT_5: In this page you can import any downloaded packages from Unity
         Asset Store.
+      PSW_REDUCE_REPOSITORIES_OR_WAIT: Reduce the number of repositories to import
+        or wait for request limit to reset
       RECOMMENDED_COMMUNITY_TOOLS: Recommended Community Tools
       RESET_UNUSED_LIGHTING_SETTINGS_DESC: Reset the lighting setting parameters that
         are unused by default\n\nOptional
       RESET_UNUSED_LIGHTING_SETTINGS: Reset unused lighting settings
       RESETS: Resets
       RESOURCES: Resources
+      SDK_VARIANT_NOT_DETECTED: SDK variant not detected
       SDK2_DEPRECATION_TEXT: VRCSDK2 is considered deprecated for creation. It will
         not receive most/any of the new features available in VRCSDK3-Worlds or VRCSDK3-Avatars.
         It will still receive important security and maintenance patches.\n\nIf you
@@ -110,10 +115,12 @@ MonoBehaviour:
       SDK3_DESCRIPTION: Brand new SDK with VRChat's own visual programming language,
         Udon.
       SECONDS_AGO: seconds ago
+      SELECT_OPEN_BETA_SDK: Select Open Beta VRCSDK
       SELECT_PACKAGE_CACHE_DIRECTORY: Select Package Cache Directory
       SELECT: Select
       SELECTED: Selected
       SETTINGS: Settings
+      SETUP_MODE: Setup Mode
       SETUP_OPTIONS: Setup Options
       SOME_COMMUNITY_TOOLS_UNAVAILABLE_SDK: Some community tools are disabled because
         they are only available when using VRCSDK3

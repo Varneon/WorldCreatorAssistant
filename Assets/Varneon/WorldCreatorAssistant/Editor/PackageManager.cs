@@ -30,11 +30,17 @@ namespace Varneon.WorldCreatorAssistant
 
         #region GitHub
 
-        internal DataStructs.GitHubApiRateLimit GetGitHubApiRateLimit()
+        internal DataStructs.GitHubApiStatus GetGitHubApiRateLimit()
         {
+            rateLimit = new DataStructs.GitHubApiRateLimit();
             var reader = GitHubAPIRateLimit("https://api.github.com/rate_limit");
             while (reader.MoveNext()) { }
-            return rateLimit;
+            return new DataStructs.GitHubApiStatus() 
+            { 
+                RequestsRemaining = rateLimit.resources.core.remaining,
+                RequestLimit = rateLimit.resources.core.limit,
+                ResetDateTime = UtilityMethods.GetDateTimeFromUnix(rateLimit.resources.core.reset)
+            };
         }
 
         IEnumerator GitHubAPIRateLimit(string url)

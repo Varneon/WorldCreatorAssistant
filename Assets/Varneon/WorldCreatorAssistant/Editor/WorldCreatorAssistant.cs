@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.U2D;
 
 namespace Varneon.WorldCreatorAssistant
 {
@@ -24,7 +23,7 @@ namespace Varneon.WorldCreatorAssistant
         private string[] pages = System.Enum.GetNames(typeof(Page));
         #endregion
 
-        internal enum Page
+        private enum Page
         {
             Main,
             Tutorials,
@@ -35,9 +34,9 @@ namespace Varneon.WorldCreatorAssistant
 
         private void OnEnable()
         {
-            if (EditorPrefs.HasKey("Varneon/WCA/PackageCacheDirectory"))
+            if (EditorPrefs.HasKey(EditorPreferenceKeys.PackageCache))
             {
-                packageCacheDirectory = EditorPrefs.GetString("Varneon/WCA/PackageCacheDirectory");
+                packageCacheDirectory = EditorPrefs.GetString(EditorPreferenceKeys.PackageCache);
             }
 
             importer = new Importer(packageCacheDirectory);
@@ -145,14 +144,14 @@ namespace Varneon.WorldCreatorAssistant
 
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
                 GUILayout.Label(packageCacheDirectory);
-                if (GUILayout.Button(dictionary.BROWSE, GUIStyles.NonPaddedButton, new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(16) }))
+                if (GUIElements.BrowseButton(dictionary.BROWSE))
                 {
                     string newPath = EditorUtility.OpenFolderPanel(dictionary.SELECT_PACKAGE_CACHE_DIRECTORY, "", "");
                     if (!string.IsNullOrEmpty(newPath) && packageCacheDirectory != newPath)
                     {
                         packageCacheDirectory = newPath;
                         importer.UpdatePackageCacheDirectory(newPath);
-                        EditorPrefs.SetString("Varneon/WCA/PackageCacheDirectory", packageCacheDirectory);
+                        EditorPrefs.SetString(EditorPreferenceKeys.PackageCache, packageCacheDirectory);
                     }
                 }
                 GUILayout.EndHorizontal();
@@ -172,9 +171,9 @@ namespace Varneon.WorldCreatorAssistant
                 {
                     if (EditorUtility.DisplayDialog($"{dictionary.CLEAR_WCA_REGISTRY_KEYS}?", dictionary.ARE_YOU_SURE_CLEAR_WCA_REGISTRY_KEYS, dictionary.YES, dictionary.CANCEL))
                     {
-                        UtilityMethods.DeleteRegistryKey("Varneon/WCA/LastVRChatAPIRequest");
-                        UtilityMethods.DeleteRegistryKey("Varneon/WCA/PackageCacheDirectory");
-                        UtilityMethods.DeleteRegistryKey("Varneon/WCA/Language");
+                        UtilityMethods.DeleteRegistryKey(EditorPreferenceKeys.LastVRCAPIRequest);
+                        UtilityMethods.DeleteRegistryKey(EditorPreferenceKeys.PackageCache);
+                        UtilityMethods.DeleteRegistryKey(EditorPreferenceKeys.Language);
                     }
                 }
                 else if (GUILayout.Button(dictionary.CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS, GUIStyles.FlatStandardButton))
