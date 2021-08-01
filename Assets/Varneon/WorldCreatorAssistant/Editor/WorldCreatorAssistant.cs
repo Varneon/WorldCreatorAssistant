@@ -34,9 +34,9 @@ namespace Varneon.WorldCreatorAssistant
 
         private void OnEnable()
         {
-            if (EditorPrefs.HasKey("Varneon/WCA/PackageCacheDirectory"))
+            if (EditorPrefs.HasKey(EditorPreferenceKeys.PackageCache))
             {
-                packageCacheDirectory = EditorPrefs.GetString("Varneon/WCA/PackageCacheDirectory");
+                packageCacheDirectory = EditorPrefs.GetString(EditorPreferenceKeys.PackageCache);
             }
 
             importer = new Importer(packageCacheDirectory);
@@ -151,7 +151,7 @@ namespace Varneon.WorldCreatorAssistant
                     {
                         packageCacheDirectory = newPath;
                         importer.UpdatePackageCacheDirectory(newPath);
-                        EditorPrefs.SetString("Varneon/WCA/PackageCacheDirectory", packageCacheDirectory);
+                        EditorPrefs.SetString(EditorPreferenceKeys.PackageCache, packageCacheDirectory);
                     }
                 }
                 GUILayout.EndHorizontal();
@@ -171,9 +171,9 @@ namespace Varneon.WorldCreatorAssistant
                 {
                     if (EditorUtility.DisplayDialog($"{dictionary.CLEAR_WCA_REGISTRY_KEYS}?", dictionary.ARE_YOU_SURE_CLEAR_WCA_REGISTRY_KEYS, dictionary.YES, dictionary.CANCEL))
                     {
-                        UtilityMethods.DeleteRegistryKey("Varneon/WCA/LastVRChatAPIRequest");
-                        UtilityMethods.DeleteRegistryKey("Varneon/WCA/PackageCacheDirectory");
-                        UtilityMethods.DeleteRegistryKey("Varneon/WCA/Language");
+                        UtilityMethods.DeleteRegistryKey(EditorPreferenceKeys.LastVRCAPIRequest);
+                        UtilityMethods.DeleteRegistryKey(EditorPreferenceKeys.PackageCache);
+                        UtilityMethods.DeleteRegistryKey(EditorPreferenceKeys.Language);
                     }
                 }
                 else if (GUILayout.Button(dictionary.CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS, GUIStyles.FlatStandardButton))

@@ -153,9 +153,9 @@ namespace Varneon.WorldCreatorAssistant
 
         private void CheckForVRCSDKUpdates()
         {
-            if (EditorPrefs.HasKey("Varneon/WCA/LastVRChatAPIRequest"))
+            if (EditorPrefs.HasKey(EditorPreferenceKeys.LastVRCAPIRequest))
             {
-                int lastRequest = EditorPrefs.GetInt("Varneon/WCA/LastVRChatAPIRequest");
+                int lastRequest = EditorPrefs.GetInt(EditorPreferenceKeys.LastVRCAPIRequest);
 
                 int timeSinceLastRequest = UtilityMethods.GetElapsedTimeFromUnix(lastRequest);
 
@@ -172,7 +172,7 @@ namespace Varneon.WorldCreatorAssistant
             }
             else
             {
-                EditorPrefs.SetInt("Varneon/WCA/LastVRChatAPIRequest", UtilityMethods.GetUnixTime());
+                EditorPrefs.SetInt(EditorPreferenceKeys.LastVRCAPIRequest, UtilityMethods.GetUnixTime());
 
                 DisplayVRCSDKCheckUpdateDialog();
             }
@@ -199,7 +199,7 @@ namespace Varneon.WorldCreatorAssistant
                 Debug.Log($"SDK3-Worlds: {config.downloadUrls.sdk3_worlds}");
                 Debug.Log($"SDK3-Avatars: {config.downloadUrls.sdk3_avatars}");
 
-                EditorPrefs.SetInt("Varneon/WCA/LastVRChatAPIRequest", UtilityMethods.GetUnixTime());
+                EditorPrefs.SetInt(EditorPreferenceKeys.LastVRCAPIRequest, UtilityMethods.GetUnixTime());
 
                 switch (installedSDKVariant)
                 {

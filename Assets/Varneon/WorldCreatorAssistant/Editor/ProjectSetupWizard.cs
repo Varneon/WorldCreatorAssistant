@@ -39,9 +39,9 @@ namespace Varneon.WorldCreatorAssistant
 
             LoadActiveLanguage();
 
-            if (EditorPrefs.HasKey("Varneon/WCA/PackageCacheDirectory"))
+            if (EditorPrefs.HasKey(EditorPreferenceKeys.PackageCache))
             {
-                packageCacheDirectory = EditorPrefs.GetString("Varneon/WCA/PackageCacheDirectory");
+                packageCacheDirectory = EditorPrefs.GetString(EditorPreferenceKeys.PackageCache);
                 if (Directory.Exists(packageCacheDirectory))
                 {
                     validCacheDirectory = true;
@@ -374,7 +374,7 @@ namespace Varneon.WorldCreatorAssistant
                 if (!string.IsNullOrEmpty(newPath) && packageCacheDirectory != newPath)
                 {
                     packageCacheDirectory = newPath;
-                    EditorPrefs.SetString("Varneon/WCA/PackageCacheDirectory", packageCacheDirectory);
+                    EditorPrefs.SetString(EditorPreferenceKeys.PackageCache, packageCacheDirectory);
                     validCacheDirectory = true;
                 }
             }
