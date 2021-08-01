@@ -23,7 +23,7 @@ namespace Varneon.WorldCreatorAssistant
         private string[] pages = System.Enum.GetNames(typeof(Page));
         #endregion
 
-        internal enum Page
+        private enum Page
         {
             Main,
             Tutorials,
