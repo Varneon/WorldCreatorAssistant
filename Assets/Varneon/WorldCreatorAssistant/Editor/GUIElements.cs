@@ -6,7 +6,7 @@ namespace Varneon.WorldCreatorAssistant
 {
     internal static class GUIElements
     {
-        private static readonly GUILayoutOption[] BrowseButtonGUILayoutOptions = new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(16) };
+        private static readonly GUILayoutOption[] BrowseButtonGUILayoutOptions = new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(15) };
 
         internal static bool Foldout(bool open, string foldoutText, Action drawContent, string contextButtonText = null, Action contextButtonAction = null)
         {
@@ -40,7 +40,7 @@ namespace Varneon.WorldCreatorAssistant
 
         internal static bool BrowseButton(string text)
         {
-            return GUILayout.Button(text, GUIStyles.NonPaddedButton, BrowseButtonGUILayoutOptions);
+            return GUILayout.Button(text, GUIStyles.FlatStandardButton, BrowseButtonGUILayoutOptions);
         }
 
         internal static void DrawWarningBox(string text)
