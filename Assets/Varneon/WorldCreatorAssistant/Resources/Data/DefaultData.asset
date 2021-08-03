@@ -19,14 +19,14 @@ MonoBehaviour:
     SDK3Only: 0
     RequiresUdonSharp: 0
     Directories:
-    - VRWorldToolkit
+    - Assets/VRWorldToolkit
   - Author: CyanLaser
     Name: CyanEmu
     Description: A VRChat client emulator in Unity for SDK2 and SDK3
     SDK3Only: 0
     RequiresUdonSharp: 0
     Directories:
-    - CyanEmu
+    - Assets/CyanEmu
   - Author: JordoVR
     Name: EasyQuestSwitch
     Description: EasyQuestSwitch is a Unity editor tool developed for VRChat world
@@ -35,22 +35,22 @@ MonoBehaviour:
     SDK3Only: 0
     RequiresUdonSharp: 0
     Directories:
-    - VRCPrefabs/EasyQuestSwitch
+    - Assets/VRCPrefabs/EasyQuestSwitch
   - Author: MerlinVR
     Name: UdonSharp
     Description: An experimental compiler for compiling C# to Udon assembly
     SDK3Only: 1
     RequiresUdonSharp: 0
     Directories:
-    - UdonSharp
-    - Gizmos/UdonSharp
+    - Assets/UdonSharp
+    - Assets/Gizmos/UdonSharp
   - Author: orels1
     Name: UdonToolkit
     Description: Purpose-built Udon Behaviours and tools to make your own
     SDK3Only: 1
     RequiresUdonSharp: 1
     Directories:
-    - UdonToolkit
+    - Assets/UdonToolkit
   DefaultUPMPackages:
   - Name: com.unity.polybrush
   - Name: com.unity.probuilder
@@ -62,14 +62,14 @@ MonoBehaviour:
     SDK3Only: 1
     RequiresUdonSharp: 1
     Directories:
-    - Varneon/Udon Prefabs/Essentials
+    - Assets/Varneon/Udon Prefabs/Essentials
   - Author: MerlinVR
     Name: USharpVideo
     Description: A basic video player made for VRChat using Udon and UdonSharp
     SDK3Only: 1
     RequiresUdonSharp: 1
     Directories:
-    - USharpVideo
+    - Assets/USharpVideo
   - Author: FairlySadPanda
     Name: vrcbce
     Description: A pool table for VRChat SDK3 worlds. Want to play 8 Ball, 9 Ball,
@@ -79,11 +79,11 @@ MonoBehaviour:
     SDK3Only: 1
     RequiresUdonSharp: 1
     Directories:
-    - VRCBilliardsCE
+    - Assets/VRCBilliardsCE
   - Author: llealloo
     Name: vrc-udon-audio-link
     Description: Audio reactive prefabs for VRChat
     SDK3Only: 1
     RequiresUdonSharp: 1
     Directories:
-    - AudioLink
+    - Assets/AudioLink

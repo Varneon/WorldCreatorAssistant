@@ -28,7 +28,7 @@ namespace Varneon.WorldCreatorAssistant
 
         internal static Version GetVersionFile(string path)
         {
-            string fullPath = Path.GetFullPath($"Assets/{path}/version.txt");
+            string fullPath = Path.GetFullPath($"Assets/{path.TrimStart("Assets/".ToCharArray())}/version.txt");
 
             if (File.Exists(fullPath))
             {
@@ -94,7 +94,7 @@ namespace Varneon.WorldCreatorAssistant
 
             status.ImportedVersion = repository.ImportedVersion;
 
-            status.Imported = Directory.Exists($"Assets/{folder}");
+            status.Imported = Directory.Exists(folder);
 
             if (status.Imported)
             {
