@@ -14,7 +14,6 @@ namespace Varneon.WorldCreatorAssistant
         [InitializeOnLoadMethod]
         public static void SetupLayers()
         {
-            PackageManager packageManager = new PackageManager();
             WCAData wcaData = UtilityMethods.LoadWCAData();
 
             if (wcaData == null) { return; }
