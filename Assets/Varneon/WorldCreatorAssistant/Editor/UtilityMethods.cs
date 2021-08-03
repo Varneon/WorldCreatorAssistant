@@ -224,6 +224,8 @@ namespace Varneon.WorldCreatorAssistant
             SyncUPMPackages(defaultData, wcaData);
 
             SyncPrefabRepositories(defaultData, wcaData);
+
+            UnityEngine.Resources.UnloadAsset(defaultData);
         }
 
         private static void SyncCommunityTools(DefaultData defaultData, WCAData wcaData)
@@ -268,7 +270,15 @@ namespace Varneon.WorldCreatorAssistant
 
             UpdateWCAData(wcaData);
 
-            AssetDatabase.CreateAsset(wcaData, "Assets/Varneon/WorldCreatorAssistant/Resources/Data/WCAData.asset");
+            DefaultData defaultData = UnityEngine.Resources.Load<DefaultData>("Data/DefaultData");
+
+            string dataPath = AssetDatabase.GetAssetPath(defaultData);
+
+            UnityEngine.Resources.UnloadAsset(defaultData);
+
+            dataPath = $"{dataPath.Substring(0, dataPath.LastIndexOf('/') + 1)}WCAData.asset";
+
+            AssetDatabase.CreateAsset(wcaData, dataPath);
 
             SaveAsset(wcaData);
 
