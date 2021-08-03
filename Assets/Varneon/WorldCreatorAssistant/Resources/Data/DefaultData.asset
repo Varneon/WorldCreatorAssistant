@@ -69,7 +69,7 @@ MonoBehaviour:
     SDK3Only: 1
     RequiresUdonSharp: 1
     Directories:
-    - 'VRCBilliards: Community Edition'
+    - USharpVideo
   - Author: FairlySadPanda
     Name: vrcbce
     Description: A pool table for VRChat SDK3 worlds. Want to play 8 Ball, 9 Ball,
