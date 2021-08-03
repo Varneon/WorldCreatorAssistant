@@ -58,7 +58,7 @@ namespace Varneon.WorldCreatorAssistant
         private void OnGUI()
         {
             GUI.color = new Color(0.65f, 0.65f, 0.65f);
-            pageNum = GUILayout.Toolbar(pageNum, pages, GUIStyles.HeaderPageSelection, GUILayout.Width(Screen.width));
+            pageNum = GUILayout.Toolbar(pageNum, pages, GUIStyles.HeaderPageSelection, GUILayout.Width(position.width));
             GUI.color = Color.white;
 
             EditorGUILayout.BeginHorizontal();
@@ -88,8 +88,7 @@ namespace Varneon.WorldCreatorAssistant
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndHorizontal();
 
-            EditorGUI.DrawRect(new Rect(0, Screen.height - 45, Screen.width, 22), (EditorGUIUtility.isProSkin ? new Color(0.16f, 0.16f, 0.16f) : new Color(0.65f, 0.65f, 0.65f)));
-            EditorGUI.DrawRect(new Rect(0, Screen.height - 48, Screen.width, 3), (EditorGUIUtility.isProSkin ? new Color(0.25f, 0.25f, 0.25f) : new Color(0.5f, 0.5f, 0.5f)));
+            EditorGUI.DrawRect(new Rect(0, position.height - 26, position.width, 26), EditorGUIUtility.isProSkin ? new Color(0.16f, 0.16f, 0.16f) : new Color(0.65f, 0.65f, 0.65f));
             GUILayout.BeginHorizontal();
             GUILayout.Label("World Creator Assistant by Varneon", EditorStyles.largeLabel);
             GUILayout.Label("[Open Alpha]", new GUIStyle(EditorStyles.largeLabel) { alignment = TextAnchor.MiddleRight });

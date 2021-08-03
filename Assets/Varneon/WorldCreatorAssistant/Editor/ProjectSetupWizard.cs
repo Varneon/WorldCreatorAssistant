@@ -79,9 +79,9 @@ namespace Varneon.WorldCreatorAssistant
 
             #region Progress Bar
 #if UNITY_2019
-            EditorGUI.ProgressBar(new Rect(64, 31, Screen.width - 128, 10), page / 4f, "");
+            EditorGUI.ProgressBar(new Rect(64, 31, position.width - 128, 10), page / 4f, "");
 #else
-            EditorGUI.ProgressBar(new Rect(64, 30, Screen.width - 128, 8), page / 4f, "");
+            EditorGUI.ProgressBar(new Rect(64, 30, position.width - 128, 8), page / 4f, "");
 #endif
             GUILayout.BeginHorizontal();
             GUILayout.Space(58);
@@ -89,7 +89,7 @@ namespace Varneon.WorldCreatorAssistant
             {
                 GUI.color = i <= page ? new Color(0.5f, 0.75f, 1f) : new Color(0.8f, 0.8f, 0.8f);
                 GUILayout.Label(new GUIContent(), EditorStyles.radioButton);
-                GUILayout.Space((Screen.width - 128) * 0.25f - 20);
+                GUILayout.Space((position.width - 128) * 0.25f - 20);
                 GUI.color = Color.white;
             }
             GUILayout.EndHorizontal();
@@ -98,14 +98,14 @@ namespace Varneon.WorldCreatorAssistant
 #region Progress Bar Bottom Labels
             GUILayout.BeginHorizontal();
             GUILayout.Space(64);
-            GUILayout.Label(dictionary.SETUP_OPTIONS, page == 1 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width((Screen.width - 128) / 2));
-            GUILayout.Label(dictionary.GITHUB_IMPORTER, page == 3 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width((Screen.width - 128) / 2));
+            GUILayout.Label(dictionary.SETUP_OPTIONS, page == 1 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width((position.width - 128) / 2));
+            GUILayout.Label(dictionary.GITHUB_IMPORTER, page == 3 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width((position.width - 128) / 2));
             GUILayout.EndHorizontal();
 #endregion
 
             GUILayout.Space(10);
 
-            EditorGUI.DrawRect(new Rect(0, Screen.height - 54, Screen.width, 31), (EditorGUIUtility.isProSkin ? new Color(0.16f, 0.16f, 0.16f) : new Color(0.65f, 0.65f, 0.65f)));
+            EditorGUI.DrawRect(new Rect(0, position.size.y - 32, position.width, 32), EditorGUIUtility.isProSkin ? new Color(0.16f, 0.16f, 0.16f) : new Color(0.65f, 0.65f, 0.65f));
 
             switch (page)
             {
@@ -138,7 +138,7 @@ namespace Varneon.WorldCreatorAssistant
 
 #region SDK2
             GUILayout.BeginHorizontal();
-            GUILayout.BeginVertical(EditorStyles.helpBox, GUILayout.Width(Screen.width / 2f - 10f));
+            GUILayout.BeginVertical(EditorStyles.helpBox, GUILayout.Width(position.width / 2f - 10f));
 
             GUILayout.Label("VRCSDK2", GUIStyles.CenteredHeaderLabel);
 
@@ -230,7 +230,7 @@ namespace Varneon.WorldCreatorAssistant
 #region Links
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button(new GUIContent(dictionary.VRC_DOCUMENTATION, "https://docs.vrchat.com/docs/choosing-your-sdk"), GUIStyles.FlatStandardButton, GUILayout.Width(Screen.width / 2f - 10f)))
+            if (GUILayout.Button(new GUIContent(dictionary.VRC_DOCUMENTATION, "https://docs.vrchat.com/docs/choosing-your-sdk"), GUIStyles.FlatStandardButton, GUILayout.Width(position.width / 2f - 10f)))
             {
                 Application.OpenURL("https://docs.vrchat.com/docs/choosing-your-sdk");
             }
@@ -456,7 +456,7 @@ namespace Varneon.WorldCreatorAssistant
                     uasPackagesToImport[i] = GUILayout.Toggle(
                         uasPackagesToImport[i],
                         wcaData.DownloadedUASPackages[i].Name,
-                        GUILayout.Width(Screen.width / 2)
+                        GUILayout.Width(position.width / 2)
                         );
                     GUILayout.Label(wcaData.DownloadedUASPackages[i].Author, GUIStyles.LeftGreyLabel, GUILayout.Height(20));
                     GUILayout.Label($"{UtilityMethods.ParseFileSize(wcaData.DownloadedUASPackages[i].Size)}", GUIStyles.VersionLabel);
@@ -481,13 +481,13 @@ namespace Varneon.WorldCreatorAssistant
         {
             GUILayout.FlexibleSpace();
             GUILayout.BeginHorizontal();
-            if (prev != null && GUILayout.Button(dictionary.PREVIOUS, GUIStyles.FlatStandardButton, new GUILayoutOption[] { GUILayout.Width(Screen.width / 4), GUILayout.Height(22) }))
+            if (prev != null && GUILayout.Button(dictionary.PREVIOUS, GUIStyles.FlatStandardButton, new GUILayoutOption[] { GUILayout.Width(position.width / 4), GUILayout.Height(22) }))
             {
                 prev();
             }
             GUILayout.FlexibleSpace();
             EditorGUI.BeginDisabledGroup(nextDisabled);
-            if (GUILayout.Button(string.IsNullOrEmpty(nextText) ? dictionary.NEXT : nextText, GUIStyles.FlatStandardButton, new GUILayoutOption[] { GUILayout.Width(Screen.width / 4), GUILayout.Height(22) }))
+            if (GUILayout.Button(string.IsNullOrEmpty(nextText) ? dictionary.NEXT : nextText, GUIStyles.FlatStandardButton, new GUILayoutOption[] { GUILayout.Width(position.width / 4), GUILayout.Height(22) }))
             {
                 next();
             }
