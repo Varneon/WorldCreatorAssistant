@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
@@ -199,6 +201,7 @@ namespace Varneon.WorldCreatorAssistant
             AssetDatabase.Refresh();
         }
 
+        #region WCA Data
         internal static WCAData LoadWCAData()
         {
             WCAData wcaData = UnityEngine.Resources.Load<WCAData>("Data/WCAData");
@@ -230,7 +233,7 @@ namespace Varneon.WorldCreatorAssistant
 
         private static void SyncCommunityTools(DefaultData defaultData, WCAData wcaData)
         {
-            if (defaultData.DefaultCommunityToolRepositories.Count == wcaData.CommunityTools.Count) { return; }
+            if (AreRepositoryDirectoriesEqual(defaultData.DefaultCommunityToolRepositories.Select(c => c.Directories).ToArray(), wcaData.CommunityTools.Select(c => c.Directories).ToArray())) { return; }
 
             wcaData.CommunityTools.Clear();
 
@@ -242,7 +245,7 @@ namespace Varneon.WorldCreatorAssistant
 
         private static void SyncUPMPackages(DefaultData defaultData, WCAData wcaData)
         {
-            if (defaultData.DefaultUPMPackages.Count == wcaData.UPMPackages.Count) { return; }
+            if (defaultData.DefaultUPMPackages.Select(c => c.Name).ToArray().SequenceEqual(wcaData.UPMPackages.Select(c => c.Name).ToArray())) { return; }
 
             wcaData.UPMPackages.Clear();
 
@@ -254,7 +257,7 @@ namespace Varneon.WorldCreatorAssistant
 
         private static void SyncPrefabRepositories(DefaultData defaultData, WCAData wcaData)
         {
-            if (defaultData.DefaultPrefabRepositories.Count == wcaData.PrefabRepositories.Count) { return; }
+            if (AreRepositoryDirectoriesEqual(defaultData.DefaultPrefabRepositories.Select(c => c.Directories).ToArray(), wcaData.PrefabRepositories.Select(c => c.Directories).ToArray())) { return; }
 
             wcaData.PrefabRepositories.Clear();
 
@@ -262,6 +265,18 @@ namespace Varneon.WorldCreatorAssistant
             {
                 wcaData.PrefabRepositories.Add(new DataStructs.Repository(repoInfo.Name, repoInfo.Author, repoInfo.Description, repoInfo.RequiresUdonSharp, repoInfo.SDK3Only, directories: repoInfo.Directories));
             }
+        }
+
+        private static bool AreRepositoryDirectoriesEqual(List<string>[] directories1, List<string>[] directories2)
+        {
+            if (directories1.Length != directories2.Length) { return false; }
+
+            for (int i = 0; i < directories1.Length; i++)
+            {
+                if (!directories1[i].SequenceEqual(directories2[i])) { return false; }
+            }
+
+            return true;
         }
 
         private static WCAData CreateWCAData()
@@ -284,6 +299,7 @@ namespace Varneon.WorldCreatorAssistant
 
             return wcaData;
         }
+        #endregion
 
         internal static string GetVRCSDKDownloadLink(DataStructs.SDKVariant variant)
         {
