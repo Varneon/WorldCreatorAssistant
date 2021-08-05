@@ -21,6 +21,37 @@ namespace Varneon.WorldCreatorAssistant
             return $"https://github.com/{owner}/{repo}";
         }
 
+        internal static DataStructs.UpdateCheckStatus CheckForWCAUpdates()
+        {
+            Version wcaVersion = GetWCAVersion();
+
+            if (wcaVersion == new Version()) 
+            {
+                return DataStructs.UpdateCheckStatus.VersionFileMissing;
+            }
+
+            DataStructs.GitHubApiStatus gitHubApiStatus = PackageManager.Instance.GetGitHubApiRateLimit();
+
+            if(gitHubApiStatus.RequestsRemaining < 1) 
+            {
+                return DataStructs.UpdateCheckStatus.OutOfRequests;
+            }
+
+            Version latestVersion = PackageManager.Instance.GetLatestReleaseVersion("Varneon", "WorldCreatorAssistant");
+
+            if(latestVersion == new Version())
+            {
+                return DataStructs.UpdateCheckStatus.CouldNotFetchRelease;
+            }
+
+            if(latestVersion > wcaVersion) 
+            {
+                return DataStructs.UpdateCheckStatus.UpdateAvailable;
+            }
+
+            return DataStructs.UpdateCheckStatus.UpToDate;
+        }
+
         internal static Version ParseVersionText(string version)
         {
             string v = Regex.Match(Regex.Match(version, "[0-9.][0-9.][0-9.]*").Value, @"^([^.]*)\.([^.]*)\.([^.]*)").Value.TrimStart('.').TrimEnd('.');
@@ -28,13 +59,23 @@ namespace Varneon.WorldCreatorAssistant
             return new Version(v);
         }
 
-        internal static Version GetVersionFile(string path)
+        internal static Version GetVersionFromDirectory(string path)
         {
             string fullPath = Path.GetFullPath($"Assets/{path.TrimStart("Assets/".ToCharArray())}/version.txt");
 
-            if (File.Exists(fullPath))
+            return GetVersionFromFile(fullPath);
+        }
+
+        internal static Version GetWCAVersion()
+        {
+            return GetVersionFromFile(AssetDatabase.GUIDToAssetPath("e6fb3830f3f9be54281bb7443d6350fc"));
+        }
+
+        internal static Version GetVersionFromFile(string path)
+        {
+            if (File.Exists(path))
             {
-                StreamReader reader = new StreamReader(fullPath);
+                StreamReader reader = new StreamReader(path);
 
                 Version version = ParseVersionText(Regex.Match(reader.ReadToEnd(), @"^([^.]*)\.([^.]*)\.([^.]*)").Value);
 
@@ -100,7 +141,7 @@ namespace Varneon.WorldCreatorAssistant
 
             if (status.Imported)
             {
-                Version versionFromFile = GetVersionFile(folder);
+                Version versionFromFile = GetVersionFromDirectory(folder);
 
                 if (versionFromFile != new Version())
                 {

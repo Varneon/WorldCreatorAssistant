@@ -17,7 +17,6 @@ namespace Varneon.WorldCreatorAssistant
         internal Texture iconCheckmark, iconDownload, iconGitHub, iconImport;
         readonly bool udonSharpImported;
         readonly List<bool> communityToolsExpanded, prefabRepositoriesExpanded;
-        readonly PackageManager packageManager = new PackageManager();
         string packageCacheDirectory;
         bool isPackageCacheValid;
         readonly WCAData wcaData;
@@ -68,7 +67,7 @@ namespace Varneon.WorldCreatorAssistant
             {
                 if (EditorUtility.DisplayDialog($"{dictionary.UPDATE} VRCSDK?", dictionary.DO_YOU_WANT_TO_UPDATE_VRCSDK, dictionary.YES, dictionary.CANCEL))
                 {
-                    packageManager.DownloadSDK(DataStructs.SDKVariant.SDK2, cleanInstall);
+                    PackageManager.Instance.DownloadSDK(DataStructs.SDKVariant.SDK2, cleanInstall);
                 }
             }
 #elif VRC_SDK_VRCSDK3
@@ -76,7 +75,7 @@ namespace Varneon.WorldCreatorAssistant
             {
                 if (EditorUtility.DisplayDialog($"{dictionary.UPDATE} VRCSDK?", dictionary.DO_YOU_WANT_TO_UPDATE_VRCSDK, dictionary.YES, dictionary.CANCEL))
                 {
-                    packageManager.DownloadSDK(DataStructs.SDKVariant.SDK3Worlds, cleanInstall);
+                    PackageManager.Instance.DownloadSDK(DataStructs.SDKVariant.SDK3Worlds, cleanInstall);
                 }
             }
             /*
@@ -84,7 +83,7 @@ namespace Varneon.WorldCreatorAssistant
             {
                 if (EditorUtility.DisplayDialog("Download / Update AV3?", "Do you want to download / update VRChat Avatar 3.0 SDK?", "Yes", "Cancel"))
                 {
-                    packageManager.DownloadSDK(DataStructs.SDKVariant.SDK3Avatars, cleanInstall);
+                    PackageManager.Instance.DownloadSDK(DataStructs.SDKVariant.SDK3Avatars, cleanInstall);
                 }
             }
             */
@@ -136,7 +135,7 @@ namespace Varneon.WorldCreatorAssistant
         {
             if (EditorUtility.DisplayDialog(dictionary.CHECK_FOR_UPDATES, dictionary.DO_YOU_WANT_CHECK_UPDATES_GITHUB, dictionary.YES, dictionary.CANCEL))
             {
-                DataStructs.GitHubApiStatus gitHubApiStatus = packageManager.GetGitHubApiRateLimit();
+                DataStructs.GitHubApiStatus gitHubApiStatus = PackageManager.Instance.GetGitHubApiRateLimit();
                 Debug.Log($"{LogPrefix}[<color=#999999>GitHub API</color>]:{gitHubApiStatus.RequestsRemaining}/{gitHubApiStatus.RequestLimit} {dictionary.USES_LEFT} | {dictionary.RESETS}: {gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm:ss tt}");
                 if (gitHubApiStatus.RequestsRemaining < repositories.Count)
                 {
@@ -184,7 +183,7 @@ namespace Varneon.WorldCreatorAssistant
             {
                 Debug.Log($"{LogPrefix} Checking for VRCSDK updates...");
 
-                string response = packageManager.GetVRCSDKConfig();
+                string response = PackageManager.Instance.GetVRCSDKConfig();
                 
                 if(response == null)
                 {
@@ -286,7 +285,7 @@ namespace Varneon.WorldCreatorAssistant
                         }
                         else if (!repository.LatestCached && GUILayout.Button(new GUIContent(iconDownload, dictionary.DOWNLOAD), GUIStyle.none, GUILayout.MaxWidth(40)))
                         {
-                            DataStructs.GitHubApiStatus gitHubApiStatus = packageManager.GetGitHubApiRateLimit();
+                            DataStructs.GitHubApiStatus gitHubApiStatus = PackageManager.Instance.GetGitHubApiRateLimit();
                             Debug.Log($"{LogPrefix}[<color=#999999>GitHub API</color>]:{gitHubApiStatus.RequestsRemaining}/{gitHubApiStatus.RequestLimit} {dictionary.USES_LEFT} | {dictionary.RESETS}: {gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm:ss tt}");
                             if (gitHubApiStatus.RequestsRemaining < 1)
                             {
@@ -324,10 +323,10 @@ namespace Varneon.WorldCreatorAssistant
             {
                 if (fromCache) 
                 {
-                    return packageManager.ImportPackage(GetLatestCachedCommunityTool(repository.Name), returnVersion: true); 
+                    return PackageManager.Instance.ImportPackage(GetLatestCachedCommunityTool(repository.Name), returnVersion: true); 
                 }
 
-                return packageManager.DownloadRepositoryLatest(packageCacheDirectory, repository.Author, repository.Name);
+                return PackageManager.Instance.DownloadRepositoryLatest(packageCacheDirectory, repository.Author, repository.Name);
             }
 
             return new DataStructs.ImportResponse();
@@ -377,7 +376,7 @@ namespace Varneon.WorldCreatorAssistant
 
             CheckRepositories(wcaData.PrefabRepositories);
 
-            wcaData.InstalledVRCSDKVersion = UtilityMethods.GetVersionFile("VRCSDK").ToString();
+            wcaData.InstalledVRCSDKVersion = UtilityMethods.GetVersionFromDirectory("VRCSDK").ToString();
 
             GetInstalledSDKVariant();
         }
@@ -413,7 +412,7 @@ namespace Varneon.WorldCreatorAssistant
 #if VRC_SDK_VRCSDK2
                 if (repo.SDK3Only) { continue; }
 #endif
-                Version version = packageManager.GetLatestReleaseVersion(repo.Author, repo.Name);
+                Version version = PackageManager.Instance.GetLatestReleaseVersion(repo.Author, repo.Name);
                 repo.CurrentVersion = version.ToString();
                 repo.LastRefreshed = DateTime.UtcNow.ToFileTime();
                 repositories[i] = repo;

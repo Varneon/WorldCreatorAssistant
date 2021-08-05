@@ -49,12 +49,16 @@ MonoBehaviour:
       DO_YOU_WANT_CHECK_UPDATES_GITHUB: Do you want to check for updates for the GitHub
         repositories?
       DO_YOU_WANT_CHECK_UPDATES_VRCSDK: Do you want to check for updates for VRCSDK?
+      DO_YOU_WANT_CHECK_UPDATES_WCA: Do you want to check for updates for World Creator
+        Assistant?
       DO_YOU_WANT_TO_UPDATE_VRCSDK: Do you want to update VRCSDK?
       DOWNLOAD: Download
       DOWNLOADED: Downloaded
       FEATURES_IN_DEVELOPMENT: Features in development
       FREQUENTLY_ASKED_QUESTIONS: Frequently Asked Questions
+      GITHUB_API_NOT_RESPONDING: GitHub API not responding
       GITHUB_API_RATE_WARNING: GitHub API rate limit warning!
+      GITHUB_COULD_NOT_FETCH_RELEASE: Could not fetch release info from GitHub
       GITHUB_IMPORTER: GitHub Importer
       GITHUB_NOT_ENOUGH_REQUESTS: You don't have enough GitHub API requests left\n\nRestrictions
         will be reset
@@ -137,6 +141,7 @@ MonoBehaviour:
         temporarily due to issues during the project setup process
       USEFUL_LINKS: Useful Links
       USES_LEFT: Uses left
+      VERSION_FILE_MISSING: Version file missing
       VERSION_UNAVAILABLE: Version unavailable
       VRC_DOCUMENTATION: VRChat Documentation
       VRC_DOWNLOAD_PAGE: VRChat Download Page
@@ -147,6 +152,7 @@ MonoBehaviour:
       WCA_FEATURES: -Project Setup Wizard\n-VRCSDK and GitHub importer\n-Resources
         and FAQ
       WCA_FOLDER_CLEANUP: WCA Folder Cleanup
+      WCA_IS_UP_TO_DATE: WCA is up to date
       WCA_THANK_YOU_FOR_USING: Thank you for using World Creator Assistant!
       WCA_THIS_EDITOR: This editor extension is still heavily work in progress and
         should only be used for testing purposes.

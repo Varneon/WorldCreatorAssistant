@@ -20,7 +20,6 @@ namespace Varneon.WorldCreatorAssistant
         Dictionary.Translations dictionary;
         int page = 0;
         int udonSharpIndex;
-        readonly PackageManager packageManager = new PackageManager();
         string packageCacheDirectory;
         string[] pageHints;
         Vector2 scrollPos;
@@ -48,7 +47,7 @@ namespace Varneon.WorldCreatorAssistant
                 }
             }
 
-            wcaData.DownloadedUASPackages = new List<DataStructs.AssetStorePackage>(packageManager.GetDownloadedUASPackages());
+            wcaData.DownloadedUASPackages = new List<DataStructs.AssetStorePackage>(PackageManager.Instance.GetDownloadedUASPackages());
 
             uasPackagesToImport = new bool[wcaData.DownloadedUASPackages.Count];
 
@@ -429,7 +428,7 @@ namespace Varneon.WorldCreatorAssistant
 
         private void CheckForGitHubApiRequestLimitAndNextPage()
         {
-            DataStructs.GitHubApiStatus gitHubApiStatus = packageManager.GetGitHubApiRateLimit();
+            DataStructs.GitHubApiStatus gitHubApiStatus = PackageManager.Instance.GetGitHubApiRateLimit();
             Debug.Log($"{LogPrefix}[<color=#999999>GitHub API</color>]:{gitHubApiStatus.RequestsRemaining}/{gitHubApiStatus.RequestLimit} {dictionary.USES_LEFT} | {dictionary.RESETS}: {gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm:ss tt}");
             if (gitHubApiStatus.RequestsRemaining < communityToolsToImport.Count(c => c))
             {
@@ -579,7 +578,7 @@ namespace Varneon.WorldCreatorAssistant
             {
                 if (upmPackagesToImport[i])
                 {
-                    packageManager.AddUPMPackage(wcaData.UPMPackages[i].Name);
+                    PackageManager.Instance.AddUPMPackage(wcaData.UPMPackages[i].Name);
                 }
             }
 
@@ -587,12 +586,12 @@ namespace Varneon.WorldCreatorAssistant
             {
                 if (uasPackagesToImport[i])
                 {
-                    packageManager.ImportPackage(wcaData.DownloadedUASPackages[i].Path);
+                    PackageManager.Instance.ImportPackage(wcaData.DownloadedUASPackages[i].Path);
                 }
             }
 
-            if (selectedSDK != DataStructs.SDKVariant.None) { packageManager.DownloadSDK(selectedSDK); }
-            else { packageManager.ImportPackage(customSDKPath); }
+            if (selectedSDK != DataStructs.SDKVariant.None) { PackageManager.Instance.DownloadSDK(selectedSDK); }
+            else { PackageManager.Instance.ImportPackage(customSDKPath); }
 
             for (int i = 0; i < communityToolsToImport.Length; i++)
             {
@@ -617,7 +616,7 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DownloadAndImportRepository(string author, string name)
         {
-            DataStructs.ImportResponse response = packageManager.DownloadRepositoryLatest(packageCacheDirectory, author, name);
+            DataStructs.ImportResponse response = PackageManager.Instance.DownloadRepositoryLatest(packageCacheDirectory, author, name);
 
             if (!response.Succeeded) { Debug.LogError($"{LogPrefix} GitHub repository import failed! ({author}/{name})"); }
 
