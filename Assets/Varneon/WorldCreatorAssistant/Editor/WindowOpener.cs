@@ -16,19 +16,15 @@ namespace Varneon.WorldCreatorAssistant
             ProjectSetupWizard window = EditorWindow.GetWindow<ProjectSetupWizard>();
             window.titleContent.text = "Project Setup Wizard";
 #endif
-#if UNITY_2018_4
-            IncorrectUnityEditorVersionPrompt prompt = EditorWindow.GetWindow<IncorrectUnityEditorVersionPrompt>();
-            prompt.titleContent.text = "Wrong Editor Version!";
-            prompt.minSize = new Vector2(512f, 256f);
-            prompt.Show();
-#elif !UNITY_2019_4
+            window.minSize = new Vector2(512f, 512f);
+            window.Show();
+
+#if !UNITY_2019_4
             IncorrectUnityEditorVersionPrompt prompt = EditorWindow.GetWindow<IncorrectUnityEditorVersionPrompt>();
             prompt.titleContent.text = "Wrong Editor Version!";
             prompt.minSize = new Vector2(512f, 256f);
             prompt.Show();
 #endif
-            window.minSize = new Vector2(512f, 512f);
-            window.Show();
         }
     }
 }
