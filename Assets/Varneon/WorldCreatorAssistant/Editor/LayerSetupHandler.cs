@@ -7,12 +7,13 @@ namespace Varneon.WorldCreatorAssistant
 {
     public static class LayerSetupHandler
     {
-        private static readonly string LogPrefix = "[<color=#009999>WorldCreatorAssistant</color>]:";
+        private const string LogPrefix = "[<color=#009999>WorldCreatorAssistant</color>]:";
+
+        private const string GUID = "0c1cedbb001e2684b8659677756a1986";
 
         [InitializeOnLoadMethod]
         public static void SetupLayers()
         {
-            PackageManager packageManager = new PackageManager();
             WCAData wcaData = UtilityMethods.LoadWCAData();
 
             if (wcaData == null) { return; }
@@ -34,7 +35,11 @@ namespace Varneon.WorldCreatorAssistant
                 }
             }
 
-            AssetDatabase.DeleteAsset("Assets/Varneon/WorldCreatorAssistant/Editor/LayerSetupHandler.cs");
+            string path = AssetDatabase.GUIDToAssetPath(GUID);
+
+            if (!path.EndsWith("LayerSetupHandler.cs")) { Debug.LogError($"{LogPrefix} LayerSetupHandler.cs has invalid GUID! Please delete this file manually."); return; }
+
+            AssetDatabase.DeleteAsset(path);
         }
     }
 }

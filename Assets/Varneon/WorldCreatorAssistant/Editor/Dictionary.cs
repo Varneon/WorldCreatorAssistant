@@ -43,12 +43,15 @@ namespace Varneon.WorldCreatorAssistant
             public string DETECTED_SDK_VARIANT;
             public string DO_YOU_WANT_CHECK_UPDATES_GITHUB;
             public string DO_YOU_WANT_CHECK_UPDATES_VRCSDK;
+            public string DO_YOU_WANT_CHECK_UPDATES_WCA;
             public string DO_YOU_WANT_TO_UPDATE_VRCSDK;
             public string DOWNLOAD;
             public string DOWNLOADED;
             public string FEATURES_IN_DEVELOPMENT;
             public string FREQUENTLY_ASKED_QUESTIONS;
+            public string GITHUB_API_NOT_RESPONDING;
             public string GITHUB_API_RATE_WARNING;
+            public string GITHUB_COULD_NOT_FETCH_RELEASE;
             public string GITHUB_IMPORTER;
             public string GITHUB_NOT_ENOUGH_REQUESTS;
             public string IMPORT_ASSET_STORE_PACKAGES;
@@ -110,6 +113,7 @@ namespace Varneon.WorldCreatorAssistant
             public string UPM_IMPORTER_DISABLED_TEMPORARILY;
             public string USEFUL_LINKS;
             public string USES_LEFT;
+            public string VERSION_FILE_MISSING;
             public string VERSION_UNAVAILABLE;
             public string VRC_DOCUMENTATION;
             public string VRC_DOWNLOAD_PAGE;
@@ -118,6 +122,7 @@ namespace Varneon.WorldCreatorAssistant
             public string WCA_FEATURES_WIP;
             public string WCA_FEATURES;
             public string WCA_FOLDER_CLEANUP;
+            public string WCA_IS_UP_TO_DATE;
             public string WCA_THANK_YOU_FOR_USING;
             public string WCA_THIS_EDITOR;
             public string WCA_WILL_TRY_TO_CLEAR_DIRECTORIES;

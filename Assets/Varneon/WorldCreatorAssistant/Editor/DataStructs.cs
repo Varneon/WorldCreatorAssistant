@@ -121,6 +121,7 @@ namespace Varneon.WorldCreatorAssistant
             public List<string> Directories;
         }
 
+        #region Resources
         [Serializable]
         public struct ResourceList
         {
@@ -186,6 +187,7 @@ namespace Varneon.WorldCreatorAssistant
                 URL = url;
             }
         }
+        #endregion
 
         #region VRCSDK
         [Serializable]
@@ -220,7 +222,7 @@ namespace Varneon.WorldCreatorAssistant
         }
         #endregion
 
-        #region GitHub
+        #region GitHub API
         [Serializable]
         public struct GitHubApiRelease
         {
@@ -265,5 +267,16 @@ namespace Varneon.WorldCreatorAssistant
             public int used;
         }
         #endregion
+
+        [Serializable]
+        public enum UpdateCheckStatus
+        {
+            Unchecked,
+            VersionFileMissing,
+            OutOfRequests,
+            CouldNotFetchRelease,
+            UpToDate,
+            UpdateAvailable
+        }
     }
 }

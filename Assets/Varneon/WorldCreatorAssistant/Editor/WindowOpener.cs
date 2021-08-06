@@ -18,6 +18,13 @@ namespace Varneon.WorldCreatorAssistant
 #endif
             window.minSize = new Vector2(512f, 512f);
             window.Show();
+
+#if !UNITY_2019_4
+            IncorrectUnityEditorVersionPrompt prompt = EditorWindow.GetWindow<IncorrectUnityEditorVersionPrompt>();
+            prompt.titleContent.text = "Wrong Editor Version!";
+            prompt.minSize = new Vector2(512f, 256f);
+            prompt.Show();
+#endif
         }
     }
 }

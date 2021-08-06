@@ -13,6 +13,19 @@ namespace Varneon.WorldCreatorAssistant
 {
     internal class PackageManager
     {
+        private static PackageManager instance = null;
+        internal static PackageManager Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new PackageManager();
+                }
+                return instance;
+            }
+        }
+
         private const string LogPrefix = "[<color=#009999>WCA Package Manager</color>]:";
 
         private static readonly string[] VRCSDKFolderPaths =

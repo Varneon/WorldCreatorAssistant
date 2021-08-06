@@ -15,6 +15,8 @@ namespace Varneon.WorldCreatorAssistant
         private Importer importer;
         private Resources resources;
         private string packageCacheDirectory;
+        private DataStructs.UpdateCheckStatus wcaUpdateStatus = DataStructs.UpdateCheckStatus.Unchecked;
+        private static readonly GUILayoutOption[] settingsBlockButtonLayoutOptions = new GUILayoutOption[] { GUILayout.ExpandWidth(false), GUILayout.Height(15) };
 
         #region Page Variables
         private int pageNum = 0;
@@ -55,10 +57,16 @@ namespace Varneon.WorldCreatorAssistant
             resources.iconCopy = UnityEngine.Resources.Load<Texture>($"Icons/Copy_{iconVariant}");
         }
 
+        private void OnDestroy()
+        {
+            AssetDatabase.SaveAssets();
+            UnityEngine.Resources.UnloadUnusedAssets();
+        }
+
         private void OnGUI()
         {
             GUI.color = new Color(0.65f, 0.65f, 0.65f);
-            pageNum = GUILayout.Toolbar(pageNum, pages, GUIStyles.HeaderPageSelection, GUILayout.Width(Screen.width));
+            pageNum = GUILayout.Toolbar(pageNum, pages, GUIStyles.HeaderPageSelection, GUILayout.Width(position.width));
             GUI.color = Color.white;
 
             EditorGUILayout.BeginHorizontal();
@@ -88,8 +96,7 @@ namespace Varneon.WorldCreatorAssistant
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndHorizontal();
 
-            EditorGUI.DrawRect(new Rect(0, Screen.height - 45, Screen.width, 22), (EditorGUIUtility.isProSkin ? new Color(0.16f, 0.16f, 0.16f) : new Color(0.65f, 0.65f, 0.65f)));
-            EditorGUI.DrawRect(new Rect(0, Screen.height - 48, Screen.width, 3), (EditorGUIUtility.isProSkin ? new Color(0.25f, 0.25f, 0.25f) : new Color(0.5f, 0.5f, 0.5f)));
+            EditorGUI.DrawRect(new Rect(0, position.height - 26, position.width, 26), EditorGUIUtility.isProSkin ? new Color(0.16f, 0.16f, 0.16f) : new Color(0.65f, 0.65f, 0.65f));
             GUILayout.BeginHorizontal();
             GUILayout.Label("World Creator Assistant by Varneon", EditorStyles.largeLabel);
             GUILayout.Label("[Open Alpha]", new GUIStyle(EditorStyles.largeLabel) { alignment = TextAnchor.MiddleRight });
@@ -133,6 +140,34 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DrawSettingsPage()
         {
+            GUILayout.BeginHorizontal(EditorStyles.helpBox);
+            GUILayout.Label(dictionary.CHECK_FOR_UPDATES);
+            switch (wcaUpdateStatus)
+            {
+                case DataStructs.UpdateCheckStatus.Unchecked:
+                    if(GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
+                    break;
+                case DataStructs.UpdateCheckStatus.UpdateAvailable:
+                    if (GUILayout.Button(dictionary.UPDATE, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions)) { UpdateWCA(); }
+                    break;
+                case DataStructs.UpdateCheckStatus.VersionFileMissing:
+                    using (new EditorGUI.DisabledGroupScope(true))
+                    {
+                        GUILayout.Button(dictionary.VERSION_UNAVAILABLE, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions);
+                    }
+                    break;
+                case DataStructs.UpdateCheckStatus.UpToDate:
+                    using (new EditorGUI.DisabledGroupScope(true))
+                    {
+                        GUILayout.Button(dictionary.UP_TO_DATE, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions);
+                    }
+                    break;
+                case DataStructs.UpdateCheckStatus.CouldNotFetchRelease:
+                    if (GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
+                    break;
+            }
+            GUILayout.EndHorizontal();
+
             GUIElements.LanguageSelection(LoadActiveLanguage);
 
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
@@ -195,6 +230,49 @@ namespace Varneon.WorldCreatorAssistant
             }
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
+        }
+
+        private void CheckForWCAUpdates()
+        {
+            if (EditorUtility.DisplayDialog(dictionary.CHECK_FOR_UPDATES, dictionary.DO_YOU_WANT_CHECK_UPDATES_WCA, dictionary.YES, dictionary.CANCEL))
+            {
+                wcaUpdateStatus = UtilityMethods.CheckForWCAUpdates();
+                switch (wcaUpdateStatus)
+                {
+                    case DataStructs.UpdateCheckStatus.OutOfRequests:
+                        EditorUtility.DisplayDialog(dictionary.GITHUB_API_RATE_WARNING, $"{dictionary.GITHUB_NOT_ENOUGH_REQUESTS}", dictionary.OK);
+                        break;
+                    case DataStructs.UpdateCheckStatus.UpdateAvailable:
+                        if (EditorUtility.DisplayDialog(dictionary.UPDATE_AVAILABLE, $"{dictionary.UPDATE}?", dictionary.UPDATE, dictionary.CANCEL)) { UpdateWCA(); }
+                        break;
+                    case DataStructs.UpdateCheckStatus.VersionFileMissing:
+                        EditorUtility.DisplayDialog(dictionary.VERSION_UNAVAILABLE, $"{dictionary.VERSION_FILE_MISSING}", dictionary.OK);
+                        break;
+                    case DataStructs.UpdateCheckStatus.UpToDate:
+                        EditorUtility.DisplayDialog(dictionary.UP_TO_DATE, $"{dictionary.WCA_IS_UP_TO_DATE}", dictionary.OK);
+                        break;
+                    case DataStructs.UpdateCheckStatus.CouldNotFetchRelease:
+                        EditorUtility.DisplayDialog(dictionary.GITHUB_API_NOT_RESPONDING, $"{Regex.Unescape(dictionary.GITHUB_COULD_NOT_FETCH_RELEASE)}", dictionary.OK);
+                        break;
+                }
+            }
+        }
+
+        private void UpdateWCA()
+        {
+            DataStructs.ImportResponse response = PackageManager.Instance.DownloadRepositoryLatest(packageCacheDirectory, "Varneon", "WorldCreatorAssistant");
+
+            if (response.Succeeded) 
+            {
+                string[] wcaDataAssetPaths = AssetDatabase.FindAssets("t:Varneon.WorldCreatorAssistant.WCAData WCAData");
+
+                foreach(string path in wcaDataAssetPaths)
+                {
+                    AssetDatabase.DeleteAsset(AssetDatabase.GUIDToAssetPath(path));
+                }
+
+                Close();
+            }
         }
     }
 }
