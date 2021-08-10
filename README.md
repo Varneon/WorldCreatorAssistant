@@ -7,7 +7,7 @@ Unity Editor extension for automating VRChat world project package management
 [![GitHub](https://img.shields.io/github/license/Varneon/WorldCreatorAssistant?color=blue&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/blob/main/LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/WorldCreatorAssistant?style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/stargazers)
 [![GitHub all releases](https://img.shields.io/github/downloads/Varneon/WorldCreatorAssistant/total?color=blue&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/releases)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Varneon/WorldCreatorAssistant?color=blue&sort=semver&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/releases/latest)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Varneon/WorldCreatorAssistant?color=blue&label=Release&sort=semver&style=for-the-badge)](https://github.com/Varneon/WorldCreatorAssistant/releases/latest)
 
 </div>
 
