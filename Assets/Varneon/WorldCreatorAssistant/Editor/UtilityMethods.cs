@@ -52,11 +52,13 @@ namespace Varneon.WorldCreatorAssistant
             return DataStructs.UpdateCheckStatus.UpToDate;
         }
 
-        internal static Version ParseVersionText(string version)
+        internal static Version ParseVersionText(string versionText)
         {
-            string v = Regex.Match(Regex.Match(version, "[0-9.][0-9.][0-9.]*").Value, @"^([^.]*)\.([^.]*)\.([^.]*)").Value.TrimStart('.').TrimEnd('.');
+            string v = Regex.Match(Regex.Match(versionText, "[0-9.][0-9.][0-9.]*").Value, @"^([^.]*)\.([^.]*)\.([^.]*)").Value.TrimStart('.').TrimEnd('.');
 
-            return new Version(v);
+            Version.TryParse(v, out Version result);
+
+            return result;
         }
 
         internal static Version GetVersionFromDirectory(string path)
