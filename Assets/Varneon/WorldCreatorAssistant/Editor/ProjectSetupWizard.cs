@@ -25,6 +25,12 @@ namespace Varneon.WorldCreatorAssistant
         Vector2 scrollPos;
         WCAData wcaData;
         SetupMode setupMode;
+        string[] pageLabels;
+        int pageCount;
+        float lastWindowWidth;
+        float progressBarLabelSpaceRemainder;
+        float progressBarPointSpacing;
+        const float ProgressBarMargin = 64f;
 
         private enum SetupMode
         {
@@ -63,42 +69,77 @@ namespace Varneon.WorldCreatorAssistant
 
                 break;
             }
+
+            pageCount = pageLabels.Length;
+
+            CalculateProgressBarLayoutVariables();
         }
 
         private void OnGUI()
         {
-            #region Progress Bar Top Labels
-            GUILayout.Space(10);
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(dictionary.CHOOSE_VRCSDK, page == 0 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(128));
-            GUILayout.Label(dictionary.PACKAGE_IMPORTER, page == 2 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel);
-            GUILayout.Label(dictionary.ASSET_IMPORTER, page == 4 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(128));
-            GUILayout.EndHorizontal();
-            #endregion
+            //Detect window width changes
+            if(position.width != lastWindowWidth) { CalculateProgressBarLayoutVariables(); }
 
             #region Progress Bar
+            GUILayout.Space(10);
+            GUILayout.BeginHorizontal();
+
+            for (int i = 0; i < pageCount; i += 2)
+            {
+                if(i == 0 || i == pageCount - 1)
+                {
+                    if (i == pageCount - 1) { GUILayout.Space(progressBarLabelSpaceRemainder); }
+                    GUILayout.Label(pageLabels[i], page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(ProgressBarMargin * 2f));
+                    if(i < pageCount - 1) { GUILayout.Space(progressBarLabelSpaceRemainder); }
+                    else if(pageCount == 3 && i == 0) { GUILayout.FlexibleSpace(); }
+                }
+                else
+                {
+                    GUILayout.Label(pageLabels[i], page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(progressBarPointSpacing * 2f));
+                    if (i == pageCount - 2) { GUILayout.Space(ProgressBarMargin); }
+                }
+                
+            }
+            GUILayout.EndHorizontal();
+
 #if UNITY_2019
-            EditorGUI.ProgressBar(new Rect(64, 31, position.width - 128, 10), page / 4f, "");
+            EditorGUI.ProgressBar(new Rect(ProgressBarMargin, 31, position.width - ProgressBarMargin * 2, 10), page / (pageCount - 1f), "");
 #else
-            EditorGUI.ProgressBar(new Rect(64, 30, position.width - 128, 8), page / 4f, "");
+            EditorGUI.ProgressBar(new Rect(ProgressBarMargin, 30, position.width - ProgressBarMargin * 2, 8), page / (pageCount - 1f), "");
 #endif
             GUILayout.BeginHorizontal();
             GUILayout.Space(58);
-            for (int i = 0; i < 5; i++)
+
+            for (int i = 0; i < pageCount; i++)
             {
                 GUI.color = i <= page ? new Color(0.5f, 0.75f, 1f) : new Color(0.8f, 0.8f, 0.8f);
-                GUILayout.Label(new GUIContent(), EditorStyles.radioButton);
-                GUILayout.Space((position.width - 128) * 0.25f - 20);
+#if UNITY_2019
+                GUI.Box(new Rect(ProgressBarMargin + progressBarPointSpacing * i - 8, 28, 0, 0), string.Empty, EditorStyles.radioButton);
+#else
+                GUI.Box(new Rect(ProgressBarMargin + progressBarPointSpacing * i - 8, 25, 0, 0), string.Empty, EditorStyles.radioButton);
+#endif
                 GUI.color = Color.white;
             }
             GUILayout.EndHorizontal();
-#endregion
 
-#region Progress Bar Bottom Labels
+            GUILayout.Space(21);
+
             GUILayout.BeginHorizontal();
-            GUILayout.Space(64);
-            GUILayout.Label(dictionary.SETUP_OPTIONS, page == 1 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width((position.width - 128) / 2));
-            GUILayout.Label(dictionary.GITHUB_IMPORTER, page == 3 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width((position.width - 128) / 2));
+            GUILayout.Space(ProgressBarMargin);
+            for (int i = 1; i < pageCount; i += 2)
+            {
+                if (i == pageCount - 1)
+                {
+                    GUILayout.Space(progressBarLabelSpaceRemainder);
+                    GUILayout.Label(pageLabels[i], page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(ProgressBarMargin * 2f));
+                }
+                else
+                {
+                    GUILayout.Label(pageLabels[i], page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(progressBarPointSpacing * 2f));
+                    if (i == pageCount - 2) { GUILayout.Space(ProgressBarMargin); }
+                }
+
+            }
             GUILayout.EndHorizontal();
 #endregion
 
@@ -126,6 +167,15 @@ namespace Varneon.WorldCreatorAssistant
             }
 
             GUILayout.Space(7);
+        }
+
+        private void CalculateProgressBarLayoutVariables()
+        {
+            lastWindowWidth = position.width;
+
+            progressBarLabelSpaceRemainder = (position.width - ProgressBarMargin * 2f) / (pageCount - 1) - ProgressBarMargin;
+
+            progressBarPointSpacing = (position.width - ProgressBarMargin * 2) * (1f / (pageCount - 1));
         }
 
 #region Pages
@@ -508,6 +558,15 @@ namespace Varneon.WorldCreatorAssistant
         private void LoadActiveLanguage()
         {
             dictionary = DictionaryLoader.ActiveDictionary;
+
+            pageLabels = new string[]
+            {
+                dictionary.CHOOSE_VRCSDK,
+                dictionary.SETUP_OPTIONS,
+                dictionary.PACKAGE_IMPORTER,
+                dictionary.GITHUB_IMPORTER,
+                dictionary.ASSET_IMPORTER
+            };
 
             pageHints = new string[]
             {
