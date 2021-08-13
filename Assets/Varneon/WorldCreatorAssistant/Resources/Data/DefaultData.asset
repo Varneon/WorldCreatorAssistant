@@ -52,9 +52,12 @@ MonoBehaviour:
     Directories:
     - Assets/UdonToolkit
   DefaultUPMPackages:
+  - Name: com.unity.formats.fbx
   - Name: com.unity.polybrush
   - Name: com.unity.probuilder
+  - Name: com.unity.progrids
   - Name: com.unity.quicksearch
+  - Name: com.unity.recorder
   DefaultPrefabRepositories:
   - Author: Varneon
     Name: UdonEssentials
