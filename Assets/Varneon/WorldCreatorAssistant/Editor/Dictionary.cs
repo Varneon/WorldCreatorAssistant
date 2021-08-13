@@ -18,6 +18,7 @@ namespace Varneon.WorldCreatorAssistant
         [Serializable]
         public struct Translations
         {
+            public string ADD_NEW_CUSTOM_UNITYPACKAGE;
             public string ARE_YOU_SURE_CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS;
             public string ARE_YOU_SURE_CLEAR_WCA_REGISTRY_KEYS;
             public string ASSET_IMPORTER;
@@ -79,13 +80,15 @@ namespace Varneon.WorldCreatorAssistant
             public string PREFAB_REPOSITORIES;
             public string PREVIOUS;
             public string PROJECT_SETUP_OPTIONS;
-            public string PSW_PAGE_HINT_1;
-            public string PSW_PAGE_HINT_2;
-            public string PSW_PAGE_HINT_3;
-            public string PSW_PAGE_HINT_4;
-            public string PSW_PAGE_HINT_5;
+            public string PSW_PAGE_HINT_CHOOSE_VRCSDK;
+            public string PSW_PAGE_HINT_IMPORT_CUSTOM_UNITYPACKAGES;
+            public string PSW_PAGE_HINT_SETUP_OPTIONS;
+            public string PSW_PAGE_HINT_UPM_IMPORTER;
+            public string PSW_PAGE_HINT_GITHUB_IMPORTER;
+            public string PSW_PAGE_HINT_UAS_IMPORTER;
             public string PSW_REDUCE_REPOSITORIES_OR_WAIT;
             public string RECOMMENDED_COMMUNITY_TOOLS;
+            public string REMOVE;
             public string RESET_UNUSED_LIGHTING_SETTINGS_DESC;
             public string RESET_UNUSED_LIGHTING_SETTINGS;
             public string RESETS;
@@ -107,6 +110,7 @@ namespace Varneon.WorldCreatorAssistant
             public string TUTORIALS;
             public string UNAVAILABLE;
             public string UNITY_ASSET_STORE;
+            public string UNITYPACKAGE_IMPORTER;
             public string UP_TO_DATE;
             public string UPDATE_AVAILABLE;
             public string UPDATE;
