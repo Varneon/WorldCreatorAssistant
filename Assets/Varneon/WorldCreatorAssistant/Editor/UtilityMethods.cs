@@ -198,7 +198,7 @@ namespace Varneon.WorldCreatorAssistant
                 Version latestVersion = new Version();
                 foreach (string v in files)
                 {
-                    Version versionFromPackage = ParseVersionText(v);
+                    Version versionFromPackage = ParseVersionText(Path.GetFileName(v));
                     if (versionFromPackage > latestVersion)
                     {
                         latestVersion = versionFromPackage;
