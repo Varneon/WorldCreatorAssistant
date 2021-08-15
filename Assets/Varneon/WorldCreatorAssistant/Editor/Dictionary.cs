@@ -75,7 +75,9 @@ namespace Varneon.WorldCreatorAssistant
             public string NOTE_VRC_LAYERS_AND_LIGHTMAP_GENERATION;
             public string OK;
             public string PACKAGE_CACHE_DIRECTORY;
+            public string PACKAGE_HAS_ALREADY_BEEN_ADDED;
             public string PACKAGE_IMPORTER;
+            public string PACKAGE_WITH_SAME_PATH_ALREADY_ADDED;
             public string PLEASE_CHOOSE_VRCSDK;
             public string PLEASE_DEFINE_VALID_CACHE_DIRECTORY;
             public string PLEASE_WAIT_VRCAPI;

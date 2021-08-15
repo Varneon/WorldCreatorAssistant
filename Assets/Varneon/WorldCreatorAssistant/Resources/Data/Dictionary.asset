@@ -84,7 +84,10 @@ MonoBehaviour:
         automatic lightmap generation will be disabled automatically'
       OK: OK
       PACKAGE_CACHE_DIRECTORY: Package cache directory
+      PACKAGE_HAS_ALREADY_BEEN_ADDED: Package has already been added
       PACKAGE_IMPORTER: UPM Importer
+      PACKAGE_WITH_SAME_PATH_ALREADY_ADDED: Package with the same path has already
+        been added to the list
       PLEASE_CHOOSE_VRCSDK: Please choose the VRCSDK you want to use
       PLEASE_DEFINE_VALID_CACHE_DIRECTORY: Please define valid package cache directory
         in the settings to access importer

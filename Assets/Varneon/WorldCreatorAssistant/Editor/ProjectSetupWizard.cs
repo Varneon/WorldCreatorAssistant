@@ -400,7 +400,11 @@ namespace Varneon.WorldCreatorAssistant
                     string packagePath = EditorUtility.OpenFilePanelWithFilters(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, "", new string[] { "Unitypackage", "unitypackage" });
                     if (!string.IsNullOrEmpty(packagePath))
                     {
-                        customUnitypackagePaths.Add(packagePath);
+                        if (customUnitypackagePaths.Contains(packagePath)) { EditorUtility.DisplayDialog(dictionary.PACKAGE_HAS_ALREADY_BEEN_ADDED, dictionary.PACKAGE_WITH_SAME_PATH_ALREADY_ADDED, dictionary.OK); }
+                        else
+                        {
+                            customUnitypackagePaths.Add(packagePath);
+                        }
                     }
                 }
             }
