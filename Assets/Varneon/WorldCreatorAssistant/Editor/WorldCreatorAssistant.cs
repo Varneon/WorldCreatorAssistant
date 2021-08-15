@@ -188,7 +188,7 @@ namespace Varneon.WorldCreatorAssistant
                 GUIElements.DrawHintPanel(dictionary.SPECIFY_PACKAGE_CACHE_DIRECTORY_DESC);
 
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-                GUILayout.Label(packageCacheDirectory);
+                GUILayout.Label(packageCacheDirectory, EditorStyles.wordWrappedLabel);
                 if (GUIElements.BrowseButton(dictionary.BROWSE))
                 {
                     string newPath = EditorUtility.OpenFolderPanel(dictionary.SELECT_PACKAGE_CACHE_DIRECTORY, Path.GetFullPath(Path.Combine(Application.dataPath, @"..\..\")), "");
