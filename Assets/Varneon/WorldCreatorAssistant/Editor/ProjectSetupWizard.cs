@@ -465,12 +465,19 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.Label(packageCacheDirectory);
             if (GUIElements.BrowseButton(dictionary.BROWSE))
             {
-                string newPath = EditorUtility.OpenFolderPanel(dictionary.SELECT_PACKAGE_CACHE_DIRECTORY, "", "");
+                string newPath = EditorUtility.OpenFolderPanel(dictionary.SELECT_PACKAGE_CACHE_DIRECTORY, Path.GetFullPath(Path.Combine(Application.dataPath, @"..\..\")), "");
                 if (!string.IsNullOrEmpty(newPath) && packageCacheDirectory != newPath)
                 {
-                    packageCacheDirectory = newPath;
-                    EditorPrefs.SetString(EditorPreferenceKeys.PackageCache, packageCacheDirectory);
-                    validCacheDirectory = true;
+                    if (Path.GetFullPath(newPath).StartsWith(Path.GetFullPath(Path.Combine(Application.dataPath, @"..\")).TrimEnd(Path.DirectorySeparatorChar))) 
+                    {
+                        EditorUtility.DisplayDialog(dictionary.INVALID_PACKAGE_CACHE_DIRECTORY, dictionary.PACKAGE_CACHE_CANT_BE_INSIDE_PROJECT, dictionary.OK);
+                    }
+                    else
+                    {
+                        packageCacheDirectory = newPath;
+                        EditorPrefs.SetString(EditorPreferenceKeys.PackageCache, packageCacheDirectory);
+                        validCacheDirectory = true;
+                    }
                 }
             }
             EditorGUILayout.EndHorizontal();

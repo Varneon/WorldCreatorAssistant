@@ -71,6 +71,7 @@ MonoBehaviour:
       IMPORTED: Imported
       IMPORTER: Importer
       INSTALLED_VERSION: Installed version
+      INVALID_PACKAGE_CACHE_DIRECTORY: Invalid Package Cache directory!
       LAST_CHECK: Last check
       LAST_VRCAPI_REQUEST: Last VRCSDK API request
       LATEST_VERSION: Latest version
@@ -83,6 +84,8 @@ MonoBehaviour:
       NOTE_VRC_LAYERS_AND_LIGHTMAP_GENERATION: 'NOTE: VRC layers will be set up and
         automatic lightmap generation will be disabled automatically'
       OK: OK
+      PACKAGE_CACHE_CANT_BE_INSIDE_PROJECT: Package Cache can't be located under
+        Unity Project folder
       PACKAGE_CACHE_DIRECTORY: Package cache directory
       PACKAGE_HAS_ALREADY_BEEN_ADDED: Package has already been added
       PACKAGE_IMPORTER: UPM Importer

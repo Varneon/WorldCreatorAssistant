@@ -63,6 +63,7 @@ namespace Varneon.WorldCreatorAssistant
             public string IMPORTED;
             public string IMPORTER;
             public string INSTALLED_VERSION;
+            public string INVALID_PACKAGE_CACHE_DIRECTORY;
             public string LAST_CHECK;
             public string LAST_VRCAPI_REQUEST;
             public string LATEST_VERSION;
@@ -74,6 +75,7 @@ namespace Varneon.WorldCreatorAssistant
             public string NO_ASSET_STORE_PACKAGES_AVAILABLE;
             public string NOTE_VRC_LAYERS_AND_LIGHTMAP_GENERATION;
             public string OK;
+            public string PACKAGE_CACHE_CANT_BE_INSIDE_PROJECT;
             public string PACKAGE_CACHE_DIRECTORY;
             public string PACKAGE_HAS_ALREADY_BEEN_ADDED;
             public string PACKAGE_IMPORTER;
