@@ -1,0 +1,19 @@
+{
+    "name": "com.varneon.worldcreatorassistant",
+    "version": "0.1.2",
+    "displayName": "World Creator Assistant",
+    "description": "Unity Editor extension for automating VRChat world project package management",
+    "unity": "2019.4",
+    "documentationUrl": "https://github.com/Varneon/WorldCreatorAssistant",
+    "changelogUrl": "https://github.com/Varneon/WorldCreatorAssistant/commits/main",
+    "licensesUrl": "https://github.com/Varneon/WorldCreatorAssistant/blob/main/LICENSE",
+    "keywords": [
+        "VRChat",
+        "Worlds"
+    ],
+    "author": {
+        "name": "Varneon",
+        "email": "me@varneon.com",
+        "url": "https://github.com/Varneon"
+    }
+}
