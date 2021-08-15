@@ -67,6 +67,8 @@ namespace Varneon.WorldCreatorAssistant
             public string LAST_VRCAPI_REQUEST;
             public string LATEST_VERSION;
             public string MAIN;
+            public string N_FILES_IN_INVALID_DIRECTORIES;
+            public string N_FILES_HAVE_INVALID_GUID;
             public string NEXT;
             public string NO;
             public string NO_ASSET_STORE_PACKAGES_AVAILABLE;
@@ -106,6 +108,7 @@ namespace Varneon.WorldCreatorAssistant
             public string SETUP_MODE;
             public string SETUP_OPTIONS;
             public string SOME_COMMUNITY_TOOLS_UNAVAILABLE_SDK;
+            public string SOME_WCA_FILES_INVALID_DIRECTORIES;
             public string SPECIFY_PACKAGE_CACHE_DIRECTORY_DESC;
             public string TUTORIALS;
             public string UNAVAILABLE;
@@ -127,6 +130,8 @@ namespace Varneon.WorldCreatorAssistant
             public string WCA_FEATURES;
             public string WCA_FOLDER_CLEANUP;
             public string WCA_IS_UP_TO_DATE;
+            public string WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT;
+            public string WCA_NEW_VERSION_AVAILABLE;
             public string WCA_THANK_YOU_FOR_USING;
             public string WCA_THIS_EDITOR;
             public string WCA_WILL_TRY_TO_CLEAR_DIRECTORIES;

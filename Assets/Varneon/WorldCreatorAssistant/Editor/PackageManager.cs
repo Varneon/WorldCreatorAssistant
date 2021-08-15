@@ -78,7 +78,7 @@ namespace Varneon.WorldCreatorAssistant
             }
         }
 
-        internal DataStructs.ImportResponse DownloadRepositoryLatest(string cacheDir, string author, string name)
+        internal string DownloadLatestRepository(string cacheDir, string author, string name)
         {
             string apiUrl = UtilityMethods.GetGitHubApiLatestReleaseURL(author, name);
 
@@ -94,7 +94,12 @@ namespace Varneon.WorldCreatorAssistant
 
             while (downloader.MoveNext()) { }
 
-            return ImportPackage(path, returnVersion: true);
+            return path;
+        }
+
+        internal DataStructs.ImportResponse DownloadAndImportLatestRepository(string cacheDir, string author, string name)
+        {
+            return ImportPackage(DownloadLatestRepository(cacheDir, author, name), returnVersion: true);
         }
 
         internal System.Version GetLatestReleaseVersion(string author, string name)

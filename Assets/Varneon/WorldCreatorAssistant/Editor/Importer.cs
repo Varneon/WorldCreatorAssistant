@@ -326,7 +326,7 @@ namespace Varneon.WorldCreatorAssistant
                     return PackageManager.Instance.ImportPackage(GetLatestCachedCommunityTool(repository.Name), returnVersion: true); 
                 }
 
-                return PackageManager.Instance.DownloadRepositoryLatest(packageCacheDirectory, repository.Author, repository.Name);
+                return PackageManager.Instance.DownloadAndImportLatestRepository(packageCacheDirectory, repository.Author, repository.Name);
             }
 
             return new DataStructs.ImportResponse();

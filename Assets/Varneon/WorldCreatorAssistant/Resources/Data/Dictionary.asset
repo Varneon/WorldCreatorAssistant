@@ -75,6 +75,8 @@ MonoBehaviour:
       LAST_VRCAPI_REQUEST: Last VRCSDK API request
       LATEST_VERSION: Latest version
       MAIN: Main
+      N_FILES_IN_INVALID_DIRECTORIES: Files are in invalid directories
+      N_FILES_HAVE_INVALID_GUID: Files have invalid GUID
       NEXT: Next
       NO: No
       NO_ASSET_STORE_PACKAGES_AVAILABLE: No Asset Store packages available
@@ -133,6 +135,8 @@ MonoBehaviour:
       SETUP_OPTIONS: Setup Options
       SOME_COMMUNITY_TOOLS_UNAVAILABLE_SDK: Some community tools are disabled because
         they are only available when using VRCSDK3
+      SOME_WCA_FILES_INVALID_DIRECTORIES: Some WCA files are in invalid directories
+        or their GUID is invalid!
       SPECIFY_PACKAGE_CACHE_DIRECTORY_DESC: Specify Package Cache directory for storing
         downloaded GitHub repositories. (Recommended to have at the root of your
         projects folder, the cache will be shared by all projects)
@@ -159,6 +163,9 @@ MonoBehaviour:
         and FAQ
       WCA_FOLDER_CLEANUP: WCA Folder Cleanup
       WCA_IS_UP_TO_DATE: WCA is up to date
+      WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT: WCA may malfunction after automatic import
+        due to WCA not being imported in it's original directory
+      WCA_NEW_VERSION_AVAILABLE: New WCA version available!
       WCA_THANK_YOU_FOR_USING: Thank you for using World Creator Assistant!
       WCA_THIS_EDITOR: This editor extension is still heavily work in progress and
         should only be used for testing purposes.

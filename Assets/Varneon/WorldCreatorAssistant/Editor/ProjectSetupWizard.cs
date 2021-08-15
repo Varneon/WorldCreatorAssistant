@@ -706,7 +706,7 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DownloadAndImportRepository(string author, string name)
         {
-            DataStructs.ImportResponse response = PackageManager.Instance.DownloadRepositoryLatest(packageCacheDirectory, author, name);
+            DataStructs.ImportResponse response = PackageManager.Instance.DownloadAndImportLatestRepository(packageCacheDirectory, author, name);
 
             if (!response.Succeeded) { Debug.LogError($"{LogPrefix} GitHub repository import failed! ({author}/{name})"); }
 

@@ -16,6 +16,8 @@ namespace Varneon.WorldCreatorAssistant
         private Resources resources;
         private string packageCacheDirectory;
         private DataStructs.UpdateCheckStatus wcaUpdateStatus = DataStructs.UpdateCheckStatus.Unchecked;
+        private WCAFileUtility.FileValidityReport wcaFileValidityStatus;
+        private bool wcaCleanInstall;
         private static readonly GUILayoutOption[] settingsBlockButtonLayoutOptions = new GUILayoutOption[] { GUILayout.ExpandWidth(false), GUILayout.Height(15) };
 
         #region Page Variables
@@ -140,7 +142,8 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DrawSettingsPage()
         {
-            GUILayout.BeginHorizontal(EditorStyles.helpBox);
+            GUILayout.BeginVertical(EditorStyles.helpBox);
+            GUILayout.BeginHorizontal();
             GUILayout.Label(dictionary.CHECK_FOR_UPDATES);
             switch (wcaUpdateStatus)
             {
@@ -148,6 +151,7 @@ namespace Varneon.WorldCreatorAssistant
                     if(GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
                     break;
                 case DataStructs.UpdateCheckStatus.UpdateAvailable:
+                    wcaCleanInstall = GUILayout.Toggle(wcaCleanInstall, dictionary.CLEAN_INSTALL, GUILayout.ExpandWidth(false));
                     if (GUILayout.Button(dictionary.UPDATE, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions)) { UpdateWCA(); }
                     break;
                 case DataStructs.UpdateCheckStatus.VersionFileMissing:
@@ -167,6 +171,11 @@ namespace Varneon.WorldCreatorAssistant
                     break;
             }
             GUILayout.EndHorizontal();
+            if (wcaUpdateStatus == DataStructs.UpdateCheckStatus.UpdateAvailable && !wcaFileValidityStatus.Verified)
+            {
+                GUIElements.DrawWarningBox($"{dictionary.SOME_WCA_FILES_INVALID_DIRECTORIES}\n\n{wcaFileValidityStatus.InvalidDirectoryCount} {dictionary.N_FILES_IN_INVALID_DIRECTORIES}\n{wcaFileValidityStatus.InvalidGUIDCount} {dictionary.N_FILES_HAVE_INVALID_GUID}\n\n{dictionary.WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT}");
+            }
+            GUILayout.EndVertical();
 
             GUIElements.LanguageSelection(LoadActiveLanguage);
 
@@ -236,6 +245,7 @@ namespace Varneon.WorldCreatorAssistant
         {
             if (EditorUtility.DisplayDialog(dictionary.CHECK_FOR_UPDATES, dictionary.DO_YOU_WANT_CHECK_UPDATES_WCA, dictionary.YES, dictionary.CANCEL))
             {
+                wcaFileValidityStatus = WCAFileUtility.CheckValidityOfWCAFiles();
                 wcaUpdateStatus = UtilityMethods.CheckForWCAUpdates();
                 switch (wcaUpdateStatus)
                 {
@@ -243,7 +253,7 @@ namespace Varneon.WorldCreatorAssistant
                         EditorUtility.DisplayDialog(dictionary.GITHUB_API_RATE_WARNING, $"{dictionary.GITHUB_NOT_ENOUGH_REQUESTS}", dictionary.OK);
                         break;
                     case DataStructs.UpdateCheckStatus.UpdateAvailable:
-                        if (EditorUtility.DisplayDialog(dictionary.UPDATE_AVAILABLE, $"{dictionary.UPDATE}?", dictionary.UPDATE, dictionary.CANCEL)) { UpdateWCA(); }
+                        EditorUtility.DisplayDialog(dictionary.UPDATE_AVAILABLE, dictionary.WCA_NEW_VERSION_AVAILABLE, dictionary.OK);
                         break;
                     case DataStructs.UpdateCheckStatus.VersionFileMissing:
                         EditorUtility.DisplayDialog(dictionary.VERSION_UNAVAILABLE, $"{dictionary.VERSION_FILE_MISSING}", dictionary.OK);
@@ -260,18 +270,17 @@ namespace Varneon.WorldCreatorAssistant
 
         private void UpdateWCA()
         {
-            DataStructs.ImportResponse response = PackageManager.Instance.DownloadRepositoryLatest(packageCacheDirectory, "Varneon", "WorldCreatorAssistant");
-
-            if (response.Succeeded) 
+            if (wcaCleanInstall)
             {
-                string[] wcaDataAssetPaths = AssetDatabase.FindAssets("t:Varneon.WorldCreatorAssistant.WCAData WCAData");
+                string importedWCAPath = PackageManager.Instance.DownloadLatestRepository(packageCacheDirectory, "Varneon", "WorldCreatorAssistant");
 
-                foreach(string path in wcaDataAssetPaths)
-                {
-                    AssetDatabase.DeleteAsset(AssetDatabase.GUIDToAssetPath(path));
-                }
+                if (wcaCleanInstall) { WCAFileUtility.DeleteAllWCAFiles(importedWCAPath, this); }
+            }
+            else
+            {
+                DataStructs.ImportResponse response = PackageManager.Instance.DownloadAndImportLatestRepository(packageCacheDirectory, "Varneon", "WorldCreatorAssistant");
 
-                Close();
+                if (response.Succeeded) { WCAFileUtility.DeleteWCAData(); Close(); }
             }
         }
     }
