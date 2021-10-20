@@ -14,32 +14,26 @@ namespace Varneon.WorldCreatorAssistant
         [InitializeOnLoadMethod]
         public static void SetupLayers()
         {
-            WCAData wcaData = UtilityMethods.LoadWCAData();
-
-            if (wcaData == null) { return; }
-            
-            if(!wcaData.AreVRCLayersSetup)
+            try
             {
-                try
-                {
-                    UpdateLayers.SetupEditorLayers();
-                    UpdateLayers.SetupCollisionLayerMatrix();
-                    wcaData.AreVRCLayersSetup = true;
-                    Debug.Log($"{LogPrefix} VRC Layers have been set up!");
-                }
-                catch(Exception e)
-                {
-                    Debug.LogError(e);
+                if (!UpdateLayers.AreLayersSetup()) { UpdateLayers.SetupEditorLayers(); }
 
-                    return;
-                }
+                if (!UpdateLayers.IsCollisionLayerMatrixSetup()) { UpdateLayers.SetupCollisionLayerMatrix(); }
+                    
+                Debug.Log($"{LogPrefix} VRC Layers and Collision Matrix have been set up!");
+
+                string path = AssetDatabase.GUIDToAssetPath(GUID);
+
+                if (!path.EndsWith("LayerSetupHandler.cs")) { Debug.LogError($"{LogPrefix} LayerSetupHandler.cs has invalid GUID! Please delete this file manually."); return; }
+
+                AssetDatabase.DeleteAsset(path);
             }
+            catch(Exception e)
+            {
+                Debug.LogError(e);
 
-            string path = AssetDatabase.GUIDToAssetPath(GUID);
-
-            if (!path.EndsWith("LayerSetupHandler.cs")) { Debug.LogError($"{LogPrefix} LayerSetupHandler.cs has invalid GUID! Please delete this file manually."); return; }
-
-            AssetDatabase.DeleteAsset(path);
+                return;
+            }
         }
     }
 }

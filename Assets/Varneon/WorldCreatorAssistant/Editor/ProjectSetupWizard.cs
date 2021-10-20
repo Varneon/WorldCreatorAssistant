@@ -21,10 +21,28 @@ namespace Varneon.WorldCreatorAssistant
         int page = 0;
         int udonSharpIndex;
         string packageCacheDirectory;
-        string[] pageHints;
         Vector2 scrollPos;
         WCAData wcaData;
         SetupMode setupMode;
+        List<string> customUnitypackagePaths = new List<string>();
+        List<PSWPage> pages = new List<PSWPage>();
+        int pageCount;
+        float lastWindowWidth;
+        float progressBarLabelSpaceRemainder;
+        float progressBarPointSpacing;
+        const float ProgressBarMargin = 64f;
+
+        private struct PSWPage
+        {
+            internal string Name;
+            internal Action Draw;
+
+            internal PSWPage(string name, Action draw)
+            {
+                Name = name;
+                Draw = draw;
+            }
+        }
 
         private enum SetupMode
         {
@@ -63,42 +81,77 @@ namespace Varneon.WorldCreatorAssistant
 
                 break;
             }
+
+            pageCount = pages.Count;
+
+            CalculateProgressBarLayoutVariables();
         }
 
         private void OnGUI()
         {
-            #region Progress Bar Top Labels
-            GUILayout.Space(10);
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(dictionary.CHOOSE_VRCSDK, page == 0 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(128));
-            GUILayout.Label(dictionary.PACKAGE_IMPORTER, page == 2 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel);
-            GUILayout.Label(dictionary.ASSET_IMPORTER, page == 4 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(128));
-            GUILayout.EndHorizontal();
-            #endregion
+            //Detect window width changes
+            if(position.width != lastWindowWidth) { CalculateProgressBarLayoutVariables(); }
 
             #region Progress Bar
+            GUILayout.Space(10);
+            GUILayout.BeginHorizontal();
+
+            for (int i = 0; i < pageCount; i += 2)
+            {
+                if(i == 0 || i == pageCount - 1)
+                {
+                    if (i == pageCount - 1) { GUILayout.Space(progressBarLabelSpaceRemainder); }
+                    GUILayout.Label(pages[i].Name, page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(ProgressBarMargin * 2f));
+                    if(i < pageCount - 1) { GUILayout.Space(progressBarLabelSpaceRemainder); }
+                    else if(pageCount == 3 && i == 0) { GUILayout.FlexibleSpace(); }
+                }
+                else
+                {
+                    GUILayout.Label(pages[i].Name, page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(progressBarPointSpacing * 2f));
+                    if (i == pageCount - 2) { GUILayout.Space(ProgressBarMargin); }
+                }
+                
+            }
+            GUILayout.EndHorizontal();
+
 #if UNITY_2019
-            EditorGUI.ProgressBar(new Rect(64, 31, position.width - 128, 10), page / 4f, "");
+            EditorGUI.ProgressBar(new Rect(ProgressBarMargin, 31, position.width - ProgressBarMargin * 2, 10), page / (pageCount - 1f), "");
 #else
-            EditorGUI.ProgressBar(new Rect(64, 30, position.width - 128, 8), page / 4f, "");
+            EditorGUI.ProgressBar(new Rect(ProgressBarMargin, 30, position.width - ProgressBarMargin * 2, 8), page / (pageCount - 1f), "");
 #endif
             GUILayout.BeginHorizontal();
             GUILayout.Space(58);
-            for (int i = 0; i < 5; i++)
+
+            for (int i = 0; i < pageCount; i++)
             {
                 GUI.color = i <= page ? new Color(0.5f, 0.75f, 1f) : new Color(0.8f, 0.8f, 0.8f);
-                GUILayout.Label(new GUIContent(), EditorStyles.radioButton);
-                GUILayout.Space((position.width - 128) * 0.25f - 20);
+#if UNITY_2019
+                GUI.Box(new Rect(ProgressBarMargin + progressBarPointSpacing * i - 8, 28, 0, 0), string.Empty, EditorStyles.radioButton);
+#else
+                GUI.Box(new Rect(ProgressBarMargin + progressBarPointSpacing * i - 8, 25, 0, 0), string.Empty, EditorStyles.radioButton);
+#endif
                 GUI.color = Color.white;
             }
             GUILayout.EndHorizontal();
-#endregion
 
-#region Progress Bar Bottom Labels
+            GUILayout.Space(21);
+
             GUILayout.BeginHorizontal();
-            GUILayout.Space(64);
-            GUILayout.Label(dictionary.SETUP_OPTIONS, page == 1 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width((position.width - 128) / 2));
-            GUILayout.Label(dictionary.GITHUB_IMPORTER, page == 3 ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width((position.width - 128) / 2));
+            GUILayout.Space(ProgressBarMargin);
+            for (int i = 1; i < pageCount; i += 2)
+            {
+                if (i == pageCount - 1)
+                {
+                    GUILayout.Space(progressBarLabelSpaceRemainder);
+                    GUILayout.Label(pages[i].Name, page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(ProgressBarMargin * 2f));
+                }
+                else
+                {
+                    GUILayout.Label(pages[i].Name, page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(progressBarPointSpacing * 2f));
+                    if (i == pageCount - 2) { GUILayout.Space(ProgressBarMargin); }
+                }
+
+            }
             GUILayout.EndHorizontal();
 #endregion
 
@@ -106,26 +159,29 @@ namespace Varneon.WorldCreatorAssistant
 
             EditorGUI.DrawRect(new Rect(0, position.size.y - 32, position.width, 32), EditorGUIUtility.isProSkin ? new Color(0.16f, 0.16f, 0.16f) : new Color(0.65f, 0.65f, 0.65f));
 
-            switch (page)
-            {
-                case 0:
-                    DrawSDKPage();
-                    break;
-                case 1:
-                    DrawSetupOptionsPage();
-                    break;
-                case 2:
-                    DrawPackageImporterPage();
-                    break;
-                case 3:
-                    DrawGitHubImporterPage();
-                    break;
-                case 4:
-                    DrawAssetStoreImporterPage();
-                    break;
-            }
+            pages[page].Draw.Invoke();
 
             GUILayout.Space(7);
+        }
+
+        private void InitializePages()
+        {
+            pages.Clear();
+            pages.Add(new PSWPage(dictionary.CHOOSE_VRCSDK, DrawSDKPage));
+            pages.Add(new PSWPage(dictionary.UNITYPACKAGE_IMPORTER, DrawUnitypackageImporter));
+            pages.Add(new PSWPage(dictionary.SETUP_OPTIONS, DrawSetupOptionsPage));
+            pages.Add(new PSWPage(dictionary.PACKAGE_IMPORTER, DrawUPMImporterPage));
+            pages.Add(new PSWPage(dictionary.GITHUB_IMPORTER, DrawGitHubImporterPage));
+            pages.Add(new PSWPage(dictionary.ASSET_IMPORTER, DrawUASImporterPage));
+        }
+
+        private void CalculateProgressBarLayoutVariables()
+        {
+            lastWindowWidth = position.width;
+
+            progressBarLabelSpaceRemainder = (position.width - ProgressBarMargin * 2f) / (pageCount - 1) - ProgressBarMargin;
+
+            progressBarPointSpacing = (position.width - ProgressBarMargin * 2) * (1f / (pageCount - 1));
         }
 
 #region Pages
@@ -250,7 +306,7 @@ namespace Varneon.WorldCreatorAssistant
                 DrawCustomSDKField();
             }
 
-            GUIElements.DrawHintPanel(pageHints[page]);
+            GUIElements.DrawHintPanel(dictionary.PSW_PAGE_HINT_CHOOSE_VRCSDK);
 
             GUILayout.FlexibleSpace();
 
@@ -318,6 +374,46 @@ namespace Varneon.WorldCreatorAssistant
             }
         }
 
+        private void DrawUnitypackageImporter()
+        {
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+
+                for (int i = 0; i < customUnitypackagePaths.Count; i++)
+                {
+                    using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
+                    {
+                        GUILayout.Label(customUnitypackagePaths[i], GUIStyles.WrappedText);
+
+                        if (GUILayout.Button(dictionary.REMOVE, GUIStyles.FlatStandardButton))
+                        {
+                            customUnitypackagePaths.RemoveAt(i);
+                        }
+                    }
+                }
+
+                EditorGUILayout.EndScrollView();
+
+                if (GUILayout.Button(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, GUIStyles.FlatStandardButton))
+                {
+                    string packagePath = EditorUtility.OpenFilePanelWithFilters(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, "", new string[] { "Unitypackage", "unitypackage" });
+                    if (!string.IsNullOrEmpty(packagePath))
+                    {
+                        if (customUnitypackagePaths.Contains(packagePath)) { EditorUtility.DisplayDialog(dictionary.PACKAGE_HAS_ALREADY_BEEN_ADDED, dictionary.PACKAGE_WITH_SAME_PATH_ALREADY_ADDED, dictionary.OK); }
+                        else
+                        {
+                            customUnitypackagePaths.Add(packagePath);
+                        }
+                    }
+                }
+            }
+
+            GUIElements.DrawHintPanel(dictionary.PSW_PAGE_HINT_IMPORT_CUSTOM_UNITYPACKAGES);
+
+            DrawNavigationFooter(NextPage, PreviousPage);
+        }
+
         private void DrawSetupOptionsPage()
         {
             GUILayout.BeginVertical(EditorStyles.helpBox);
@@ -329,12 +425,12 @@ namespace Varneon.WorldCreatorAssistant
             EditorGUI.EndDisabledGroup();
             GUILayout.EndVertical();
 
-            GUIElements.DrawHintPanel(pageHints[page]);
+            GUIElements.DrawHintPanel(dictionary.PSW_PAGE_HINT_SETUP_OPTIONS);
 
             DrawNavigationFooter(NextPage, PreviousPage);
         }
 
-        private void DrawPackageImporterPage()
+        private void DrawUPMImporterPage()
         {
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
             GUILayout.BeginVertical();
@@ -353,7 +449,7 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
-            GUIElements.DrawHintPanel(pageHints[page]);
+            GUIElements.DrawHintPanel(dictionary.PSW_PAGE_HINT_UPM_IMPORTER);
 
             DrawNavigationFooter(NextPage, PreviousPage);
         }
@@ -366,15 +462,22 @@ namespace Varneon.WorldCreatorAssistant
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             GUILayout.Label(dictionary.SPECIFY_PACKAGE_CACHE_DIRECTORY_DESC, EditorStyles.wordWrappedLabel);
             EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
-            GUILayout.Label(packageCacheDirectory);
+            GUILayout.Label(packageCacheDirectory, EditorStyles.wordWrappedLabel);
             if (GUIElements.BrowseButton(dictionary.BROWSE))
             {
-                string newPath = EditorUtility.OpenFolderPanel(dictionary.SELECT_PACKAGE_CACHE_DIRECTORY, "", "");
+                string newPath = EditorUtility.OpenFolderPanel(dictionary.SELECT_PACKAGE_CACHE_DIRECTORY, Path.GetFullPath(Path.Combine(Application.dataPath, @"..\..\")), "");
                 if (!string.IsNullOrEmpty(newPath) && packageCacheDirectory != newPath)
                 {
-                    packageCacheDirectory = newPath;
-                    EditorPrefs.SetString(EditorPreferenceKeys.PackageCache, packageCacheDirectory);
-                    validCacheDirectory = true;
+                    if (Path.GetFullPath(newPath).StartsWith(Path.GetFullPath(Path.Combine(Application.dataPath, @"..\")).TrimEnd(Path.DirectorySeparatorChar))) 
+                    {
+                        EditorUtility.DisplayDialog(dictionary.INVALID_PACKAGE_CACHE_DIRECTORY, dictionary.PACKAGE_CACHE_CANT_BE_INSIDE_PROJECT, dictionary.OK);
+                    }
+                    else
+                    {
+                        packageCacheDirectory = newPath;
+                        EditorPrefs.SetString(EditorPreferenceKeys.PackageCache, packageCacheDirectory);
+                        validCacheDirectory = true;
+                    }
                 }
             }
             EditorGUILayout.EndHorizontal();
@@ -421,7 +524,7 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
-            GUIElements.DrawHintPanel(pageHints[page]);
+            GUIElements.DrawHintPanel(dictionary.PSW_PAGE_HINT_GITHUB_IMPORTER);
 
             DrawNavigationFooter(CheckForGitHubApiRequestLimitAndNextPage, PreviousPage);
         }
@@ -440,7 +543,7 @@ namespace Varneon.WorldCreatorAssistant
             }
         }
 
-        private void DrawAssetStoreImporterPage()
+        private void DrawUASImporterPage()
         {
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
             GUILayout.BeginVertical();
@@ -471,7 +574,7 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
-            GUIElements.DrawHintPanel(pageHints[page]);
+            GUIElements.DrawHintPanel(dictionary.PSW_PAGE_HINT_UAS_IMPORTER);
 
             DrawNavigationFooter(StartSetup, PreviousPage, dictionary.CONTINUE);
         }
@@ -509,14 +612,7 @@ namespace Varneon.WorldCreatorAssistant
         {
             dictionary = DictionaryLoader.ActiveDictionary;
 
-            pageHints = new string[]
-            {
-                dictionary.PSW_PAGE_HINT_1,
-                dictionary.PSW_PAGE_HINT_2,
-                dictionary.PSW_PAGE_HINT_3,
-                dictionary.PSW_PAGE_HINT_4,
-                dictionary.PSW_PAGE_HINT_5,
-            };
+            InitializePages();
         }
 
         private void StartSetup()
@@ -605,6 +701,11 @@ namespace Varneon.WorldCreatorAssistant
                 DownloadAndImportRepository(wcaData.CommunityTools[i].Author, wcaData.CommunityTools[i].Name);
             }
 
+            foreach(string path in customUnitypackagePaths)
+            {
+                PackageManager.Instance.ImportPackage(path);
+            }
+
             if (resetLightSettings) { ResetLightingSettings(); }
 
             DisableAutoLightmapGeneration();
@@ -616,7 +717,7 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DownloadAndImportRepository(string author, string name)
         {
-            DataStructs.ImportResponse response = PackageManager.Instance.DownloadRepositoryLatest(packageCacheDirectory, author, name);
+            DataStructs.ImportResponse response = PackageManager.Instance.DownloadAndImportLatestRepository(packageCacheDirectory, author, name);
 
             if (!response.Succeeded) { Debug.LogError($"{LogPrefix} GitHub repository import failed! ({author}/{name})"); }
 

@@ -18,6 +18,7 @@ namespace Varneon.WorldCreatorAssistant
         [Serializable]
         public struct Translations
         {
+            public string ADD_NEW_CUSTOM_UNITYPACKAGE;
             public string ARE_YOU_SURE_CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS;
             public string ARE_YOU_SURE_CLEAR_WCA_REGISTRY_KEYS;
             public string ASSET_IMPORTER;
@@ -62,30 +63,38 @@ namespace Varneon.WorldCreatorAssistant
             public string IMPORTED;
             public string IMPORTER;
             public string INSTALLED_VERSION;
+            public string INVALID_PACKAGE_CACHE_DIRECTORY;
             public string LAST_CHECK;
             public string LAST_VRCAPI_REQUEST;
             public string LATEST_VERSION;
             public string MAIN;
+            public string N_FILES_IN_INVALID_DIRECTORIES;
+            public string N_FILES_HAVE_INVALID_GUID;
             public string NEXT;
             public string NO;
             public string NO_ASSET_STORE_PACKAGES_AVAILABLE;
             public string NOTE_VRC_LAYERS_AND_LIGHTMAP_GENERATION;
             public string OK;
+            public string PACKAGE_CACHE_CANT_BE_INSIDE_PROJECT;
             public string PACKAGE_CACHE_DIRECTORY;
+            public string PACKAGE_HAS_ALREADY_BEEN_ADDED;
             public string PACKAGE_IMPORTER;
+            public string PACKAGE_WITH_SAME_PATH_ALREADY_ADDED;
             public string PLEASE_CHOOSE_VRCSDK;
             public string PLEASE_DEFINE_VALID_CACHE_DIRECTORY;
             public string PLEASE_WAIT_VRCAPI;
             public string PREFAB_REPOSITORIES;
             public string PREVIOUS;
             public string PROJECT_SETUP_OPTIONS;
-            public string PSW_PAGE_HINT_1;
-            public string PSW_PAGE_HINT_2;
-            public string PSW_PAGE_HINT_3;
-            public string PSW_PAGE_HINT_4;
-            public string PSW_PAGE_HINT_5;
+            public string PSW_PAGE_HINT_CHOOSE_VRCSDK;
+            public string PSW_PAGE_HINT_IMPORT_CUSTOM_UNITYPACKAGES;
+            public string PSW_PAGE_HINT_SETUP_OPTIONS;
+            public string PSW_PAGE_HINT_UPM_IMPORTER;
+            public string PSW_PAGE_HINT_GITHUB_IMPORTER;
+            public string PSW_PAGE_HINT_UAS_IMPORTER;
             public string PSW_REDUCE_REPOSITORIES_OR_WAIT;
             public string RECOMMENDED_COMMUNITY_TOOLS;
+            public string REMOVE;
             public string RESET_UNUSED_LIGHTING_SETTINGS_DESC;
             public string RESET_UNUSED_LIGHTING_SETTINGS;
             public string RESETS;
@@ -103,10 +112,12 @@ namespace Varneon.WorldCreatorAssistant
             public string SETUP_MODE;
             public string SETUP_OPTIONS;
             public string SOME_COMMUNITY_TOOLS_UNAVAILABLE_SDK;
+            public string SOME_WCA_FILES_INVALID_DIRECTORIES;
             public string SPECIFY_PACKAGE_CACHE_DIRECTORY_DESC;
             public string TUTORIALS;
             public string UNAVAILABLE;
             public string UNITY_ASSET_STORE;
+            public string UNITYPACKAGE_IMPORTER;
             public string UP_TO_DATE;
             public string UPDATE_AVAILABLE;
             public string UPDATE;
@@ -123,6 +134,8 @@ namespace Varneon.WorldCreatorAssistant
             public string WCA_FEATURES;
             public string WCA_FOLDER_CLEANUP;
             public string WCA_IS_UP_TO_DATE;
+            public string WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT;
+            public string WCA_NEW_VERSION_AVAILABLE;
             public string WCA_THANK_YOU_FOR_USING;
             public string WCA_THIS_EDITOR;
             public string WCA_WILL_TRY_TO_CLEAR_DIRECTORIES;

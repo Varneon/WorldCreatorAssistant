@@ -326,7 +326,7 @@ namespace Varneon.WorldCreatorAssistant
                     return PackageManager.Instance.ImportPackage(GetLatestCachedCommunityTool(repository.Name), returnVersion: true); 
                 }
 
-                return PackageManager.Instance.DownloadRepositoryLatest(packageCacheDirectory, repository.Author, repository.Name);
+                return PackageManager.Instance.DownloadAndImportLatestRepository(packageCacheDirectory, repository.Author, repository.Name);
             }
 
             return new DataStructs.ImportResponse();
@@ -445,7 +445,7 @@ namespace Varneon.WorldCreatorAssistant
                 Version latestVersion = new Version();
                 for(int i = 0; i < files.Length; i++)
                 {
-                    Version v = UtilityMethods.ParseVersionText(files[i]);
+                    Version v = UtilityMethods.ParseVersionText(Path.GetFileName(files[i]));
                     if(v > latestVersion)
                     {
                         latestVersion = v;

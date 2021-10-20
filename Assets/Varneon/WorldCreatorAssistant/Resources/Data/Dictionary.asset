@@ -15,12 +15,13 @@ MonoBehaviour:
   Languages:
   - Language: English
     Translations:
+      ADD_NEW_CUSTOM_UNITYPACKAGE: Add new custom Unitypackage
       ARE_YOU_SURE_CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS: Are you sure you want to clear
         VRC script define keywords?\n\nOnly do this if you have deleted all VRCSDK
         files and are planning to do a clean install
       ARE_YOU_SURE_CLEAR_WCA_REGISTRY_KEYS: Are you sure you want to clear WCA registry
         keys?
-      ASSET_IMPORTER: Asset Importer
+      ASSET_IMPORTER: UAS Importer
       BROWSE: Browse
       CANCEL: Cancel
       CHECK_FOR_UPDATES_GET_LATEST_VERSION: Check for updates to get the latest version
@@ -31,9 +32,9 @@ MonoBehaviour:
       CLEAN_INSTALL_VRCSDK_NOTICE: 'NOTE: When updating VRCSDK after major updates,
         it''s best to use clean install to make sure that all of the old files are
         deleted before importing'
-      CLEAN_INSTALL_WARNING: Clean install will remove all assets located in the folders
-        associated with the packages. Please avoid saving your personal assets in
-        the folders that are automatically managed by WCA
+      CLEAN_INSTALL_WARNING: Clean install will remove all assets located in the
+        folders associated with the packages. Please avoid saving your personal assets
+        in the folders that are automatically managed by WCA
       CLEAN_INSTALL: Clean install
       CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS: Clear VRC script define keywords
       CLEAR_WCA_REGISTRY_KEYS: Clear WCA registry keys
@@ -46,8 +47,8 @@ MonoBehaviour:
       DEFINE_VALID_CACHE_DIRECTORY: Please define valid directory before adding repositories
       DEPRECATED: Deprecated
       DETECTED_SDK_VARIANT: Detected SDK variant
-      DO_YOU_WANT_CHECK_UPDATES_GITHUB: Do you want to check for updates for the GitHub
-        repositories?
+      DO_YOU_WANT_CHECK_UPDATES_GITHUB: Do you want to check for updates for the
+        GitHub repositories?
       DO_YOU_WANT_CHECK_UPDATES_VRCSDK: Do you want to check for updates for VRCSDK?
       DO_YOU_WANT_CHECK_UPDATES_WCA: Do you want to check for updates for World Creator
         Assistant?
@@ -70,18 +71,26 @@ MonoBehaviour:
       IMPORTED: Imported
       IMPORTER: Importer
       INSTALLED_VERSION: Installed version
+      INVALID_PACKAGE_CACHE_DIRECTORY: Invalid Package Cache directory!
       LAST_CHECK: Last check
       LAST_VRCAPI_REQUEST: Last VRCSDK API request
       LATEST_VERSION: Latest version
       MAIN: Main
+      N_FILES_IN_INVALID_DIRECTORIES: Files are in invalid directories
+      N_FILES_HAVE_INVALID_GUID: Files have invalid GUID
       NEXT: Next
       NO: No
       NO_ASSET_STORE_PACKAGES_AVAILABLE: No Asset Store packages available
       NOTE_VRC_LAYERS_AND_LIGHTMAP_GENERATION: 'NOTE: VRC layers will be set up and
         automatic lightmap generation will be disabled automatically'
       OK: OK
+      PACKAGE_CACHE_CANT_BE_INSIDE_PROJECT: Package Cache can't be located under
+        Unity Project folder
       PACKAGE_CACHE_DIRECTORY: Package cache directory
-      PACKAGE_IMPORTER: Package Importer
+      PACKAGE_HAS_ALREADY_BEEN_ADDED: Package has already been added
+      PACKAGE_IMPORTER: UPM Importer
+      PACKAGE_WITH_SAME_PATH_ALREADY_ADDED: Package with the same path has already
+        been added to the list
       PLEASE_CHOOSE_VRCSDK: Please choose the VRCSDK you want to use
       PLEASE_DEFINE_VALID_CACHE_DIRECTORY: Please define valid package cache directory
         in the settings to access importer
@@ -90,23 +99,27 @@ MonoBehaviour:
       PREFAB_REPOSITORIES: Community Prefabs
       PREVIOUS: Previous
       PROJECT_SETUP_OPTIONS: Project Setup Options
-      PSW_PAGE_HINT_1: VRChat SDK provides all the essential components and tools
-        for creating a VRChat world and uploading it.
-      PSW_PAGE_HINT_2: Utilizing these setup options saves you valuable time during
-        the project setup as you only have to tick one box instead of setting up everything
-        manually and they will be ready after the setup is done.
-      PSW_PAGE_HINT_3: Here you can import packages from the PackageManager
-      PSW_PAGE_HINT_4: Community has created numerous useful tools to help with VRChat
-        world creation. Downloading and importing them during the setup can save a
-        lot of time and doesn't require any knowledge about GitHub or downloading
-        repositories.
-      PSW_PAGE_HINT_5: In this page you can import any downloaded packages from Unity
-        Asset Store.
+      PSW_PAGE_HINT_CHOOSE_VRCSDK: VRChat SDK provides all the essential components
+        and tools for creating a VRChat world and uploading it.
+      PSW_PAGE_HINT_IMPORT_CUSTOM_UNITYPACKAGES: Here you can add your own Unitypackages
+        for batch import during the project setup
+      PSW_PAGE_HINT_SETUP_OPTIONS: Utilizing these setup options saves you valuable
+        time during the project setup as you only have to tick one box instead of
+        setting up everything manually and they will be ready after the setup is
+        done.
+      PSW_PAGE_HINT_UPM_IMPORTER: Here you can import packages from the PackageManager
+      PSW_PAGE_HINT_GITHUB_IMPORTER: Community has created numerous useful tools
+        to help with VRChat world creation. Downloading and importing them during
+        the setup can save a lot of time and doesn't require any knowledge about
+        GitHub or downloading repositories.
+      PSW_PAGE_HINT_UAS_IMPORTER: In this page you can import any downloaded packages
+        from Unity Asset Store.
       PSW_REDUCE_REPOSITORIES_OR_WAIT: Reduce the number of repositories to import
         or wait for request limit to reset
       RECOMMENDED_COMMUNITY_TOOLS: Recommended Community Tools
-      RESET_UNUSED_LIGHTING_SETTINGS_DESC: Reset the lighting setting parameters that
-        are unused by default\n\nOptional
+      REMOVE: Remove
+      RESET_UNUSED_LIGHTING_SETTINGS_DESC: Reset the lighting setting parameters
+        that are unused by default\n\nOptional
       RESET_UNUSED_LIGHTING_SETTINGS: Reset unused lighting settings
       RESETS: Resets
       RESOURCES: Resources
@@ -128,12 +141,15 @@ MonoBehaviour:
       SETUP_OPTIONS: Setup Options
       SOME_COMMUNITY_TOOLS_UNAVAILABLE_SDK: Some community tools are disabled because
         they are only available when using VRCSDK3
+      SOME_WCA_FILES_INVALID_DIRECTORIES: Some WCA files are in invalid directories
+        or their GUID is invalid!
       SPECIFY_PACKAGE_CACHE_DIRECTORY_DESC: Specify Package Cache directory for storing
-        downloaded GitHub repositories. (Recommended to have at the root of your projects
-        folder, the cache will be shared by all projects)
+        downloaded GitHub repositories. (Recommended to have at the root of your
+        projects folder, the cache will be shared by all projects)
       TUTORIALS: Tutorials
       UNAVAILABLE: Unavailable
       UNITY_ASSET_STORE: Unity Asset Store
+      UNITYPACKAGE_IMPORTER: Unitypackage Importer
       UP_TO_DATE: Up to date
       UPDATE_AVAILABLE: Update Available
       UPDATE: Update
@@ -153,6 +169,9 @@ MonoBehaviour:
         and FAQ
       WCA_FOLDER_CLEANUP: WCA Folder Cleanup
       WCA_IS_UP_TO_DATE: WCA is up to date
+      WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT: WCA may malfunction after automatic import
+        due to WCA not being imported in it's original directory
+      WCA_NEW_VERSION_AVAILABLE: New WCA version available!
       WCA_THANK_YOU_FOR_USING: Thank you for using World Creator Assistant!
       WCA_THIS_EDITOR: This editor extension is still heavily work in progress and
         should only be used for testing purposes.

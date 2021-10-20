@@ -5,7 +5,6 @@ namespace Varneon.WorldCreatorAssistant
 {
     public class WCAData : ScriptableObject
     {
-        public bool AreVRCLayersSetup;
         public string InstalledVRCSDKVersion, LatestVRCSDKVersion;
         public bool IsVRCSDKUpdateAvailable;
         public List<DataStructs.Repository> CommunityTools = new List<DataStructs.Repository>();
