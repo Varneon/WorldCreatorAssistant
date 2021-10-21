@@ -28,7 +28,7 @@ WCA also has built-in resources and FAQ that are there for you when you need the
 
 ## Starting new project [Tutorial video on YouTube](https://www.youtube.com/watch?v=F1Tr3Nc9Rxs)
 1. Download latest WCA from [here](https://github.com/Varneon/WorldCreatorAssistant/releases/latest)
-2. Start new Unity project using `Unity 2019.4.29f1` [VRChat Docs - Currently Supported Unity Version](https://docs.vrchat.com/docs/current-unity-version)
+2. Start new Unity project using `Unity 2019.4.31f1` [VRChat Docs - Currently Supported Unity Version](https://docs.vrchat.com/docs/current-unity-version)
 3. Import WCA unitypackage to the project
 4. Open WCA Project Setup Wizard by navigating to `Varneon` > `World Creator Assistant` on your Unity editor's toolbar
 5. Proceed to configure your project as you wish and let WCA Project Setup Wizard take care of the initialization of the project
