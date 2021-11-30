@@ -14,6 +14,7 @@ namespace Varneon.WorldCreatorAssistant
             window.titleContent.text = "WCA";
 #else
             ProjectSetupWizard window = EditorWindow.GetWindow<ProjectSetupWizard>();
+            window.titleContent.image = UnityEngine.Resources.Load<Texture>("Icons/WCA");
             window.titleContent.text = "Project Setup Wizard";
 #endif
             window.minSize = new Vector2(512f, 512f);
