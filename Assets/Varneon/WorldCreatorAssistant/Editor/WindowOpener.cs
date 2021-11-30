@@ -10,7 +10,7 @@ namespace Varneon.WorldCreatorAssistant
         {
 #if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3
             WorldCreatorAssistant window = EditorWindow.GetWindow<WorldCreatorAssistant>();
-            window.titleContent.image = UnityEngine.Resources.Load<Texture>($"Icons/World_{(EditorGUIUtility.isProSkin ? "W" : "B")}");
+            window.titleContent.image = UnityEngine.Resources.Load<Texture>("Icons/WCA");
             window.titleContent.text = "WCA";
 #else
             ProjectSetupWizard window = EditorWindow.GetWindow<ProjectSetupWizard>();
