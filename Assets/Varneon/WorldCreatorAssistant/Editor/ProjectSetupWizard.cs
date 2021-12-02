@@ -31,6 +31,7 @@ namespace Varneon.WorldCreatorAssistant
         float progressBarLabelSpaceRemainder;
         float progressBarPointSpacing;
         const float ProgressBarMargin = 64f;
+        DragAndDropState dragAndDropState;
 
         private struct PSWPage
         {
@@ -48,6 +49,13 @@ namespace Varneon.WorldCreatorAssistant
         {
             Basic,
             Advanced
+        }
+
+        private enum DragAndDropState
+        {
+            None,
+            Valid,
+            Invalid
         }
 
         private void OnEnable()
@@ -397,21 +405,52 @@ namespace Varneon.WorldCreatorAssistant
 
                 if (GUILayout.Button(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, GUIStyles.FlatStandardButton))
                 {
-                    string packagePath = EditorUtility.OpenFilePanelWithFilters(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, "", new string[] { "Unitypackage", "unitypackage" });
-                    if (!string.IsNullOrEmpty(packagePath))
-                    {
-                        if (customUnitypackagePaths.Contains(packagePath)) { EditorUtility.DisplayDialog(dictionary.PACKAGE_HAS_ALREADY_BEEN_ADDED, dictionary.PACKAGE_WITH_SAME_PATH_ALREADY_ADDED, dictionary.OK); }
-                        else
-                        {
-                            customUnitypackagePaths.Add(packagePath);
-                        }
-                    }
+                    TryAddCustomUnitypackageForImport(EditorUtility.OpenFilePanelWithFilters(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, "", new string[] { "Unitypackage", "unitypackage" }));
                 }
             }
 
             GUIElements.DrawHintPanel(dictionary.PSW_PAGE_HINT_IMPORT_CUSTOM_UNITYPACKAGES);
 
             DrawNavigationFooter(NextPage, PreviousPage);
+
+            HandleFileDragAndDrop();
+        }
+
+        private void TryAddCustomUnitypackageForImport(string path)
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                if (customUnitypackagePaths.Contains(path)) { EditorUtility.DisplayDialog(dictionary.PACKAGE_HAS_ALREADY_BEEN_ADDED, dictionary.PACKAGE_WITH_SAME_PATH_ALREADY_ADDED, dictionary.OK); }
+                else { customUnitypackagePaths.Add(path); }
+            }
+        }
+
+        private void HandleFileDragAndDrop()
+        {
+            switch (Event.current.type)
+            {
+                case EventType.DragUpdated:
+                    if(dragAndDropState == DragAndDropState.None)
+                    {
+                        dragAndDropState = DragAndDrop.paths.Where(c => c.EndsWith(".unitypackage")).ToArray().Length > 0 ? DragAndDropState.Valid : DragAndDropState.Invalid;
+                    }
+                    else
+                    {
+                        DragAndDrop.visualMode = dragAndDropState == DragAndDropState.Valid ? DragAndDropVisualMode.Copy : DragAndDropVisualMode.Rejected;
+                    }
+                    Event.current.Use();
+                    return;
+                case EventType.DragPerform:
+                    foreach(string path in DragAndDrop.paths.Where(c => c.EndsWith(".unitypackage")))
+                    {
+                        TryAddCustomUnitypackageForImport(path);
+                    }
+                    Event.current.Use();
+                    return;
+                case EventType.DragExited:
+                    dragAndDropState = DragAndDropState.None;
+                    return;
+            }
         }
 
         private void DrawSetupOptionsPage()
@@ -796,7 +835,7 @@ namespace Varneon.WorldCreatorAssistant
         private void OpenWorldCreatorAssistant()
         {
             EditorWindow window = CreateInstance<WorldCreatorAssistant>();
-            window.titleContent.image = UnityEngine.Resources.Load<Texture>($"Icons/World_{(EditorGUIUtility.isProSkin ? "W" : "B")}");
+            window.titleContent.image = UnityEngine.Resources.Load<Texture>("Icons/WCA");
             window.titleContent.text = "World Creator Assistant";
             window.minSize = new Vector2(512f, 512f);
             window.Show();
