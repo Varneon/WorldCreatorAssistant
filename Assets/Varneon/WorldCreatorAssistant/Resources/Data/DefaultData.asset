@@ -73,7 +73,7 @@ MonoBehaviour:
     RequiresUdonSharp: 1
     Directories:
     - Assets/USharpVideo
-  - Author: FairlySadPanda
+  - Author: VRCBilliards
     Name: vrcbce
     Description: A pool table for VRChat SDK3 worlds. Want to play 8 Ball, 9 Ball,
       or Japanese or Korean 4 Ball? This is the prefab for you! With the power of
