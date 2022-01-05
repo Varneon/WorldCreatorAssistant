@@ -124,10 +124,11 @@ MonoBehaviour:
       RESETS: Resets
       RESOURCES: Resources
       SDK_VARIANT_NOT_DETECTED: SDK variant not detected
-      SDK2_DEPRECATION_TEXT: VRCSDK2 is considered deprecated for creation. It will
-        not receive most/any of the new features available in VRCSDK3-Worlds or VRCSDK3-Avatars.
-        It will still receive important security and maintenance patches.\n\nIf you
-        are creating new content, we strongly recommend using VRCSDK3 instead.
+      SDK2_DEPRECATION_TEXT: This should not be used for new projects. If you are
+        maintaining an old project that uses SDK2, please migrate to SDK3 as soon
+        as possible. At a later date, this download will be removed, and SDK2 uploads
+        for avatars and worlds will be locked. Do not use SDK2 and SDK3 in the same
+        project simultaneously.
       SDK2_DESCRIPTION: Older SDK based on Triggers and Actions.
       SDK3_DESCRIPTION: Brand new SDK with VRChat's own visual programming language,
         Udon.
