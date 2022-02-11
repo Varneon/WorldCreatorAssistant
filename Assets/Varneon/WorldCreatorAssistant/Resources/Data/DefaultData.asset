@@ -36,7 +36,7 @@ MonoBehaviour:
     RequiresUdonSharp: 0
     Directories:
     - Assets/VRCPrefabs/EasyQuestSwitch
-  - Author: MerlinVR
+  - Author: vrchat-community
     Name: UdonSharp
     Description: An experimental compiler for compiling C# to Udon assembly
     SDK3Only: 1
@@ -44,6 +44,14 @@ MonoBehaviour:
     Directories:
     - Assets/UdonSharp
     - Assets/Gizmos/UdonSharp
+  - Author: Varneon
+    Name: UdonExplorer
+    Description: Unity Editor extension for easily exploring all UdonBehaviours in
+      your Unity scene
+    SDK3Only: 1
+    RequiresUdonSharp: 0
+    Directories:
+    - Assets/Varneon/UdonExplorer
   - Author: orels1
     Name: UdonToolkit
     Description: Purpose-built Udon Behaviours and tools to make your own
