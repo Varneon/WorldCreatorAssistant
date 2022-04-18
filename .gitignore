@@ -4,7 +4,8 @@
 !/.gitignore
 !/.LICENCE
 !/.README.md
-!/Assets
-/Assets/*
-!/Assets/Varneon
-!/Assets/Varneon.meta
+!/Packages
+/Packages/*
+!/Packages/com.varneon.worldcreatorassistant
+/Packages/com.varneon.worldcreatorassistant/Resources/Data/WCAData.asset
+/Packages/com.varneon.worldcreatorassistant/Resources/Data/WCAData.asset.meta

@@ -1,0 +1,12 @@
+{
+  "name": "com.vrchat.worldcreatorassistant",
+  "displayName": "World Creator Assistant",
+  "version": "0.1.5",
+  "unity": "2019.4",
+  "description": "Unity Editor extension for automating VRChat world project package management.",
+  "author": {
+    "name": "Varneon",
+    "url": "https://github.com/Varneon"
+  },
+  "type": "tool"
+}
