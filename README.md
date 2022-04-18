@@ -1,3 +1,5 @@
+> # THIS IS EXPERIMENTAL UPM/VPM BRANCH FOR TESTING PACKAGE COMPATIBILITY, READ INSTALLATION INSTRUCTIONS BELOW
+
 # WorldCreatorAssistant
 Unity Editor extension for automating VRChat world project package management
 ---
@@ -26,20 +28,12 @@ WCA also has built-in resources and FAQ that are there for you when you need the
 
 # How to use World Creator Assistant
 
-## Starting new project [Tutorial video on YouTube](https://www.youtube.com/watch?v=F1Tr3Nc9Rxs)
-1. Download latest WCA from [here](https://github.com/Varneon/WorldCreatorAssistant/releases/latest)
-2. Start new Unity project using `Unity 2019.4.31f1` [VRChat Docs - Currently Supported Unity Version](https://docs.vrchat.com/docs/current-unity-version)
-3. Import WCA unitypackage to the project
-4. Open WCA Project Setup Wizard by navigating to `Varneon` > `World Creator Assistant` on your Unity editor's toolbar
-5. Proceed to configure your project as you wish and let WCA Project Setup Wizard take care of the initialization of the project
+## Starting new project
+1. Start new Unity project using `Unity 2019.4.31f1` [VRChat Docs - Currently Supported Unity Version](https://docs.vrchat.com/docs/current-unity-version)
+2. Navigate to your toolbar: `Window` > `Package Manager` > `[+]` > `Add package from git URL...` and type in: `https://github.com/Varneon/WorldCreatorAssistant.git?path=/Packages/com.varneon.worldcreatorassistant#com.varneon.worldcreatorassistant` 
+3. Open WCA Project Setup Wizard by navigating to `Varneon` > `World Creator Assistant` on your Unity editor's toolbar
+4. Proceed to configure your project as you wish and let WCA Project Setup Wizard take care of the initialization of the project
 
 ## Using WCA in existing project
-1. Download latest WCA from [here](https://github.com/Varneon/WorldCreatorAssistant/releases/latest)
-2. Import WCA unitypackage to the project
-3. Open World Creator Assistant by navigating to `Varneon` > `World Creator Assistant` on your Unity editor's toolbar
-
-## Updating World Creator Assistant using self-updater
-> ### **NOTE:** *Self-updater is not guaranteed to work if WCA's files are not under the standard directory (`Assets/Varneon/WorldCreatorAssistant`)*
-1. Go to `Settings` tab on the main window
-2. Click `Check For Updates`
-3. If new version is available, click `Update`
+1. Navigate to your toolbar: `Window` > `Package Manager` > `[+]` > `Add package from git URL...` and type in: `https://github.com/Varneon/WorldCreatorAssistant.git?path=/Packages/com.varneon.worldcreatorassistant#com.varneon.worldcreatorassistant` 
+2. Open World Creator Assistant by navigating to `Varneon` > `World Creator Assistant` on your Unity editor's toolbar
