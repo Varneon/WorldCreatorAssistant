@@ -18,6 +18,12 @@ namespace Varneon.WorldCreatorAssistant
         internal static GUIStyle UpdateLabel { get; }
         internal static GUIStyle VersionLabel { get; }
         internal static GUIStyle WrappedText { get; }
+        internal static Texture IconCheckmark { get; }
+        internal static Texture IconDownload { get; }
+        internal static Texture IconGitHub { get; }
+        internal static Texture IconImport { get; }
+        internal static Texture IconWeb { get; }
+        internal static Texture IconCopy { get; }
 
         private static Texture2D ColorTexture(Color color)
         {
@@ -32,6 +38,15 @@ namespace Varneon.WorldCreatorAssistant
 
         static GUIResources()
         {
+            string iconVariant = EditorGUIUtility.isProSkin ? "W" : "B";
+
+            IconCheckmark = UnityEngine.Resources.Load<Texture>("Icons/Checkmark");
+            IconDownload = UnityEngine.Resources.Load<Texture>($"Icons/Download_{iconVariant}");
+            IconGitHub = UnityEngine.Resources.Load<Texture>($"Icons/GitHub_{iconVariant}");
+            IconImport = UnityEngine.Resources.Load<Texture>($"Icons/Import_{iconVariant}");
+            IconWeb = UnityEngine.Resources.Load<Texture>($"Icons/Web_{iconVariant}");
+            IconCopy = UnityEngine.Resources.Load<Texture>($"Icons/Copy_{iconVariant}");
+
             BlockHeaderButton = new GUIStyle()
             {
                 active = { textColor = (EditorGUIUtility.isProSkin ? new Color(0.2f, 0.65f, 1f) : new Color(0f, 0f, 0.75f)), background = Texture2D.blackTexture },

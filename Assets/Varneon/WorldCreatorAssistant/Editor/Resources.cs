@@ -8,7 +8,6 @@ namespace Varneon.WorldCreatorAssistant
         bool expandResources, expandQuestions;
         Dictionary.Translations dictionary;
         int selectedQuestion = -1, selectedResource = -1;
-        internal Texture iconWeb, iconCopy;
         readonly ResourceData resourceData;
 
         internal void Draw()
@@ -131,7 +130,7 @@ namespace Varneon.WorldCreatorAssistant
             {
                 Application.OpenURL(url);
             }
-            else if (GUILayout.Button(new GUIContent(dictionary.COPY_LINK, iconCopy), GUIResources.FlatStandardButton, new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(20) }))
+            else if (GUILayout.Button(new GUIContent(dictionary.COPY_LINK, GUIResources.IconCopy), GUIResources.FlatStandardButton, new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(20) }))
             {
                 EditorGUIUtility.systemCopyBuffer = url;
             }

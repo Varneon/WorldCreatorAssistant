@@ -49,15 +49,6 @@ namespace Varneon.WorldCreatorAssistant
             resources = new Resources();
 
             LoadActiveLanguage();
-
-            string iconVariant = EditorGUIUtility.isProSkin ? "W" : "B";
-
-            importer.iconCheckmark = UnityEngine.Resources.Load<Texture>("Icons/Checkmark");
-            importer.iconDownload = UnityEngine.Resources.Load<Texture>($"Icons/Download_{iconVariant}");
-            importer.iconGitHub = UnityEngine.Resources.Load<Texture>($"Icons/GitHub_{iconVariant}");
-            importer.iconImport = UnityEngine.Resources.Load<Texture>($"Icons/Import_{iconVariant}");
-            resources.iconWeb = UnityEngine.Resources.Load<Texture>($"Icons/Web_{iconVariant}");
-            resources.iconCopy = UnityEngine.Resources.Load<Texture>($"Icons/Copy_{iconVariant}");
         }
 
         private void OnDestroy()

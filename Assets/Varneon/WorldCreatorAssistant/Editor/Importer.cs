@@ -14,7 +14,6 @@ namespace Varneon.WorldCreatorAssistant
         bool cleanInstall;
         bool sdkExpanded, prefabsExpanded, toolsExpanded;
         DataStructs.SDKVariant installedSDKVariant = DataStructs.SDKVariant.None;
-        internal Texture iconCheckmark, iconDownload, iconGitHub, iconImport;
         readonly bool udonSharpImported;
         readonly List<bool> communityToolsExpanded, prefabRepositoriesExpanded;
         string packageCacheDirectory;
@@ -262,7 +261,7 @@ namespace Varneon.WorldCreatorAssistant
 
                 GUILayout.BeginHorizontal();
                 GUILayout.Label(repository.Description, GUIResources.WrappedText);
-                if (GUILayout.Button(new GUIContent(iconGitHub, "GitHub"), GUIStyle.none, GUILayout.MaxWidth(40)))
+                if (GUILayout.Button(new GUIContent(GUIResources.IconGitHub, "GitHub"), GUIStyle.none, GUILayout.MaxWidth(40)))
                 {
                     Application.OpenURL(url);
                 }
@@ -276,14 +275,14 @@ namespace Varneon.WorldCreatorAssistant
                     {
                         if (!cleanInstall && repository.Imported && !repository.UpdateAvailable && !repository.VersionFileMissing)
                         {
-                            GUILayout.Box(new GUIContent(iconCheckmark, dictionary.UP_TO_DATE), GUIStyle.none, GUILayout.MaxWidth(40));
+                            GUILayout.Box(new GUIContent(GUIResources.IconCheckmark, dictionary.UP_TO_DATE), GUIStyle.none, GUILayout.MaxWidth(40));
                         }
-                        else if (repository.LatestCached && GUILayout.Button(new GUIContent(iconImport, dictionary.IMPORT), GUIStyle.none, GUILayout.MaxWidth(40)))
+                        else if (repository.LatestCached && GUILayout.Button(new GUIContent(GUIResources.IconImport, dictionary.IMPORT), GUIStyle.none, GUILayout.MaxWidth(40)))
                         {
                             DataStructs.ImportResponse response = ImportRepository(repository, true);
                             if (response.Succeeded) { repository.ImportedVersion = response.Version; }
                         }
-                        else if (!repository.LatestCached && GUILayout.Button(new GUIContent(iconDownload, dictionary.DOWNLOAD), GUIStyle.none, GUILayout.MaxWidth(40)))
+                        else if (!repository.LatestCached && GUILayout.Button(new GUIContent(GUIResources.IconDownload, dictionary.DOWNLOAD), GUIStyle.none, GUILayout.MaxWidth(40)))
                         {
                             DataStructs.GitHubApiStatus gitHubApiStatus = PackageManager.Instance.GetGitHubApiRateLimit();
                             Debug.Log($"{LogPrefix}[<color=#999999>GitHub API</color>]:{gitHubApiStatus.RequestsRemaining}/{gitHubApiStatus.RequestLimit} {dictionary.USES_LEFT} | {dictionary.RESETS}: {gitHubApiStatus.ResetDateTime.ToLocalTime():MMMM dd, yyyy | h:mm:ss tt}");
