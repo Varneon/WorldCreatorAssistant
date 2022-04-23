@@ -26,7 +26,7 @@ namespace Varneon.WorldCreatorAssistant
         {
             if (!isPackageCacheValid) 
             {
-                GUILayout.Label(dictionary.PLEASE_DEFINE_VALID_CACHE_DIRECTORY, GUIStyles.CenteredHeaderLabel);
+                GUILayout.Label(dictionary.PLEASE_DEFINE_VALID_CACHE_DIRECTORY, GUIResources.CenteredHeaderLabel);
 
                 return; 
             }
@@ -63,7 +63,7 @@ namespace Varneon.WorldCreatorAssistant
 
             EditorGUI.BeginDisabledGroup(!wcaData.IsVRCSDKUpdateAvailable);
 #if VRC_SDK_VRCSDK2
-            if (GUILayout.Button($"{dictionary.UPDATE} VRCSDK2", GUIStyles.FlatStandardButton))
+            if (GUILayout.Button($"{dictionary.UPDATE} VRCSDK2", GUIResources.FlatStandardButton))
             {
                 if (EditorUtility.DisplayDialog($"{dictionary.UPDATE} VRCSDK?", dictionary.DO_YOU_WANT_TO_UPDATE_VRCSDK, dictionary.YES, dictionary.CANCEL))
                 {
@@ -71,7 +71,7 @@ namespace Varneon.WorldCreatorAssistant
                 }
             }
 #elif VRC_SDK_VRCSDK3
-            if (GUILayout.Button($"{dictionary.UPDATE} VRCSDK3", GUIStyles.FlatStandardButton))
+            if (GUILayout.Button($"{dictionary.UPDATE} VRCSDK3", GUIResources.FlatStandardButton))
             {
                 if (EditorUtility.DisplayDialog($"{dictionary.UPDATE} VRCSDK?", dictionary.DO_YOU_WANT_TO_UPDATE_VRCSDK, dictionary.YES, dictionary.CANCEL))
                 {
@@ -79,7 +79,7 @@ namespace Varneon.WorldCreatorAssistant
                 }
             }
             /*
-            else if (GUILayout.Button("Download / Update AV3", GUIStyles.FlatStandardButton))
+            else if (GUILayout.Button("Download / Update AV3", GUIResources.FlatStandardButton))
             {
                 if (EditorUtility.DisplayDialog("Download / Update AV3?", "Do you want to download / update VRChat Avatar 3.0 SDK?", "Yes", "Cancel"))
                 {
@@ -222,7 +222,7 @@ namespace Varneon.WorldCreatorAssistant
             string url = UtilityMethods.GitHubPageURL(repository.Author, repository.Name);
             Rect rect = EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             GUILayout.BeginHorizontal();
-            if(GUILayout.Button($"{repository.Name} | {repository.Author}", GUIStyles.BlockHeaderButton))
+            if(GUILayout.Button($"{repository.Name} | {repository.Author}", GUIResources.BlockHeaderButton))
             {
                 expandedList[index] ^= true;
             }
@@ -230,12 +230,12 @@ namespace Varneon.WorldCreatorAssistant
 #if VRC_SDK_VRCSDK2
             if (repository.SDK3Only)
             {
-                GUILayout.Label("VRCSDK3 Only", GUIStyles.VersionLabel, GUILayout.MaxWidth(120));
+                GUILayout.Label("VRCSDK3 Only", GUIResources.VersionLabel, GUILayout.MaxWidth(120));
             }
 #elif VRC_SDK_VRCSDK3
             if (repository.RequiresUdonSharp && !udonSharpImported)
             {
-                GUILayout.Label("Requires UdonSharp", GUIStyles.VersionLabel, GUILayout.MaxWidth(120));
+                GUILayout.Label("Requires UdonSharp", GUIResources.VersionLabel, GUILayout.MaxWidth(120));
             }
 #endif
 
@@ -245,13 +245,13 @@ namespace Varneon.WorldCreatorAssistant
                 if (repository.Imported && repository.UpdateAvailable)
                 {
                     GUI.color = Color.green;
-                    GUILayout.Box(new GUIContent($"{dictionary.UPDATE_AVAILABLE} | {(repository.LatestCached ? repository.DownloadedVersion : repository.CurrentVersion)}"), GUIStyles.UpdateLabel);
+                    GUILayout.Box(new GUIContent($"{dictionary.UPDATE_AVAILABLE} | {(repository.LatestCached ? repository.DownloadedVersion : repository.CurrentVersion)}"), GUIResources.UpdateLabel);
                     GUI.color = Color.white;
                 }
 
                 //Don't worry about this, I'll fix it at some point
                 string statusLabel = repository.Imported ? $"{dictionary.IMPORTED}: {(repository.ImportedVersion == "0.0.0" ? $"{dictionary.VERSION_UNAVAILABLE} | {dictionary.DOWNLOADED}: {repository.DownloadedVersion}" : repository.ImportedVersion)}" : (repository.Downloaded ? $"{dictionary.DOWNLOADED}: {repository.DownloadedVersion}" : string.Empty);
-                GUILayout.Label(statusLabel, GUIStyles.VersionLabel, GUILayout.MinHeight(20));
+                GUILayout.Label(statusLabel, GUIResources.VersionLabel, GUILayout.MinHeight(20));
             }
 
             GUILayout.EndHorizontal();
@@ -261,7 +261,7 @@ namespace Varneon.WorldCreatorAssistant
                 EditorGUI.DrawRect(new Rect(rect.x, rect.y + 30, rect.width, 1), (EditorGUIUtility.isProSkin ? new Color(0.15f, 0.15f, 0.15f) : Color.grey));
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label(repository.Description, GUIStyles.WrappedText);
+                GUILayout.Label(repository.Description, GUIResources.WrappedText);
                 if (GUILayout.Button(new GUIContent(iconGitHub, "GitHub"), GUIStyle.none, GUILayout.MaxWidth(40)))
                 {
                     Application.OpenURL(url);

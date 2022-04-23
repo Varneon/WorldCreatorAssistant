@@ -14,7 +14,7 @@ namespace Varneon.WorldCreatorAssistant
         internal void Draw()
         {
             GUILayout.BeginVertical(EditorStyles.helpBox);
-            if (GUILayout.Button(dictionary.USEFUL_LINKS, GUIStyles.BlockHeaderButton))
+            if (GUILayout.Button(dictionary.USEFUL_LINKS, GUIResources.BlockHeaderButton))
             {
                 expandResources ^= true;
             }
@@ -29,7 +29,7 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical(EditorStyles.helpBox);
-            if (GUILayout.Button(dictionary.FREQUENTLY_ASKED_QUESTIONS, GUIStyles.BlockHeaderButton))
+            if (GUILayout.Button(dictionary.FREQUENTLY_ASKED_QUESTIONS, GUIResources.BlockHeaderButton))
             {
                 expandQuestions ^= true;
             }
@@ -66,19 +66,19 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.BeginHorizontal();
 
             GUI.color = isThisResourceSelected ? new Color(0.2f, 0.65f, 1f) : Color.white;
-            if (GUILayout.Button(resource.Name, GUIStyles.BlockHeaderButton))
+            if (GUILayout.Button(resource.Name, GUIResources.BlockHeaderButton))
             {
                 selectedResource = (selectedResource == index) ? -1 : index;
             }
             GUI.color = Color.white;
 
-            GUILayout.Label(resource.Type.ToString(), GUIStyles.ResourceTypeText, GUILayout.MaxWidth(100));
+            GUILayout.Label(resource.Type.ToString(), GUIResources.ResourceTypeText, GUILayout.MaxWidth(100));
             GUILayout.EndHorizontal();
 
             if (isThisResourceSelected)
             {
                 EditorGUI.DrawRect(new Rect(rect.x, rect.y + 30, rect.width, 1), (EditorGUIUtility.isProSkin ? new Color(0.15f, 0.15f, 0.15f) : Color.grey));
-                GUILayout.Label(resource.Description, GUIStyles.WrappedText);
+                GUILayout.Label(resource.Description, GUIResources.WrappedText);
                 if (resource.URL.Length > 0)
                 {
                     DrawBlockURL(resource.URL);
@@ -96,7 +96,7 @@ namespace Varneon.WorldCreatorAssistant
             GUI.color = Color.white;
 
             GUI.color = isThisQuestionSelected ? new Color(0.2f, 0.65f, 1f) : Color.white;
-            if (GUILayout.Button(question.Question, GUIStyles.BlockHeaderButton))
+            if (GUILayout.Button(question.Question, GUIResources.BlockHeaderButton))
             {
                 selectedQuestion = (selectedQuestion == index) ? -1 : index;
             }
@@ -112,7 +112,7 @@ namespace Varneon.WorldCreatorAssistant
 
                     DataStructs.FAQAnswer answer = question.Answers[i];
 
-                    GUILayout.Label(answer.Description, GUIStyles.WrappedText);
+                    GUILayout.Label(answer.Description, GUIResources.WrappedText);
 
                     if (!string.IsNullOrEmpty(answer.URL))
                     {
@@ -127,11 +127,11 @@ namespace Varneon.WorldCreatorAssistant
         private void DrawBlockURL(string url)
         {
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(url, GUIStyles.ButtonHyperlink))
+            if (GUILayout.Button(url, GUIResources.ButtonHyperlink))
             {
                 Application.OpenURL(url);
             }
-            else if (GUILayout.Button(new GUIContent(dictionary.COPY_LINK, iconCopy), GUIStyles.FlatStandardButton, new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(20) }))
+            else if (GUILayout.Button(new GUIContent(dictionary.COPY_LINK, iconCopy), GUIResources.FlatStandardButton, new GUILayoutOption[] { GUILayout.MaxWidth(100), GUILayout.MaxHeight(20) }))
             {
                 EditorGUIUtility.systemCopyBuffer = url;
             }

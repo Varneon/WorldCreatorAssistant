@@ -13,13 +13,13 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(foldoutText, GUIStyles.BlockHeaderButton))
+            if (GUILayout.Button(foldoutText, GUIResources.BlockHeaderButton))
             {
                 open ^= true;
             }
             if (open)
             {
-                if (contextButtonAction is Action && GUILayout.Button(new GUIContent(contextButtonText), GUIStyles.FlatStandardButton, GUILayout.Width(120)))
+                if (contextButtonAction is Action && GUILayout.Button(new GUIContent(contextButtonText), GUIResources.FlatStandardButton, GUILayout.Width(120)))
                 {
                     contextButtonAction.Invoke();
                 }
@@ -40,14 +40,14 @@ namespace Varneon.WorldCreatorAssistant
 
         internal static bool BrowseButton(string text)
         {
-            return GUILayout.Button(text, GUIStyles.FlatStandardButton, BrowseButtonGUILayoutOptions);
+            return GUILayout.Button(text, GUIResources.FlatStandardButton, BrowseButtonGUILayoutOptions);
         }
 
         internal static void DrawWarningBox(string text)
         {
             GUI.color = Color.yellow;
             EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
-            GUILayout.Label(text, GUIStyles.WrappedText);
+            GUILayout.Label(text, GUIResources.WrappedText);
             EditorGUILayout.EndHorizontal();
             GUI.color = Color.white;
         }
@@ -56,7 +56,7 @@ namespace Varneon.WorldCreatorAssistant
         {
             GUI.color = new Color(0.5f, 0.75f, 1f);
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
-            GUILayout.Label(text, GUIStyles.WrappedText);
+            GUILayout.Label(text, GUIResources.WrappedText);
             GUILayout.EndHorizontal();
             GUI.color = Color.white;
         }
@@ -65,7 +65,7 @@ namespace Varneon.WorldCreatorAssistant
         {
             GUI.color = Color.green;
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
-            GUILayout.Label(text, GUIStyles.WrappedText);
+            GUILayout.Label(text, GUIResources.WrappedText);
             GUILayout.EndHorizontal();
             GUI.color = Color.white;
         }

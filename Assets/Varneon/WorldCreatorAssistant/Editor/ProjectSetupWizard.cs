@@ -109,13 +109,13 @@ namespace Varneon.WorldCreatorAssistant
                 if(i == 0 || i == pageCount - 1)
                 {
                     if (i == pageCount - 1) { GUILayout.Space(progressBarLabelSpaceRemainder); }
-                    GUILayout.Label(pages[i].Name, page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(ProgressBarMargin * 2f));
+                    GUILayout.Label(pages[i].Name, page == i ? GUIResources.CenteredBoldLabel : GUIResources.CenteredLabel, GUILayout.Width(ProgressBarMargin * 2f));
                     if(i < pageCount - 1) { GUILayout.Space(progressBarLabelSpaceRemainder); }
                     else if(pageCount == 3 && i == 0) { GUILayout.FlexibleSpace(); }
                 }
                 else
                 {
-                    GUILayout.Label(pages[i].Name, page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(progressBarPointSpacing * 2f));
+                    GUILayout.Label(pages[i].Name, page == i ? GUIResources.CenteredBoldLabel : GUIResources.CenteredLabel, GUILayout.Width(progressBarPointSpacing * 2f));
                     if (i == pageCount - 2) { GUILayout.Space(ProgressBarMargin); }
                 }
                 
@@ -151,11 +151,11 @@ namespace Varneon.WorldCreatorAssistant
                 if (i == pageCount - 1)
                 {
                     GUILayout.Space(progressBarLabelSpaceRemainder);
-                    GUILayout.Label(pages[i].Name, page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(ProgressBarMargin * 2f));
+                    GUILayout.Label(pages[i].Name, page == i ? GUIResources.CenteredBoldLabel : GUIResources.CenteredLabel, GUILayout.Width(ProgressBarMargin * 2f));
                 }
                 else
                 {
-                    GUILayout.Label(pages[i].Name, page == i ? GUIStyles.CenteredBoldLabel : GUIStyles.CenteredLabel, GUILayout.Width(progressBarPointSpacing * 2f));
+                    GUILayout.Label(pages[i].Name, page == i ? GUIResources.CenteredBoldLabel : GUIResources.CenteredLabel, GUILayout.Width(progressBarPointSpacing * 2f));
                     if (i == pageCount - 2) { GUILayout.Space(ProgressBarMargin); }
                 }
 
@@ -203,7 +203,7 @@ namespace Varneon.WorldCreatorAssistant
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical(EditorStyles.helpBox, GUILayout.Width(position.width / 2f - 10f));
 
-            GUILayout.Label("VRCSDK2", GUIStyles.CenteredHeaderLabel);
+            GUILayout.Label("VRCSDK2", GUIResources.CenteredHeaderLabel);
 
             if (selectedSDK == DataStructs.SDKVariant.SDK2)
             {
@@ -213,11 +213,11 @@ namespace Varneon.WorldCreatorAssistant
 #else
                 GUILayout.BeginHorizontal(EditorStyles.helpBox, GUILayout.MinHeight(29));
 #endif
-                GUILayout.Label(dictionary.SELECTED, GUIStyles.CenteredLabel, GUILayout.MinHeight(22));
+                GUILayout.Label(dictionary.SELECTED, GUIResources.CenteredLabel, GUILayout.MinHeight(22));
                 GUILayout.EndHorizontal();
                 GUI.color = Color.white;
             }
-            else if (GUILayout.Button(dictionary.SELECT, GUIStyles.FlatStandardButton, GUILayout.MinHeight(30)))
+            else if (GUILayout.Button(dictionary.SELECT, GUIResources.FlatStandardButton, GUILayout.MinHeight(30)))
             {
                 ResetSDKInfo();
                 selectedSDK = DataStructs.SDKVariant.SDK2;
@@ -240,7 +240,7 @@ namespace Varneon.WorldCreatorAssistant
 
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
 
-            GUILayout.Label(new GUIContent(dictionary.DEPRECATED, dictionary.SDK2_DEPRECATION_TEXT), GUIStyles.CenteredLabel);
+            GUILayout.Label(new GUIContent(dictionary.DEPRECATED, dictionary.SDK2_DEPRECATION_TEXT), GUIResources.CenteredLabel);
 
             GUILayout.EndHorizontal();
 
@@ -252,7 +252,7 @@ namespace Varneon.WorldCreatorAssistant
 #region SDK3-Worlds
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
-            GUILayout.Label("VRCSDK3-Worlds", GUIStyles.CenteredHeaderLabel);
+            GUILayout.Label("VRCSDK3-Worlds", GUIResources.CenteredHeaderLabel);
 
             if (selectedSDK == DataStructs.SDKVariant.SDK3Worlds)
             {
@@ -262,11 +262,11 @@ namespace Varneon.WorldCreatorAssistant
 #else
                 GUILayout.BeginHorizontal(EditorStyles.helpBox, GUILayout.MinHeight(29));
 #endif
-                GUILayout.Label(dictionary.SELECTED, GUIStyles.CenteredLabel, GUILayout.MinHeight(22));
+                GUILayout.Label(dictionary.SELECTED, GUIResources.CenteredLabel, GUILayout.MinHeight(22));
                 GUILayout.EndHorizontal();
                 GUI.color = Color.white;
             }
-            else if (GUILayout.Button(dictionary.SELECT, GUIStyles.FlatStandardButton, GUILayout.MinHeight(30)))
+            else if (GUILayout.Button(dictionary.SELECT, GUIResources.FlatStandardButton, GUILayout.MinHeight(30)))
             {
                 ResetSDKInfo();
                 selectedSDK = DataStructs.SDKVariant.SDK3Worlds;
@@ -293,11 +293,11 @@ namespace Varneon.WorldCreatorAssistant
 #region Links
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button(new GUIContent(dictionary.VRC_DOCUMENTATION, "https://docs.vrchat.com/docs/choosing-your-sdk"), GUIStyles.FlatStandardButton, GUILayout.Width(position.width / 2f - 10f)))
+            if (GUILayout.Button(new GUIContent(dictionary.VRC_DOCUMENTATION, "https://docs.vrchat.com/docs/choosing-your-sdk"), GUIResources.FlatStandardButton, GUILayout.Width(position.width / 2f - 10f)))
             {
                 Application.OpenURL("https://docs.vrchat.com/docs/choosing-your-sdk");
             }
-            else if (GUILayout.Button(new GUIContent(dictionary.VRC_DOWNLOAD_PAGE, "https://vrchat.com/home/download"), GUIStyles.FlatStandardButton))
+            else if (GUILayout.Button(new GUIContent(dictionary.VRC_DOWNLOAD_PAGE, "https://vrchat.com/home/download"), GUIResources.FlatStandardButton))
             {
                 Application.OpenURL("https://vrchat.com/home/download");
             }
@@ -309,7 +309,7 @@ namespace Varneon.WorldCreatorAssistant
 
             if(setupMode == SetupMode.Advanced)
             {
-                GUILayout.Label("- OR -", GUIStyles.CenteredHeaderLabel);
+                GUILayout.Label("- OR -", GUIResources.CenteredHeaderLabel);
 
                 DrawCustomSDKField();
             }
@@ -392,9 +392,9 @@ namespace Varneon.WorldCreatorAssistant
                 {
                     using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
                     {
-                        GUILayout.Label(customUnitypackagePaths[i], GUIStyles.WrappedText);
+                        GUILayout.Label(customUnitypackagePaths[i], GUIResources.WrappedText);
 
-                        if (GUILayout.Button(dictionary.REMOVE, GUIStyles.FlatStandardButton))
+                        if (GUILayout.Button(dictionary.REMOVE, GUIResources.FlatStandardButton))
                         {
                             customUnitypackagePaths.RemoveAt(i);
                         }
@@ -403,7 +403,7 @@ namespace Varneon.WorldCreatorAssistant
 
                 EditorGUILayout.EndScrollView();
 
-                if (GUILayout.Button(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, GUIStyles.FlatStandardButton))
+                if (GUILayout.Button(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, GUIResources.FlatStandardButton))
                 {
                     TryAddCustomUnitypackageForImport(EditorUtility.OpenFilePanelWithFilters(dictionary.ADD_NEW_CUSTOM_UNITYPACKAGE, "", new string[] { "Unitypackage", "unitypackage" }));
                 }
@@ -599,8 +599,8 @@ namespace Varneon.WorldCreatorAssistant
                         wcaData.DownloadedUASPackages[i].Name,
                         GUILayout.Width(position.width / 2)
                         );
-                    GUILayout.Label(wcaData.DownloadedUASPackages[i].Author, GUIStyles.LeftGreyLabel, GUILayout.Height(20));
-                    GUILayout.Label($"{UtilityMethods.ParseFileSize(wcaData.DownloadedUASPackages[i].Size)}", GUIStyles.VersionLabel);
+                    GUILayout.Label(wcaData.DownloadedUASPackages[i].Author, GUIResources.LeftGreyLabel, GUILayout.Height(20));
+                    GUILayout.Label($"{UtilityMethods.ParseFileSize(wcaData.DownloadedUASPackages[i].Size)}", GUIResources.VersionLabel);
                     GUILayout.EndHorizontal();
                 }
             }
@@ -622,13 +622,13 @@ namespace Varneon.WorldCreatorAssistant
         {
             GUILayout.FlexibleSpace();
             GUILayout.BeginHorizontal();
-            if (prev != null && GUILayout.Button(dictionary.PREVIOUS, GUIStyles.FlatStandardButton, new GUILayoutOption[] { GUILayout.Width(position.width / 4), GUILayout.Height(22) }))
+            if (prev != null && GUILayout.Button(dictionary.PREVIOUS, GUIResources.FlatStandardButton, new GUILayoutOption[] { GUILayout.Width(position.width / 4), GUILayout.Height(22) }))
             {
                 prev();
             }
             GUILayout.FlexibleSpace();
             EditorGUI.BeginDisabledGroup(nextDisabled);
-            if (GUILayout.Button(string.IsNullOrEmpty(nextText) ? dictionary.NEXT : nextText, GUIStyles.FlatStandardButton, new GUILayoutOption[] { GUILayout.Width(position.width / 4), GUILayout.Height(22) }))
+            if (GUILayout.Button(string.IsNullOrEmpty(nextText) ? dictionary.NEXT : nextText, GUIResources.FlatStandardButton, new GUILayoutOption[] { GUILayout.Width(position.width / 4), GUILayout.Height(22) }))
             {
                 next();
             }

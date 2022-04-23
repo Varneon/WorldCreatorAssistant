@@ -69,7 +69,7 @@ namespace Varneon.WorldCreatorAssistant
         private void OnGUI()
         {
             GUI.color = new Color(0.65f, 0.65f, 0.65f);
-            pageNum = GUILayout.Toolbar(pageNum, pages, GUIStyles.HeaderPageSelection, GUILayout.Width(position.width));
+            pageNum = GUILayout.Toolbar(pageNum, pages, GUIResources.HeaderPageSelection, GUILayout.Width(position.width));
             GUI.color = Color.white;
 
             EditorGUILayout.BeginHorizontal();
@@ -82,7 +82,7 @@ namespace Varneon.WorldCreatorAssistant
                     DrawMainPage();
                     break;
                 case Page.Tutorials:
-                    GUILayout.Label(dictionary.COMING_SOON, GUIStyles.CenteredHeaderLabel);
+                    GUILayout.Label(dictionary.COMING_SOON, GUIResources.CenteredHeaderLabel);
                     //TODO Create tutorial framework
                     break;
                 case Page.Importer:
@@ -130,7 +130,7 @@ namespace Varneon.WorldCreatorAssistant
         private void DrawMainPage()
         {
             EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
-            GUILayout.Label(dictionary.WCA_THANK_YOU_FOR_USING, GUIStyles.CenteredHeaderLabel);
+            GUILayout.Label(dictionary.WCA_THANK_YOU_FOR_USING, GUIResources.CenteredHeaderLabel);
             EditorGUILayout.EndHorizontal();
             GUILayout.Label(dictionary.WCA_THIS_EDITOR, EditorStyles.wordWrappedLabel);
             GUILayout.Space(10);
@@ -149,26 +149,26 @@ namespace Varneon.WorldCreatorAssistant
             switch (wcaUpdateStatus)
             {
                 case DataStructs.UpdateCheckStatus.Unchecked:
-                    if(GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
+                    if(GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
                     break;
                 case DataStructs.UpdateCheckStatus.UpdateAvailable:
                     wcaCleanInstall = GUILayout.Toggle(wcaCleanInstall, dictionary.CLEAN_INSTALL, GUILayout.ExpandWidth(false));
-                    if (GUILayout.Button(dictionary.UPDATE, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions)) { UpdateWCA(); }
+                    if (GUILayout.Button(dictionary.UPDATE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { UpdateWCA(); }
                     break;
                 case DataStructs.UpdateCheckStatus.VersionFileMissing:
                     using (new EditorGUI.DisabledGroupScope(true))
                     {
-                        GUILayout.Button(dictionary.VERSION_UNAVAILABLE, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions);
+                        GUILayout.Button(dictionary.VERSION_UNAVAILABLE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions);
                     }
                     break;
                 case DataStructs.UpdateCheckStatus.UpToDate:
                     using (new EditorGUI.DisabledGroupScope(true))
                     {
-                        GUILayout.Button(dictionary.UP_TO_DATE, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions);
+                        GUILayout.Button(dictionary.UP_TO_DATE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions);
                     }
                     break;
                 case DataStructs.UpdateCheckStatus.CouldNotFetchRelease:
-                    if (GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIStyles.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
+                    if (GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
                     break;
             }
             GUILayout.EndHorizontal();
@@ -219,7 +219,7 @@ namespace Varneon.WorldCreatorAssistant
             if (showDangerZoneSettings)
             {
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(dictionary.CLEAR_WCA_REGISTRY_KEYS, GUIStyles.FlatStandardButton))
+                if (GUILayout.Button(dictionary.CLEAR_WCA_REGISTRY_KEYS, GUIResources.FlatStandardButton))
                 {
                     if (EditorUtility.DisplayDialog($"{dictionary.CLEAR_WCA_REGISTRY_KEYS}?", dictionary.ARE_YOU_SURE_CLEAR_WCA_REGISTRY_KEYS, dictionary.YES, dictionary.CANCEL))
                     {
@@ -228,7 +228,7 @@ namespace Varneon.WorldCreatorAssistant
                         UtilityMethods.DeleteRegistryKey(EditorPreferenceKeys.Language);
                     }
                 }
-                else if (GUILayout.Button(dictionary.CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS, GUIStyles.FlatStandardButton))
+                else if (GUILayout.Button(dictionary.CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS, GUIResources.FlatStandardButton))
                 {
                     if (EditorUtility.DisplayDialog($"{dictionary.CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS}?", Regex.Unescape(dictionary.ARE_YOU_SURE_CLEAR_VRC_SCRIPT_DEFINE_KEYWORDS), dictionary.YES, dictionary.CANCEL))
                     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Varneon.WorldCreatorAssistant
 {
-    internal static class GUIStyles
+    internal static class GUIResources
     {
         internal static GUIStyle BlockHeaderButton { get; }
         internal static GUIStyle ButtonHyperlink { get; }
@@ -30,7 +30,7 @@ namespace Varneon.WorldCreatorAssistant
             return tex;
         }
 
-        static GUIStyles()
+        static GUIResources()
         {
             BlockHeaderButton = new GUIStyle()
             {
