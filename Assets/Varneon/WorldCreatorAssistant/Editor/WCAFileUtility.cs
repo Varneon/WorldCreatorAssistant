@@ -19,7 +19,7 @@ namespace Varneon.WorldCreatorAssistant
             new FileDefinition("DictionaryLoader.cs", "b3f2c2cf712a02a4e93edb1044cf14a7"),
             new FileDefinition("EditorPreferenceKeys.cs", "1121866af2e203943b6e0d68952fd1fe"),
             new FileDefinition("GUIElements.cs", "999613815213d7048971c40be3612315"),
-            new FileDefinition("GUIResources.cs", "a8225749c7c27b649840c0df37b4f548"),
+            new FileDefinition("GUIResources.cs", "ca241dbf59a18ca40b80633dbf022363"),
             new FileDefinition("Importer.cs", "6acd73af308a7dd448f2d1114f6007d4"),
             new FileDefinition("IncorrectUnityEditorVersionPrompt.cs", "53ad0a89ac899054cbcb0dfed3792181"),
             new FileDefinition("PackageManager.cs", "093db119226359b42be2884146bbefc9"),
