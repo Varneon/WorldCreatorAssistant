@@ -249,16 +249,13 @@ namespace Varneon.WorldCreatorAssistant
         {
             WCAData wcaData = UnityEngine.Resources.Load<WCAData>("Data/WCAData");
 
-            if (wcaData != null)
-            {
-                UpdateWCAData(wcaData);
+            if(wcaData == null) { throw new NullReferenceException("WCAData.asset is missing! Please re-import WCA to fix the issue!"); }
 
-                SaveAsset(wcaData);
+            UpdateWCAData(wcaData);
 
-                return wcaData;
-            }
+            SaveAsset(wcaData);
 
-            return CreateWCAData();
+            return wcaData;
         }
 
         private static void UpdateWCAData(WCAData wcaData)
@@ -320,27 +317,6 @@ namespace Varneon.WorldCreatorAssistant
             }
 
             return true;
-        }
-
-        private static WCAData CreateWCAData()
-        {
-            WCAData wcaData = ScriptableObject.CreateInstance<WCAData>();
-
-            UpdateWCAData(wcaData);
-
-            DefaultData defaultData = UnityEngine.Resources.Load<DefaultData>("Data/DefaultData");
-
-            string dataPath = AssetDatabase.GetAssetPath(defaultData);
-
-            UnityEngine.Resources.UnloadAsset(defaultData);
-
-            dataPath = $"{dataPath.Substring(0, dataPath.LastIndexOf('/') + 1)}WCAData.asset";
-
-            AssetDatabase.CreateAsset(wcaData, dataPath);
-
-            SaveAsset(wcaData);
-
-            return wcaData;
         }
         #endregion
 
