@@ -36,12 +36,13 @@ namespace Varneon.WorldCreatorAssistant
         {
             new FileDefinition("DefaultData.asset", "8db252d8640a1474ebcad18df45ad390", WCAFileType.Data),
             new FileDefinition("Dictionary.asset", "8ab9f056ae5147545866e08d0f5175e2", WCAFileType.Data),
-            new FileDefinition("ResourceData.asset", "c4143893d59cb9143af3992ae05c4e9d", WCAFileType.Data)
+            new FileDefinition("ResourceData.asset", "c4143893d59cb9143af3992ae05c4e9d", WCAFileType.Data),
+            new FileDefinition("WCAData.asset", "fe71aad12a6d9f145a59d90ad943bb44", WCAFileType.Data)
         };
 
-        private const string EditorFolderPath = "Assets/Varneon/WorldCreatorAssistant/Editor/";
+        private const string EditorFolderPath = "Packages/com.varneon.worldcreatorassistant/Editor/";
 
-        private const string DataFolderPath = "Assets/Varneon/WorldCreatorAssistant/Resources/Data/";
+        private const string DataFolderPath = "Packages/com.varneon.worldcreatorassistant/Resources/Data/";
 
         private const string LogPrefix = "[<color=grey>WCA File Utility</color>]:";
 

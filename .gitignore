@@ -4,7 +4,6 @@
 !/.gitignore
 !/.LICENCE
 !/.README.md
-!/Assets
-/Assets/*
-!/Assets/Varneon
-!/Assets/Varneon.meta
+!/Packages
+/Packages/*
+!/Packages/com.varneon.worldcreatorassistant

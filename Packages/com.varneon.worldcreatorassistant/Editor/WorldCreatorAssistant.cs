@@ -19,6 +19,7 @@ namespace Varneon.WorldCreatorAssistant
         private DataStructs.UpdateCheckStatus wcaUpdateStatus = DataStructs.UpdateCheckStatus.Unchecked;
         private WCAFileUtility.FileValidityReport wcaFileValidityStatus;
         private bool wcaCleanInstall;
+        private bool isWCAEmbeddedPackage;
         private static readonly GUILayoutOption[] settingsBlockButtonLayoutOptions = new GUILayoutOption[] { GUILayout.ExpandWidth(false), GUILayout.Height(15) };
 
         #region Page Variables
@@ -39,6 +40,8 @@ namespace Varneon.WorldCreatorAssistant
 
         private void OnEnable()
         {
+            isWCAEmbeddedPackage = UnityEditor.PackageManager.PackageInfo.FindForAssetPath(AssetDatabase.GUIDToAssetPath("079b4a06e6b33ce458a06fea527f6a81")).source.Equals(UnityEditor.PackageManager.PackageSource.Embedded);
+
             if (EditorPrefs.HasKey(EditorPreferenceKeys.PackageCache))
             {
                 packageCacheDirectory = EditorPrefs.GetString(EditorPreferenceKeys.PackageCache);
@@ -134,40 +137,43 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DrawSettingsPage()
         {
-            GUILayout.BeginVertical(EditorStyles.helpBox);
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(dictionary.CHECK_FOR_UPDATES);
-            switch (wcaUpdateStatus)
+            if (isWCAEmbeddedPackage)
             {
-                case DataStructs.UpdateCheckStatus.Unchecked:
-                    if(GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
-                    break;
-                case DataStructs.UpdateCheckStatus.UpdateAvailable:
-                    wcaCleanInstall = GUILayout.Toggle(wcaCleanInstall, dictionary.CLEAN_INSTALL, GUILayout.ExpandWidth(false));
-                    if (GUILayout.Button(dictionary.UPDATE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { UpdateWCA(); }
-                    break;
-                case DataStructs.UpdateCheckStatus.VersionFileMissing:
-                    using (new EditorGUI.DisabledGroupScope(true))
-                    {
-                        GUILayout.Button(dictionary.VERSION_UNAVAILABLE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions);
-                    }
-                    break;
-                case DataStructs.UpdateCheckStatus.UpToDate:
-                    using (new EditorGUI.DisabledGroupScope(true))
-                    {
-                        GUILayout.Button(dictionary.UP_TO_DATE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions);
-                    }
-                    break;
-                case DataStructs.UpdateCheckStatus.CouldNotFetchRelease:
-                    if (GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
-                    break;
+                GUILayout.BeginVertical(EditorStyles.helpBox);
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(dictionary.CHECK_FOR_UPDATES);
+                switch (wcaUpdateStatus)
+                {
+                    case DataStructs.UpdateCheckStatus.Unchecked:
+                        if (GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
+                        break;
+                    case DataStructs.UpdateCheckStatus.UpdateAvailable:
+                        wcaCleanInstall = GUILayout.Toggle(wcaCleanInstall, dictionary.CLEAN_INSTALL, GUILayout.ExpandWidth(false));
+                        if (GUILayout.Button(dictionary.UPDATE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { UpdateWCA(); }
+                        break;
+                    case DataStructs.UpdateCheckStatus.VersionFileMissing:
+                        using (new EditorGUI.DisabledGroupScope(true))
+                        {
+                            GUILayout.Button(dictionary.VERSION_UNAVAILABLE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions);
+                        }
+                        break;
+                    case DataStructs.UpdateCheckStatus.UpToDate:
+                        using (new EditorGUI.DisabledGroupScope(true))
+                        {
+                            GUILayout.Button(dictionary.UP_TO_DATE, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions);
+                        }
+                        break;
+                    case DataStructs.UpdateCheckStatus.CouldNotFetchRelease:
+                        if (GUILayout.Button(dictionary.CHECK_FOR_UPDATES, GUIResources.FlatStandardButton, settingsBlockButtonLayoutOptions)) { CheckForWCAUpdates(); }
+                        break;
+                }
+                GUILayout.EndHorizontal();
+                if (wcaUpdateStatus == DataStructs.UpdateCheckStatus.UpdateAvailable && !wcaFileValidityStatus.Verified)
+                {
+                    GUIElements.DrawWarningBox($"{dictionary.SOME_WCA_FILES_INVALID_DIRECTORIES}\n\n{wcaFileValidityStatus.InvalidDirectoryCount} {dictionary.N_FILES_IN_INVALID_DIRECTORIES}\n{wcaFileValidityStatus.InvalidGUIDCount} {dictionary.N_FILES_HAVE_INVALID_GUID}\n\n{dictionary.WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT}");
+                }
+                GUILayout.EndVertical();
             }
-            GUILayout.EndHorizontal();
-            if (wcaUpdateStatus == DataStructs.UpdateCheckStatus.UpdateAvailable && !wcaFileValidityStatus.Verified)
-            {
-                GUIElements.DrawWarningBox($"{dictionary.SOME_WCA_FILES_INVALID_DIRECTORIES}\n\n{wcaFileValidityStatus.InvalidDirectoryCount} {dictionary.N_FILES_IN_INVALID_DIRECTORIES}\n{wcaFileValidityStatus.InvalidGUIDCount} {dictionary.N_FILES_HAVE_INVALID_GUID}\n\n{dictionary.WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT}");
-            }
-            GUILayout.EndVertical();
 
             GUIElements.LanguageSelection(LoadActiveLanguage);
 
