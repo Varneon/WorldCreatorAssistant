@@ -15,7 +15,182 @@ MonoBehaviour:
   InstalledVRCSDKVersion: 
   LatestVRCSDKVersion: 
   IsVRCSDKUpdateAvailable: 0
-  CommunityTools: []
+  AreLayersSetup: 0
+  IsCollisionLayerMatrixSetup: 0
+  CommunityTools:
+  - Name: VRWorldToolkit
+    Author: oneVR
+    Description: Unity Editor extension for making VRChat worlds
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 0
+    SDK3Only: 0
+    Directories:
+    - Assets/VRWorldToolkit
+  - Name: CyanEmu
+    Author: CyanLaser
+    Description: A VRChat client emulator in Unity for SDK2 and SDK3
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 0
+    SDK3Only: 0
+    Directories:
+    - Assets/CyanEmu
+  - Name: EasyQuestSwitch
+    Author: JordoVR
+    Description: EasyQuestSwitch is a Unity editor tool developed for VRChat world
+      creators, it can automate changes to components within a scene as soon as the
+      build platform is changed from PC to Android (for Oculus Quest) or vice versa.
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 0
+    SDK3Only: 0
+    Directories:
+    - Assets/VRCPrefabs/EasyQuestSwitch
+  - Name: UdonSharp
+    Author: vrchat-community
+    Description: An experimental compiler for compiling C# to Udon assembly
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 0
+    SDK3Only: 1
+    Directories:
+    - Assets/UdonSharp
+    - Assets/Gizmos/UdonSharp
+  - Name: UdonExplorer
+    Author: Varneon
+    Description: Unity Editor extension for easily exploring all UdonBehaviours in
+      your Unity scene
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 0
+    SDK3Only: 1
+    Directories:
+    - Assets/Varneon/UdonExplorer
+  - Name: UdonToolkit
+    Author: orels1
+    Description: Purpose-built Udon Behaviours and tools to make your own
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 1
+    SDK3Only: 1
+    Directories:
+    - Assets/UdonToolkit
   DownloadedUASPackages: []
-  UPMPackages: []
-  PrefabRepositories: []
+  UPMPackages:
+  - Name: com.unity.formats.fbx
+  - Name: com.unity.polybrush
+  - Name: com.unity.probuilder
+  - Name: com.unity.progrids
+  - Name: com.unity.quicksearch
+  - Name: com.unity.recorder
+  PrefabRepositories:
+  - Name: UdonEssentials
+    Author: Varneon
+    Description: Evergrowing collection of Udon prefabs for VRChat world creation
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 1
+    SDK3Only: 1
+    Directories:
+    - Assets/Varneon/Udon Prefabs/Essentials
+  - Name: USharpVideo
+    Author: MerlinVR
+    Description: A basic video player made for VRChat using Udon and UdonSharp
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 1
+    SDK3Only: 1
+    Directories:
+    - Assets/USharpVideo
+  - Name: vrcbce
+    Author: VRCBilliards
+    Description: A pool table for VRChat SDK3 worlds. Want to play 8 Ball, 9 Ball,
+      or Japanese or Korean 4 Ball? This is the prefab for you! With the power of
+      the Udon Networking Update, you can even have several tables in the same world
+      without issue!
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 1
+    SDK3Only: 1
+    Directories:
+    - Assets/VRCBilliardsCE
+  - Name: vrc-udon-audio-link
+    Author: llealloo
+    Description: Audio reactive prefabs for VRChat
+    Imported: 0
+    Downloaded: 0
+    ImportedVersion: 0.0.0
+    DownloadedVersion: 0.0.0
+    CurrentVersion: 0.0.0
+    UpdateAvailable: 0
+    LatestCached: 0
+    VersionFileMissing: 0
+    LastRefreshed: 0
+    RequiresUdonSharp: 1
+    SDK3Only: 1
+    Directories:
+    - Assets/AudioLink

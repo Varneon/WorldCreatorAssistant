@@ -1,7 +1,8 @@
-﻿#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3
+﻿
 using UnityEditor;
 using UnityEngine;
 using System;
+using System.Reflection;
 
 namespace Varneon.WorldCreatorAssistant
 {
@@ -9,32 +10,54 @@ namespace Varneon.WorldCreatorAssistant
     {
         private const string LogPrefix = "[<color=#009999>WorldCreatorAssistant</color>]:";
 
-        private const string GUID = "0c1cedbb001e2684b8659677756a1986";
+        private static readonly object[] EmptyArgs = new object[0];
 
         [InitializeOnLoadMethod]
         public static void SetupLayers()
         {
+            WCAData wcaData = UtilityMethods.LoadWCAData();
+
+            if(wcaData.AreLayersSetup && wcaData.IsCollisionLayerMatrixSetup) { return; }
+
+            Type updateLayersType = Type.GetType("UpdateLayers, VRCCore-Editor");
+
+            if (updateLayersType == null)
+            {
+                return;
+            }
+
             try
             {
-                if (!UpdateLayers.AreLayersSetup()) { UpdateLayers.SetupEditorLayers(); }
+                MethodInfo areLayersSetupInfo = updateLayersType.GetMethod("AreLayersSetup", BindingFlags.Static | BindingFlags.Public);
+                MethodInfo isCollisionLayerMatrixSetupInfo = updateLayersType.GetMethod("IsCollisionLayerMatrixSetup", BindingFlags.Static | BindingFlags.Public);
+                MethodInfo setupEditorLayersInfo = updateLayersType.GetMethod("SetupEditorLayers", BindingFlags.Static | BindingFlags.Public);
+                MethodInfo setupCollisionLayerMatrixInfo = updateLayersType.GetMethod("SetupCollisionLayerMatrix", BindingFlags.Static | BindingFlags.Public);
 
-                if (!UpdateLayers.IsCollisionLayerMatrixSetup()) { UpdateLayers.SetupCollisionLayerMatrix(); }
-                    
-                Debug.Log($"{LogPrefix} VRC Layers and Collision Matrix have been set up!");
+                if (!(wcaData.AreLayersSetup = (bool)areLayersSetupInfo.Invoke(null, EmptyArgs)))
+                {
+                    setupEditorLayersInfo.Invoke(null, EmptyArgs);
 
-                string path = AssetDatabase.GUIDToAssetPath(GUID);
+                    wcaData.AreLayersSetup = true;
 
-                if (!path.EndsWith("LayerSetupHandler.cs")) { Debug.LogError($"{LogPrefix} LayerSetupHandler.cs has invalid GUID! Please delete this file manually."); return; }
+                    Debug.Log($"{LogPrefix} VRC Layers have been set up!");
+                }
+                if (!(wcaData.IsCollisionLayerMatrixSetup = (bool)isCollisionLayerMatrixSetupInfo.Invoke(null, EmptyArgs)))
+                {
+                    setupCollisionLayerMatrixInfo.Invoke(null, EmptyArgs);
 
-                AssetDatabase.DeleteAsset(path);
+                    wcaData.IsCollisionLayerMatrixSetup = true;
+
+                    Debug.Log($"{LogPrefix} VRC Collision Matrix has been set up!");
+                }
+
+                UtilityMethods.SaveAsset(wcaData);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Debug.LogError(e);
+                Debug.LogError($"{LogPrefix} {e}");
 
                 return;
             }
         }
     }
 }
-#endif
