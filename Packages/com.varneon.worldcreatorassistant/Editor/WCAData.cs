@@ -8,8 +8,6 @@ namespace Varneon.WorldCreatorAssistant
     {
         public string InstalledVRCSDKVersion, LatestVRCSDKVersion;
         public bool IsVRCSDKUpdateAvailable;
-        public bool AreLayersSetup;
-        public bool IsCollisionLayerMatrixSetup;
         public List<DataStructs.Repository> CommunityTools = new List<DataStructs.Repository>();
         public List<DataStructs.AssetStorePackage> DownloadedUASPackages = new List<DataStructs.AssetStorePackage>();
         public List<DataStructs.UPMPackage> UPMPackages = new List<DataStructs.UPMPackage>();
