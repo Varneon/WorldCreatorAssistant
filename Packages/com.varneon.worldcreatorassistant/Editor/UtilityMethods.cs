@@ -245,11 +245,11 @@ namespace Varneon.WorldCreatorAssistant
         }
 
         #region WCA Data
-        internal static WCAData LoadWCAData()
+        internal static WCAData LoadWCAData(bool createNewIfNotFound = true)
         {
-            WCAData wcaData = UnityEngine.Resources.Load<WCAData>("Data/WCAData");
+            WCAData wcaData = WCAData.Load(createNewIfNotFound);
 
-            if(wcaData == null) { throw new NullReferenceException("WCAData.asset is missing! Please re-import WCA to fix the issue!"); }
+            if(wcaData == null) { throw new NullReferenceException("WCAData is required in order for World Creator Assistant to work! Please create the asset and try again."); }
 
             UpdateWCAData(wcaData);
 

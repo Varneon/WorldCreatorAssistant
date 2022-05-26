@@ -15,7 +15,7 @@ namespace Varneon.WorldCreatorAssistant
         [InitializeOnLoadMethod]
         public static void SetupLayers()
         {
-            WCAData wcaData = UtilityMethods.LoadWCAData();
+            WCAData wcaData = UtilityMethods.LoadWCAData(false);
 
             if(wcaData.AreLayersSetup && wcaData.IsCollisionLayerMatrixSetup) { return; }
 

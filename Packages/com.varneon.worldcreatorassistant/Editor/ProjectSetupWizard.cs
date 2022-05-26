@@ -62,6 +62,8 @@ namespace Varneon.WorldCreatorAssistant
         {
             wcaData = UtilityMethods.LoadWCAData();
 
+            if(wcaData == null) { throw new NullReferenceException("WCAData is required in order for World Creator Assistant to work! Please create the asset and try again."); }
+
             LoadActiveLanguage();
 
             if (EditorPrefs.HasKey(EditorPreferenceKeys.PackageCache))
@@ -97,6 +99,18 @@ namespace Varneon.WorldCreatorAssistant
 
         private void OnGUI()
         {
+            if(wcaData == null)
+            {
+                EditorGUILayout.HelpBox("WCAData.asset could not be found! WCAData is required in order for World Creator Assistant to function, please create it and try again.", MessageType.Error, true);
+
+                if (GUILayout.Button("Create WCAData"))
+                {
+                    OnEnable();
+                }
+
+                return;
+            }
+
             //Detect window width changes
             if(position.width != lastWindowWidth) { CalculateProgressBarLayoutVariables(); }
 
