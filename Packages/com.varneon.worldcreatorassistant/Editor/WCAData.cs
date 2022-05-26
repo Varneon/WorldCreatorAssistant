@@ -24,7 +24,7 @@ namespace Varneon.WorldCreatorAssistant
 
             if((wcaDataAssets == null || wcaDataAssets.Length == 0) && createNewIfNotFound)
             {
-                string path = EditorUtility.SaveFilePanel("Create New WCAData Asset", string.Empty, "WCAData", "asset");
+                string path = EditorUtility.SaveFilePanel("Create New WCAData Asset", "Assets", "WCAData", "asset");
 
                 if (!string.IsNullOrEmpty(path))
                 {
