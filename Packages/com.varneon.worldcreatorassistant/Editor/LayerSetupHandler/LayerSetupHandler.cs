@@ -1,5 +1,4 @@
-﻿#if (VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3) && !WCA_LAYERS_SETUP
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ namespace Varneon.WorldCreatorAssistant
                 if (!UpdateLayers.AreLayersSetup()) { UpdateLayers.SetupEditorLayers(); }
 
                 if (!UpdateLayers.IsCollisionLayerMatrixSetup()) { UpdateLayers.SetupCollisionLayerMatrix(); }
-                    
+
                 Debug.Log($"{LogPrefix} VRC Layers and Collision Matrix have been set up!");
 
                 List<string> defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup).Split(';').ToList();
@@ -37,4 +36,3 @@ namespace Varneon.WorldCreatorAssistant
         }
     }
 }
-#endif
