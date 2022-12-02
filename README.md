@@ -1,3 +1,6 @@
+> # :no_entry: WorldCreatorAssistant will be deprecated in `January, 2023`! Please migrate to VRChat Creator Companion. :no_entry:
+> ### https://vcc.docs.vrchat.com/
+
 # WorldCreatorAssistant
 Unity Editor extension for automating VRChat world project package management
 ---
