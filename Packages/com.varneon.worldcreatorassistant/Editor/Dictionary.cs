@@ -83,6 +83,7 @@ namespace Varneon.WorldCreatorAssistant
             public string PACKAGE_WITH_SAME_PATH_ALREADY_ADDED;
             public string PLEASE_CHOOSE_VRCSDK;
             public string PLEASE_DEFINE_VALID_CACHE_DIRECTORY;
+            public string PLEASE_USE_VRCHAT_CREATOR_COMPANION;
             public string PLEASE_WAIT_VRCAPI;
             public string PREFAB_REPOSITORIES;
             public string PREVIOUS;
@@ -134,6 +135,7 @@ namespace Varneon.WorldCreatorAssistant
             public string WCA_FEATURES_WIP;
             public string WCA_FEATURES;
             public string WCA_FOLDER_CLEANUP;
+            public string WCA_IS_DEPRECATED;
             public string WCA_IS_UP_TO_DATE;
             public string WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT;
             public string WCA_NEW_VERSION_AVAILABLE;

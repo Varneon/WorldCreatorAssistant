@@ -95,6 +95,9 @@ MonoBehaviour:
       PLEASE_CHOOSE_VRCSDK: Please choose the VRCSDK you want to use
       PLEASE_DEFINE_VALID_CACHE_DIRECTORY: Please define valid package cache directory
         in the settings to access importer
+      PLEASE_USE_VRCHAT_CREATOR_COMPANION: Please use VRChat Creator Companion instead.
+        (World Creator Assistant was developed before VRChat Creator Companion and
+        isn't a valid substitute for VCC!)
       PLEASE_WAIT_VRCAPI: You have already checked the latest version of VRCSDK within
         the last 60 seconds, please wait until making another API request
       PREFAB_REPOSITORIES: Community Prefabs
@@ -166,11 +169,19 @@ MonoBehaviour:
       WCA_FEATURES: -Project Setup Wizard\n-VRCSDK and GitHub importer\n-Resources
         and FAQ
       WCA_FOLDER_CLEANUP: WCA Folder Cleanup
+      WCA_IS_DEPRECATED: World Creator Assistant is deprecated!
       WCA_IS_UP_TO_DATE: WCA is up to date
       WCA_MAY_MALFUNCTION_AUTOMATIC_IMPORT: WCA may malfunction after automatic import
         due to WCA not being imported in it's original directory
       WCA_NEW_VERSION_AVAILABLE: New WCA version available!
-      WCA_THANK_YOU_FOR_USING: Thank you for using World Creator Assistant!
+      WCA_THANK_YOU_FOR_USING: 'Thank you to everyone who has used World Creator
+        Assistant in the past!\n\nThe VRChat team has been working hard on VRChat
+        Creator Companion, which provides several new features for project management,
+        several ones that WCA couldn''t have ever offered in the first place.\n\nWCA
+        was never released as a "competitor" of VCC, rather it was a friendly agreement
+        that WCA will eventually be phased out after VCC gets released.\n\nWCA was
+        my first large scale open source project, which paved the way for many other
+        great tools and prefabs. Check out my other projects on my GitHub:'
       WCA_THIS_EDITOR: This editor extension is still heavily work in progress and
         should only be used for testing purposes.
       WCA_WILL_TRY_TO_CLEAR_DIRECTORIES: WCA will try to clear the following directories

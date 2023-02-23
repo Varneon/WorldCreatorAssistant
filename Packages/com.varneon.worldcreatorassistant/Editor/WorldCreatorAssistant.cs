@@ -123,16 +123,26 @@ namespace Varneon.WorldCreatorAssistant
 
         private void DrawMainPage()
         {
+            GUI.color = Color.red;
             EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
-            GUILayout.Label(dictionary.WCA_THANK_YOU_FOR_USING, GUIResources.CenteredHeaderLabel);
+            GUILayout.Label(dictionary.WCA_IS_DEPRECATED, GUIResources.CenteredHeaderLabel);
             EditorGUILayout.EndHorizontal();
-            GUILayout.Label(dictionary.WCA_THIS_EDITOR, EditorStyles.wordWrappedLabel);
+            GUI.color = Color.white;
+            GUILayout.Label(dictionary.PLEASE_USE_VRCHAT_CREATOR_COMPANION, EditorStyles.wordWrappedLabel);
             GUILayout.Space(10);
-            GUILayout.Label($"{dictionary.CURRENT_FEATURES}:", EditorStyles.boldLabel);
-            GUILayout.Label(Regex.Unescape(dictionary.WCA_FEATURES));
+            if(GUILayout.Button("https://vcc.docs.vrchat.com/", EditorStyles.linkLabel))
+            {
+                Application.OpenURL("https://vcc.docs.vrchat.com/");
+            }
+            GUILayout.Space(30);
+            GUILayout.Label(Regex.Unescape(dictionary.WCA_THANK_YOU_FOR_USING), EditorStyles.wordWrappedLabel);
             GUILayout.Space(10);
-            GUILayout.Label($"{dictionary.FEATURES_IN_DEVELOPMENT}:", EditorStyles.boldLabel);
-            GUILayout.Label(Regex.Unescape(dictionary.WCA_FEATURES_WIP));
+            if (GUILayout.Button("https://github.com/Varneon", EditorStyles.linkLabel))
+            {
+                Application.OpenURL("https://github.com/Varneon");
+            }
+            GUILayout.Space(30);
+            GUILayout.Label("- Varneon", EditorStyles.wordWrappedLabel);
         }
 
         private void DrawSettingsPage()
