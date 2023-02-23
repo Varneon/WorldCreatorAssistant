@@ -219,6 +219,9 @@ namespace Varneon.WorldCreatorAssistant
 
             GUILayout.Label("VRCSDK2", GUIResources.CenteredHeaderLabel);
 
+            // SDK2 is deprecated, disable the option
+            EditorGUI.BeginDisabledGroup(true);
+
             if (selectedSDK == DataStructs.SDKVariant.SDK2)
             {
                 GUI.color = Color.green;
@@ -231,7 +234,7 @@ namespace Varneon.WorldCreatorAssistant
                 GUILayout.EndHorizontal();
                 GUI.color = Color.white;
             }
-            else if (GUILayout.Button(dictionary.SELECT, GUIResources.FlatStandardButton, GUILayout.MinHeight(30)))
+            else if (GUILayout.Button(dictionary.NOT_AVAILABLE, GUIResources.FlatStandardButton, GUILayout.MinHeight(30)))
             {
                 ResetSDKInfo();
                 selectedSDK = DataStructs.SDKVariant.SDK2;
@@ -244,13 +247,15 @@ namespace Varneon.WorldCreatorAssistant
                 }
             }
 
+            EditorGUI.EndDisabledGroup();
+
             GUILayout.Space(10);
 
             GUILayout.Label(dictionary.SDK2_DESCRIPTION, EditorStyles.wordWrappedLabel);
 
             GUILayout.Space(10);
 
-            GUI.color = Color.yellow;
+            GUI.color = Color.red;
 
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
 

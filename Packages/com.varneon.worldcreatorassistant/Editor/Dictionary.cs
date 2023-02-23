@@ -73,6 +73,7 @@ namespace Varneon.WorldCreatorAssistant
             public string NEXT;
             public string NO;
             public string NO_ASSET_STORE_PACKAGES_AVAILABLE;
+            public string NOT_AVAILABLE;
             public string NOTE_VRC_LAYERS_AND_LIGHTMAP_GENERATION;
             public string OK;
             public string PACKAGE_CACHE_CANT_BE_INSIDE_PROJECT;

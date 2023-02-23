@@ -81,6 +81,7 @@ MonoBehaviour:
       NEXT: Next
       NO: No
       NO_ASSET_STORE_PACKAGES_AVAILABLE: No Asset Store packages available
+      NOT_AVAILABLE: Not available
       NOTE_VRC_LAYERS_AND_LIGHTMAP_GENERATION: 'NOTE: VRC layers will be set up and
         automatic lightmap generation will be disabled automatically'
       OK: OK
@@ -124,11 +125,7 @@ MonoBehaviour:
       RESETS: Resets
       RESOURCES: Resources
       SDK_VARIANT_NOT_DETECTED: SDK variant not detected
-      SDK2_DEPRECATION_TEXT: This should not be used for new projects. If you are
-        maintaining an old project that uses SDK2, please migrate to SDK3 as soon
-        as possible. At a later date, this download will be removed, and SDK2 uploads
-        for avatars and worlds will be locked. Do not use SDK2 and SDK3 in the same
-        project simultaneously.
+      SDK2_DEPRECATION_TEXT: SDK2 is not available for download anymore.
       SDK2_DESCRIPTION: Older SDK based on Triggers and Actions.
       SDK3_DESCRIPTION: Brand new SDK with VRChat's own visual programming language,
         Udon.
