@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
 namespace Varneon.WorldCreatorAssistant
 {
@@ -20,9 +21,9 @@ namespace Varneon.WorldCreatorAssistant
         /// <returns></returns>
         internal static WCAData Load(bool createNewIfNotFound = true)
         {
-            WCAData[] wcaDataAssets = UnityEngine.Resources.FindObjectsOfTypeAll<WCAData>();
+            WCAData[] wcaDataAssets = AssetDatabase.FindAssets($"t:{nameof(WCAData)}").Select(a => AssetDatabase.LoadAssetAtPath<WCAData>(AssetDatabase.GUIDToAssetPath(a))).ToArray();
 
-            if((wcaDataAssets == null || wcaDataAssets.Length == 0) && createNewIfNotFound)
+            if ((wcaDataAssets == null || wcaDataAssets.Length == 0) && createNewIfNotFound)
             {
                 string path = EditorUtility.SaveFilePanel("Create New WCAData Asset", "Assets", "WCAData", "asset");
 
