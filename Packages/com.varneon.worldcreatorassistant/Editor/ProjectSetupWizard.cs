@@ -209,6 +209,21 @@ namespace Varneon.WorldCreatorAssistant
 #region Pages
         private void DrawSDKPage()
         {
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+
+            GUI.color = Color.red;
+            EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
+            GUILayout.Label(dictionary.WCA_IS_DEPRECATED, GUIResources.CenteredHeaderLabel);
+            EditorGUILayout.EndHorizontal();
+            GUI.color = Color.white;
+            GUILayout.Label(dictionary.PLEASE_USE_VRCHAT_CREATOR_COMPANION, EditorStyles.wordWrappedLabel);
+            GUILayout.Space(10);
+            if (GUILayout.Button("https://vcc.docs.vrchat.com/", EditorStyles.linkLabel))
+            {
+                Application.OpenURL("https://vcc.docs.vrchat.com/");
+            }
+            GUILayout.Space(30);
+
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             GUILayout.Label(dictionary.PLEASE_CHOOSE_VRCSDK, EditorStyles.boldLabel);
@@ -336,6 +351,8 @@ namespace Varneon.WorldCreatorAssistant
             GUIElements.DrawHintPanel(dictionary.PSW_PAGE_HINT_CHOOSE_VRCSDK);
 
             GUILayout.FlexibleSpace();
+
+            GUILayout.EndScrollView();
 
             GUILayout.BeginHorizontal();
 
