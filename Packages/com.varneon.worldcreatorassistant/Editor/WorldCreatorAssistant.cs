@@ -76,8 +76,18 @@ namespace Varneon.WorldCreatorAssistant
                     DrawMainPage();
                     break;
                 case Page.Tutorials:
-                    GUILayout.Label(dictionary.COMING_SOON, GUIResources.CenteredHeaderLabel);
-                    //TODO Create tutorial framework
+                    if (GUILayout.Button("https://vcc.docs.vrchat.com/guides/getting-started", EditorStyles.linkLabel))
+                    {
+                        Application.OpenURL("https://vcc.docs.vrchat.com/guides/getting-started");
+                    }
+                    if (GUILayout.Button("https://docs.vrchat.com/docs/creating-your-first-world", EditorStyles.linkLabel))
+                    {
+                        Application.OpenURL("https://docs.vrchat.com/docs/creating-your-first-world");
+                    }
+                    if (GUILayout.Button("https://docs.vrchat.com/docs/getting-started-with-udon", EditorStyles.linkLabel))
+                    {
+                        Application.OpenURL("https://docs.vrchat.com/docs/getting-started-with-udon");
+                    }
                     break;
                 case Page.Importer:
                     importer.Draw();
