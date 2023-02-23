@@ -20,9 +20,9 @@ MonoBehaviour:
     RequiresUdonSharp: 0
     Directories:
     - Assets/VRWorldToolkit
-  - Author: CyanLaser
-    Name: CyanEmu
-    Description: A VRChat client emulator in Unity for SDK2 and SDK3
+  - Author: vrchat-community
+    Name: ClientSim
+    Description: Client Simulator for World Building
     SDK3Only: 0
     RequiresUdonSharp: 0
     Directories:
