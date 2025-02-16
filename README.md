@@ -1,9 +1,7 @@
-> # :no_entry: WorldCreatorAssistant is deprecated! Please migrate to VRChat Creator Companion. :no_entry:
-> ### https://vcc.docs.vrchat.com/
+> [!CAUTION]
+> # :no_entry: WorldCreatorAssistant is deprecated! :no_entry:
+> Please migrate to VRChat Creator Companion: https://vcc.docs.vrchat.com/
 
-# WorldCreatorAssistant
-Unity Editor extension for automating VRChat world project package management
----
 <div align="center">
 
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Varneon/WorldCreatorAssistant?style=for-the-badge)
@@ -17,10 +15,12 @@ Unity Editor extension for automating VRChat world project package management
 ![Header1](https://i.imgur.com/rIdvYx2.png)
 ![Header2](https://i.imgur.com/H2lu2k0.png)
 
-Are you tired of manually importing VRCSDK, CyanEmu, VRWorldToolkit, UdonSharp, UdonToolkit or any other package into your new project or updating them over time?
+Before VRChat released [VRChat Creator Companion](https://vcc.docs.vrchat.com/), WorldCreatorAssistant was a popular Unity Editor extension which allowed you to set up new projects for VRChat worlds, import community packages and find resources to assist you with world creation. The development of this tool was extremely demanding for one developer to manage, and since VRChat has now released their own first-party application for managing all VRChat projects, WorldCreatorAssistant development has been discontinued so I can move on to other new big exciting projects.
+
+<i><s>Are you tired of manually importing VRCSDK, CyanEmu, VRWorldToolkit, UdonSharp, UdonToolkit or any other package into your new project or updating them over time?
 
 Would you like to have direct access to an extensive list of information related to VRChat world creation right within your editor?
 
 WorldCreatorAssistant is made to be the first package to be imported into your Unity projects and it takes care of the most common steps with the help of Project Setup Wizard that allows you to choose your preferred options for initializing the project.
 
-WCA also has built-in resources and FAQ that are there for you when you need them the most.
+WCA also has built-in resources and FAQ that are there for you when you need them the most.</s></i>
